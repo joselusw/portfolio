@@ -18,13 +18,20 @@
 
 .cover-container > h1 {
   color: white;
-  font-size: 100px;
+  font-size: 60px;
 }
 
-.cover-container > p {
+.dynamic-text {
   margin-top: 8px;
   color: white;
   font-size: 32px;
+}
+
+.avatar {
+  border-radius: 50%;
+  margin: 5rem;
+  height: 300px;
+  width: 300px;
 }
 
 @media screen and (max-width: 960px) {
@@ -51,7 +58,7 @@
 }
 
 .scrolling {
-  background-color: black;
+  background-color: #00251a;
   transition: all 0.5s ease;
 }
 
@@ -124,7 +131,8 @@
   display: flex;
   vertical-align: center;
   align-items: center;
-  background-color: black;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6);
+  background-color: #00897b;
   padding: 30px 0 30px 0;
 }
 
@@ -234,7 +242,7 @@
 .footer {
   width: 100%;
   height: 100vh;
-  background-color: black;
+  background-color: #00251a;
   color: white;
   padding-top: 180px;
   position: fixed;
