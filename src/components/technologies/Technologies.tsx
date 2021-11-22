@@ -1,7 +1,7 @@
 import React from "react";
-import "./Slider.css";
+import "./Technologies.css";
 
-const Slider = () => {
+const Technologies = () => {
   return (
     <div className="carousel-container">
       <div className="carousel-title">
@@ -11,4 +11,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default Technologies;

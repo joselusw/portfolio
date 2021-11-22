@@ -1,11 +1,11 @@
 import React from "react";
-import "./About.css";
+import "./Education.css";
 
-const About = () => {
+const Education = () => {
 	return (
-		<div className="about-container">
-			<div className="about-desc">
-				<h3>Let me tell you something about me</h3>
+		<div className="education-container">
+			<div className="education-desc">
+				<h3></h3>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 					Omnis provident inventore quod voluptates sequi. Quis,
@@ -13,14 +13,14 @@ const About = () => {
 					dolorum inventore autem nemo, quos eveniet magni nesciunt.
 				</p>
 			</div>
-			<div className="about-img">
+			<div className="education-img">
 				<img
 					src="https://c.tenor.com/ypIm98iEXasAAAAC/vegeta-rain.gif"
-					alt="about"
+					alt="education"
 				/>
 			</div>
 		</div>
 	);
 };
 
-export default About;
+export default Education;
