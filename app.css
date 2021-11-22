@@ -62,13 +62,22 @@
   transition: all 0.5s ease;
 }
 
-.navbar-logo {
+.navbar-div {
   height: 80px;
   line-height: 80px;
   color: white;
   cursor: pointer;
 }
-.about-container {
+
+.navbar-logo {
+  height: 60px;
+  filter: brightness(0) invert(1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.education-container {
   display: flex;
   background-color: white;
   color: black;
@@ -76,7 +85,7 @@
   padding: 100px 0 100px 0;
 }
 
-.about-desc {
+.education-desc {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,16 +93,16 @@
   padding: 0 100px 0 100px;
 }
 
-.about-desc > h3 {
+.education-desc > h3 {
   margin-bottom: 30px;
   font-size: 28px;
 }
 
-.about-desc > p {
+.education-desc > p {
   line-height: 1.5;
 }
 
-.about-img {
+.education-img {
   width: 45%;
   display: flex;
   align-self: center;
@@ -101,29 +110,29 @@
 }
 
 @media only screen and (max-width: 960px) {
-  .about-container {
+  .education-container {
     flex-direction: column;
     padding: 0;
     height: auto;
   }
 
-  .about-desc {
+  .education-desc {
     width: 90%;
     margin: 0 auto;
     padding: 40px 20px 50px 20px;
   }
 
-  .about-desc > h3 {
+  .education-desc > h3 {
     font-size: 20px;
     text-align: center;
   }
 
-  .about-img {
+  .education-img {
     width: 100%;
     margin-bottom: 50px;
   }
 
-  .about-img > img {
+  .education-img > img {
     width: 100%;
   }
 }
@@ -138,64 +147,9 @@
 
 .carousel-title {
   color: white;
-  width: 40%;
   text-align: center;
   font-size: 30px;
   padding: 0 100px 0 100px;
-}
-
-.slide-container {
-  height: 80%;
-  border-radius: 40px;
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-}
-
-.slide-container > img {
-  object-fit: contain;
-  transition: all 0.2s ease-in-out;
-}
-
-.slide-container:hover > img {
-  transform: scale(1.2);
-  opacity: 0.7;
-}
-
-.slide-desc {
-  background-color: black;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 70%;
-  padding-left: 30px;
-  border-top-left-radius: 20px;
-  opacity: 0.8;
-}
-
-.slide-desc > span {
-  color: white;
-  display: block;
-  font-size: 22px;
-  padding: 20px 0 20px 10px;
-}
-
-.BrainhubCarousel__arrows {
-  background-color: white;
-  border-radius: 50%;
-  margin: 20px;
-}
-
-.BrainhubCarousel__arrows > span {
-  border-color: black;
-}
-
-.BrainhubCarousel__arrows:hover {
-  background-color: white !important;
-}
-
-.BrainhubCarousel__arrows:hover > span {
-  border-color: black !important;
 }
 
 @media only screen and (max-width: 960px) {
@@ -207,10 +161,6 @@
     width: 100%;
     text-align: center;
     padding: 50px 0 50px 0;
-  }
-
-  .slide-container {
-    width: 100%;
   }
 }
 .info-container {
@@ -288,8 +238,7 @@
 }
 
 .linkedin,
-.twitter,
-.facebook {
+.github {
   color: white;
   font-size: 35px;
   margin: 0 auto;
@@ -298,8 +247,7 @@
 }
 
 .linkedin:hover,
-.twitter:hover,
-.facebook:hover {
+.github:hover {
   border-color: white;
   transition: all 0.3s ease-out;
 }
