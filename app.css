@@ -243,6 +243,7 @@
   padding: 100px 0 30px 50px;
   width: 70%;
   margin: 0 auto;
+  line-height: 1.6;
 }
 
 .footer-sns {
@@ -282,6 +283,11 @@
   font-size: 18px;
   padding-left: 50px;
   color: white;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 @media only screen and (max-width: 960px) {
