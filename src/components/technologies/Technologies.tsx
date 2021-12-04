@@ -3,9 +3,9 @@ import "./Technologies.css";
 
 const Technologies = () => {
   return (
-    <div className="carousel-container">
-      <div className="carousel-title">
-        <h2>My Projects => (╯°□°)╯︵ ┻━┻</h2>
+    <div className="experience-container">
+      <div className="experience-title">
+        <h2>Cool projects I've worked:</h2>
       </div>
     </div>
   );
