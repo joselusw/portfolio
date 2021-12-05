@@ -9,10 +9,10 @@ const Footer = () => {
         <p>Based in Málaga</p>
       </div>
       <div className="footer-contact">
-        <a href="mailto:jose.gallardo994@gmail.com">Contact me</a>
+        <a href="mailto:jose.gallardo994@gmail.com">· Contact me</a>
         <br />
         <a href="https://drive.google.com/file/d/1HrZoTKzEUHFTOgLVE94NA1fRtZUk4nRq/view?usp=sharing">
-          Download a copy of my CV
+          · Download a copy of my CV
         </a>
         <p>And let's get down to work!!</p>
       </div>
