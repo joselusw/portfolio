@@ -4,10 +4,11 @@ import "./Cover.css";
 
 const Cover = () => {
   const phrases = [
-    ".NET developer",
-    "Virgin Angular developer",
-    "Chad React Enjoyer",
-    "Full time freak",
+    "Senior full-stack Developer",
+    ".NET enjoyer",
+    "Passionate About Clean Code",
+    "Open Source Advocate",
+    "Tech Enthusiast and Innovator",
   ];
 
   return (
