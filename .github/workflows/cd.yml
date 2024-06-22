@@ -6,37 +6,34 @@ on:
             - master
 
 jobs:
-    cd:
-        runs-on: ubuntu-latest
-
+    deploy:
+        runs-on: ubuntu-22.04
+        permissions:
+            contents: write
+        concurrency:
+            group: ${{ github.workflow }}-${{ github.ref }}
         steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v2
+            - name: Setup Node
+              uses: actions/setup-node@v3
               with:
-                  node-version: "20"
+                  node-version: "14"
 
-            - name: Configure SSH for deployment
-              run: |
-                  mkdir -p ~/.ssh
-                  echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
-                  chmod 600 ~/.ssh/id_rsa
-                  ssh-keyscan github.com >> ~/.ssh/known_hosts
+            - name: Cache dependencies
+              uses: actions/cache@v3
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-
 
-            - name: Git config
-              run: |
-                  git config --global user.email "cd-jsw@portfolio.com"
-                  git config --global user.name "cd-jsw"
+      - run: yarn install
+      - run: yarn build
 
-            - name: Install dependencies
-              run: yarn install
-
-            - name: Build the project
-              run: yarn build
-
-            - name: Deploy to GitHub Pages
-              run: yarn deploy
-              env:
-                  GIT_DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
