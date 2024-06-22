@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14" # You can specify the Node.js version you need
+          node-version: "16" # You can specify the Node.js version you need
 
       - name: Configure SSH for deployment
         run: |
