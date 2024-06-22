@@ -13,7 +13,8 @@ jobs:
         concurrency:
             group: ${{ github.workflow }}-${{ github.ref }}
         steps:
-            - uses: actions/checkout@v3
+            - name: Checkout repository
+              uses: actions/checkout@v3
 
             - name: Setup Node
               uses: actions/setup-node@v3
@@ -28,12 +29,15 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-node-
 
-      - run: yarn install
-      - run: yarn build
+            - name: Install dependencies
+              run: yarn install
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/main'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+            - name: Build the project
+              run: yarn build
+
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v4
+              if: github.ref == 'refs/heads/master'
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./public
