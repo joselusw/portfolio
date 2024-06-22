@@ -1,0 +1,52 @@
+.info-container {
+  width: 100%;
+  height: 400px;
+  background-color: white;
+  color: black;
+  margin-bottom: 100vh;
+}
+
+.info-title {
+  padding: 20px;
+}
+
+.info-title > h1 {
+  font-family: "Dancing Script";
+  font-size: 50px;
+  text-align: center;
+  height: 20%;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
+
+.tech {
+  display: inline-block;
+  padding-left: 100px;
+  padding-right: 100px;
+  flex-grow: 1;
+}
+
+@media only screen and (max-width: 960px) {
+  .info-container {
+    height: auto;
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .info > h1 {
+    text-align: center;
+    font-size: 25px;
+  }
+
+  .tech {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
