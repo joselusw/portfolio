@@ -1,42 +1,42 @@
 name: Continuous Deployment Workflow
 
 on:
-  push:
-    branches:
-      - master
+    push:
+        branches:
+            - master
 
 jobs:
-  cd:
-    runs-on: ubuntu-latest
+    cd:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16" # You can specify the Node.js version you need
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "20"
 
-      - name: Configure SSH for deployment
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+            - name: Configure SSH for deployment
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      - name: Git config
-        run: |
-          git config --global user.email "cd-jsw@portfolio.com"
-          git config --global user.name "cd-jsw"
+            - name: Git config
+              run: |
+                  git config --global user.email "cd-jsw@portfolio.com"
+                  git config --global user.name "cd-jsw"
 
-      - name: Install dependencies
-        run: yarn install
+            - name: Install dependencies
+              run: yarn install
 
-      - name: Build the project
-        run: yarn build
+            - name: Build the project
+              run: yarn build
 
-      - name: Deploy to GitHub Pages
-        run: yarn deploy
-        env:
-          GIT_DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            - name: Deploy to GitHub Pages
+              run: yarn deploy
+              env:
+                  GIT_DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
