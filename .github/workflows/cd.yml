@@ -20,10 +20,10 @@ jobs:
         run: |
           git config --global user.email "cd-jsw@portfolio.com"
           git config --global user.name "cd-jsw"
-      - name: Legacy
-        run: npm config set legacy-peer-deps true
+      - name: Add Yarn
+        run: npm install -g yarn
       - name: Install
-        run: npm install
+        run: yarn
       - name: Build
         run: npm run build
       - name: Deploy
