@@ -1,4 +1,4 @@
-name: Continuos Deployment workflow
+name: Continuous Deployment Workflow
 
 on:
   push:
@@ -8,23 +8,35 @@ on:
 jobs:
   cd:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Use SSH key
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14" # You can specify the Node.js version you need
+
+      - name: Configure SSH for deployment
         run: |
-          mkdir -p ~/.ssh/
+          mkdir -p ~/.ssh
           echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
-          sudo chmod 700 ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Git config
         run: |
           git config --global user.email "cd-jsw@portfolio.com"
           git config --global user.name "cd-jsw"
-      - name: Add Yarn
-        run: npm install -g yarn
-      - name: Install
-        run: yarn
-      - name: Build
-        run: npm run build
-      - name: Deploy
-        run: npm run deploy -- -r git@github.com:joselusw/portfolio.git
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build the project
+        run: yarn build
+
+      - name: Deploy to GitHub Pages
+        run: yarn deploy
+        env:
+          GIT_DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
