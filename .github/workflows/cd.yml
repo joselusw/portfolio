@@ -20,6 +20,8 @@ jobs:
         run: |
           git config --global user.email "cd-jsw@portfolio.com"
           git config --global user.name "cd-jsw"
+      - name: Legacy
+        run: npm config set legacy-peer-deps true
       - name: Install
         run: npm install
       - name: Build
