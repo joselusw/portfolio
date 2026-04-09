@@ -2323,30 +2323,43 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Cover = () => {
-  const phrases = ["Senior Full-Stack Developer", "AI-Powered Solutions Architect", "Cloud-Native Application Builder", "DevSecOps & CI/CD Expert", "Microservices & Scalable Systems Engineer", "React, Node.js & .NET Specialist", "Performance Optimization & Security Advocate", "Open Source Contributor & Tech Innovator"];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+// Constants extracted outside component to prevent re-creation on each render
+
+const PROFESSION_PHRASES = ["Senior Full-Stack Developer", "AI-Powered Solutions Architect", "Cloud-Native Application Builder", "DevSecOps & CI/CD Expert", "Microservices & Scalable Systems Engineer", "React, Node.js & .NET Specialist", "Performance Optimization & Security Advocate", "Open Source Contributor & Tech Innovator"];
+const TYPEWRITER_OPTIONS = {
+  strings: PROFESSION_PHRASES,
+  autoStart: true,
+  loop: true,
+  cursorClassName: "dynamic-text",
+  wrapperClassName: "dynamic-text"
+};
+const Cover = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(() => {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("section", {
     className: "cover-container",
+    role: "banner",
+    "aria-label": "Portfolio cover",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
       className: "avatar",
       src: _assets_joselu_png__WEBPACK_IMPORTED_MODULE_3__,
-      alt: "Jos\xE9 Luis Gallardo"
+      alt: "Jos\xE9 Luis Gallardo - Senior Full-Stack Developer",
+      loading: "eager",
+      width: "300",
+      height: "300"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
       children: "Jos\xE9 Luis Gallardo"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
       className: "subtitle",
       children: "Crafting digital experiences with passion and precision"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)((typewriter_effect__WEBPACK_IMPORTED_MODULE_1___default()), {
-      options: {
-        strings: phrases,
-        autoStart: true,
-        loop: true,
-        cursorClassName: "dynamic-text",
-        wrapperClassName: "dynamic-text"
-      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      "aria-live": "polite",
+      "aria-atomic": "true",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)((typewriter_effect__WEBPACK_IMPORTED_MODULE_1___default()), {
+        options: TYPEWRITER_OPTIONS
+      })
     })]
   });
-};
+});
+Cover.displayName = "Cover";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Cover);
 
 /***/ },
@@ -2369,79 +2382,84 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Education = () => {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+// Utility function to calculate age dynamically
+
+const calculateAge = birthDate => {
+  const today = new Date();
+  const birth = new Date(birthDate);
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+  if (monthDiff < 0 || monthDiff === 0 && today.getDate() < birth.getDate()) {
+    age--;
+  }
+  return age;
+};
+
+// Constants extracted outside component to prevent re-creation
+const EDUCATION_CONTENT = {
+  title: "Know me better"
+};
+const CERTIFICATIONS = [{
+  id: "aws-developer",
+  title: "AWS Certified Developer",
+  provider: "A Cloud Guru",
+  graduation: "2024"
+}, {
+  id: "frontend-master",
+  title: "Frontend Master",
+  provider: "Lemoncoders",
+  graduation: "2021"
+}, {
+  id: "superior-apps",
+  title: "Técnico Superior en Apps Multiplataforma",
+  provider: "I.E.S Portada Alta",
+  graduation: "2017"
+}, {
+  id: "sistemas-redes",
+  title: "Técnico en Sistemas Microinformáticos y Redes",
+  provider: "I.E.S Pedro Espinosa",
+  graduation: "2014"
+}];
+const Education = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(() => {
+  const age = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => calculateAge("1994-07-27"), []);
+  const paragraphs = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => [`Heya! I am a ${age}-year-old Full-Stack .NET Developer with over 7 years of experience in designing, developing, and maintaining robust web applications.`, "Based in Málaga, Spain, I enjoy both frontend and backend technologies, including C#, ASP.NET, Angular, React, and SQL.", "Passionate about clean code, open-source contributions, and delivering end-to-end solutions that drive business success. I am currently seeking my next career step to leverage my expertise in a dynamic and innovative environment.", "Beyond traditional development, I'm fascinated by the intersection of AI and full-stack development. I love finding ways to make applications more adaptive and user-centric."], [age]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("section", {
     className: "education-container",
+    "aria-labelledby": "education-title",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "education-desc",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-        children: "Know me better"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-        children: "Heya! I am a 29-year-old Full-Stack .NET Developer with over 7 years of experience in designing, developing, and maintaining robust web applications."
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-        children: "Based in M\xE1laga, Spain, I enjoy both frontend and backend technologies, including C#, ASP.NET, Angular, React, and SQL."
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-        children: "Passionate about clean code, open-source contributions, and delivering end-to-end solutions that drive business success. I am currently seeking my next career step to leverage my expertise in a dynamic and innovative environment."
-      })]
+        id: "education-title",
+        children: EDUCATION_CONTENT.title
+      }), paragraphs.map((paragraph, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        children: paragraph
+      }, `para-${index}`))]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "education-desc",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
         children: "Education & Certifications"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
         className: "certifications",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+        role: "list",
+        "aria-label": "Professional certifications",
+        children: CERTIFICATIONS.map(cert => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
           className: "certification-item",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
             className: "certification-title",
-            children: "AWS Certified Developer"
-          }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "certification-provider",
-            children: "A Cloud Guru"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "certification-graduation",
-            children: "Graduation: 2024"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-          className: "certification-item",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "certification-title",
-            children: "Frontend Master"
+            children: cert.title
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
             className: "certification-provider",
-            children: "Lemoncoders"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+            children: cert.provider
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
             className: "certification-graduation",
-            children: "Graduation: 2021"
+            children: ["Graduation: ", cert.graduation]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-          className: "certification-item",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "certification-title",
-            children: "T\xE9cnico Superior en Apps Multiplataforma"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "certification-provider",
-            children: "I.E.S Portada Alta"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "certification-graduation",
-            children: "Graduation: 2017"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-          className: "certification-item",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "certification-title",
-            children: "T\xE9cnico en Sistemas Microinform\xE1ticos y Redes"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "certification-provider",
-            children: "I.E.S Pedro Espinosa"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "certification-graduation",
-            children: "Graduation: 2014"
-          })]
-        })]
+        }, cert.id))
       })]
     })]
   });
-};
+});
+Education.displayName = "Education";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Education);
 
 /***/ },
@@ -2464,9 +2482,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Footer = () => {
+// Constants extracted outside component to prevent re-creation
+
+const CONTACT_LINKS = [{
+  href: "mailto:jose.gallardo994@gmail.com",
+  text: "Contact me",
+  ariaLabel: "Send email to José Gallardo"
+}, {
+  href: "https://drive.google.com/file/d/1HrZoTKzEUHFTOgLVE94NA1fRtZUk4nRq/view?usp=sharing",
+  text: "Download a copy of my CV",
+  ariaLabel: "Download José Gallardo's CV"
+}];
+const SOCIAL_LINKS = [{
+  href: "https://www.linkedin.com/in/jos%C3%A9gallardo/",
+  icon: "fab fa-linkedin",
+  className: "linkedin",
+  ariaLabel: "Visit José Gallardo's LinkedIn profile"
+}, {
+  href: "https://github.com/JoseluSW",
+  icon: "fab fa-github",
+  className: "github",
+  ariaLabel: "Visit José Gallardo's GitHub profile"
+}];
+const Footer = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(() => {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("footer", {
     className: "footer",
+    role: "contentinfo",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "footer-info",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
@@ -2476,13 +2517,15 @@ const Footer = () => {
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "footer-contact",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-        href: "mailto:jose.gallardo994@gmail.com",
-        children: "\xB7 Contact me"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-        href: "https://drive.google.com/file/d/1HrZoTKzEUHFTOgLVE94NA1fRtZUk4nRq/view?usp=sharing",
-        children: "\xB7 Download a copy of my CV"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      children: [CONTACT_LINKS.map((link, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+          href: link.href,
+          "aria-label": link.ariaLabel,
+          target: link.href.startsWith("http") ? "_blank" : undefined,
+          rel: link.href.startsWith("http") ? "noopener noreferrer" : undefined,
+          children: ["\xB7 ", link.text]
+        }), index < CONTACT_LINKS.length - 1 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {})]
+      }, link.href)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
         children: "And let's get down to work!!"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -2490,27 +2533,25 @@ const Footer = () => {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "design-by",
         children: "Reach me out on social media:"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "sns-links",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-          href: "https://www.linkedin.com/in/jos%C3%A9gallardo/",
+        role: "list",
+        children: SOCIAL_LINKS.map(social => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+          href: social.href,
           target: "_blank",
-          rel: "noreferrer",
+          rel: "noopener noreferrer",
+          "aria-label": social.ariaLabel,
+          className: "social-link",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-            className: "fab fa-linkedin linkedin"
+            className: `${social.icon} ${social.className}`,
+            "aria-hidden": "true"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-          href: "https://github.com/JoseluSW",
-          target: "_blank",
-          rel: "noreferrer",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-            className: "fab fa-github github"
-          })
-        })]
+        }, social.href))
       })]
     })]
   });
-};
+});
+Footer.displayName = "Footer";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Footer);
 
 /***/ },
