@@ -1,8 +1,8 @@
 .info-container {
   width: 100%;
-  height: 400px;
-  background-color: white;
-  color: black;
+  height: 500px;
+  background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+  color: #667eea;
   margin-bottom: 100vh;
 }
 
@@ -15,6 +15,7 @@
   font-size: 50px;
   text-align: center;
   height: 20%;
+  color: #667eea;
 }
 
 .info {
@@ -27,9 +28,22 @@
 
 .tech {
   display: inline-block;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding: 20px 100px 40px 100px;
   flex-grow: 1;
+}
+
+.tech img {
+  width: 64px;
+  height: 64px;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.tech img:hover {
+  transform: scale(1.1) rotate(5deg);
 }
 
 @media only screen and (max-width: 960px) {

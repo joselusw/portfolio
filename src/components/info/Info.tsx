@@ -6,7 +6,7 @@ const Info: React.FunctionComponent = () => {
   return (
     <div className="info-container">
       <div className="info-title">
-        <h1>Some tech I like to use:</h1>
+        <h1>Some tech I'm into</h1>
       </div>
       <div className="info">
         <Slide direction="up">

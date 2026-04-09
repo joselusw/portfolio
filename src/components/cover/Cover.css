@@ -1,42 +1,130 @@
 .cover-container {
-	height: 100vh;
-	width: 100%;
-	object-fit: contain;
-	box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background-color: #00897b;
+  height: 100vh;
+  width: 100%;
+  object-fit: contain;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(145deg, #1a1a40, #00251a);
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(
+      circle at 30% 40%,
+      rgba(102, 126, 234, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 60%,
+      rgba(118, 75, 162, 0.1) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
 }
 
 .cover-container > h1 {
-	color: white;
-	font-size: 60px;
+  color: white;
+  font-size: 60px;
+  margin: 0;
+  font-weight: 700;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  animation: fadeInUp 1s ease-out;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 24px;
+  margin: 10px 0 20px 0;
+  font-weight: 300;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.4;
+  animation: fadeInUp 1.2s ease-out;
 }
 
 .dynamic-text {
-	margin-top: 8px;
-	color: white;
-	font-size: 32px;
+  margin-top: 8px;
+  color: white;
+  font-size: 32px;
+  font-weight: 500;
+  animation: fadeInUp 1.4s ease-out;
 }
 
 .avatar {
-	border-radius: 50%;
-	margin: 5rem;
-	height: 300px;
-	width: 300px;
+  border-radius: 50%;
+  margin: 2rem 0 3rem 0;
+  height: 300px;
+  width: 300px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  animation:
+    fadeInUp 0.8s ease-out,
+    float 6s ease-in-out infinite;
+  position: relative;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @media screen and (max-width: 960px) {
-	.cover-container > h1 {
-		font-size: 70px;
-		text-align: center;
-	}
+  .cover-container > h1 {
+    font-size: 50px;
+    text-align: center;
+  }
 
-	.cover-container > p {
-		text-align: center;
-		font-size: 22px;
-		width: 85%;
-	}
+  .subtitle {
+    font-size: 20px;
+    margin: 15px 20px 25px 20px;
+  }
+
+  .dynamic-text {
+    font-size: 28px;
+  }
+
+  .avatar {
+    height: 250px;
+    width: 250px;
+    margin: 1.5rem 0 2.5rem 0;
+  }
 }
