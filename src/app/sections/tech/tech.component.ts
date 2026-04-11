@@ -29,7 +29,7 @@ interface TechItem {
   template: `
     <section
       id="tech"
-      class="relative w-full min-h-screen flex items-center justify-center py-24"
+      class="relative w-full min-h-screen flex items-center justify-center py-12"
       style="background-color: var(--color-bg);"
       #section
     >
