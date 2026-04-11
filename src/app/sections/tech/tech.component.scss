@@ -1,0 +1,166 @@
+// Tech Component - Masonry Grid Layout
+
+.tech-masonry {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 2rem;
+  place-items: center;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 3rem;
+  }
+}
+
+.tech-tile {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 22, 0.4),
+    rgba(30, 30, 35, 0.5)
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(201, 169, 110, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(201, 169, 110, 0.15),
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    border-color: rgba(201, 169, 110, 0.3);
+    background: linear-gradient(
+      135deg,
+      rgba(20, 20, 22, 0.6),
+      rgba(30, 30, 35, 0.7)
+    );
+
+    &::before {
+      opacity: 1;
+    }
+
+    .tech-logo {
+      filter: drop-shadow(0 0 8px rgba(201, 169, 110, 0.4));
+    }
+
+    .tech-label {
+      color: var(--color-accent-2);
+    }
+  }
+
+  // Size variations for proficiency levels
+  &.size-sm {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  &.size-md {
+    grid-column: span 1;
+    grid-row: span 1;
+    transform: scale(1.15);
+  }
+
+  &.size-lg {
+    grid-column: span 2;
+    grid-row: span 2;
+    transform: scale(1.3);
+
+    @media (max-width: 1024px) {
+      grid-column: span 1;
+      grid-row: span 1;
+      transform: scale(1.25);
+    }
+
+    @media (max-width: 640px) {
+      grid-column: span 1;
+      grid-row: span 1;
+      transform: scale(1.15);
+    }
+  }
+}
+
+.tech-tile-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.tech-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 4px rgba(201, 169, 110, 0.2));
+
+  @media (min-width: 1024px) {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.tech-label {
+  color: var(--color-text-muted);
+  font-size: 0.65rem;
+  text-align: center;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  @media (min-width: 640px) {
+    font-size: 0.7rem;
+  }
+}
+
+// Responsive masonry for mobile
+@media (max-width: 640px) {
+  .tech-masonry {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .tech-tile-inner {
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .tech-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tech-label {
+    font-size: 0.6rem;
+  }
+}
+
+// Scroll snap behavior
+section#tech {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
