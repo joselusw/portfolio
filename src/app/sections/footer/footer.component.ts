@@ -39,8 +39,8 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
         <div class="mb-16 text-center">
           <h2
             #statement
-            class="font-display font-bold mb-8"
-            style="font-size: clamp(3rem, 8vw, 7rem); color: var(--color-accent);"
+            class="footer-statement font-display font-bold mb-8"
+            style="font-size: clamp(3rem, 8vw, 7rem);"
           >
             Let's build something remarkable.
           </h2>

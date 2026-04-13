@@ -49,11 +49,6 @@
 
   &:hover {
     border-color: rgba(201, 169, 110, 0.3);
-    background: linear-gradient(
-      135deg,
-      rgba(20, 20, 22, 0.6),
-      rgba(30, 30, 35, 0.7)
-    );
 
     &::before {
       opacity: 1;
