@@ -89,41 +89,6 @@
   transform-origin: left;
 }
 
-.about-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.stat-number {
-  font-family: var(--font-display);
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--color-accent-2);
-  line-height: 1;
-}
-
-.counter {
-  display: inline-block;
-}
-
-.stat-label {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  line-height: 1.4;
-  margin: 0;
-  max-width: 100px;
-}
-
 /* Right Panel */
 .about-right {
   padding: 6rem 4rem;
@@ -264,11 +229,6 @@
     border-top: 1px solid var(--color-surface-2);
   }
 
-  .about-stats {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
   .certifications-list {
     max-height: none;
     gap: 1rem;
@@ -286,7 +246,10 @@
 }
 
 @media (max-width: 640px) {
-  .about-left,
+  .about-left {
+    padding: 2rem 1.5rem 0 1.5rem;
+  }
+
   .about-right {
     padding: 2rem 1.5rem;
   }
@@ -299,19 +262,6 @@
   .bio-paragraph {
     font-size: 0.95rem;
     line-height: 1.7;
-  }
-
-  .about-stats {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
-  .stat-number {
-    font-size: 1.75rem;
-  }
-
-  .stat-label {
-    font-size: 0.8rem;
   }
 
   .cert-card {

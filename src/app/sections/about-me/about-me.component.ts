@@ -15,12 +15,6 @@ import { AnimationService } from "@core/services/animation.service";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface StatCounter {
-  label: string;
-  value: number;
-  suffix: string;
-}
-
 @Component({
   selector: "app-about-me",
   standalone: true,
@@ -49,17 +43,6 @@ interface StatCounter {
 
           <!-- Divider -->
           <div class="about-divider"></div>
-
-          <!-- Stat counters -->
-          <div class="about-stats" #aboutStats>
-            <div class="stat-item" *ngFor="let stat of stats" #statItem>
-              <div class="stat-number">
-                <span class="counter" [attr.data-target]="stat.value">0</span
-                >{{ stat.suffix }}
-              </div>
-              <p class="stat-label">{{ stat.label }}</p>
-            </div>
-          </div>
         </div>
 
         <!-- Right Panel: Certifications -->
@@ -125,7 +108,6 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("aboutLeft") aboutLeft!: ElementRef;
   @ViewChild("aboutRight") aboutRight!: ElementRef;
   @ViewChild("sectionDivider") sectionDivider!: ElementRef;
-  @ViewChild("aboutStats") aboutStats!: ElementRef;
   @ViewChild("certificationsList") certificationsList!: ElementRef;
 
   portfolio = PORTFOLIO_DATA;
@@ -163,12 +145,6 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
     ];
   }
 
-  stats: StatCounter[] = [
-    { label: "Years Experience", value: 7, suffix: "+" },
-    { label: "Projects Delivered", value: 20, suffix: "+" },
-    { label: "Málaga, Spain", value: 0, suffix: "" },
-  ];
-
   private scrollTriggers: ScrollTrigger[] = [];
 
   constructor(private animationService: AnimationService) {}
@@ -180,7 +156,6 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.initDividerAnimation();
     this.initContentAnimation();
-    this.initStatCounters();
   }
 
   ngOnDestroy(): void {
@@ -280,40 +255,6 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
-   * Animate stat counters counting up
-   */
-  private initStatCounters(): void {
-    if (!this.aboutStats) return;
-
-    const counters = this.aboutStats.nativeElement.querySelectorAll(".counter");
-
-    gsap.to(this.aboutStats.nativeElement, {
-      scrollTrigger: {
-        trigger: this.aboutSection.nativeElement,
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-      duration: 0,
-      onStart: () => {
-        counters.forEach((counter: HTMLElement) => {
-          const target = parseInt(counter.getAttribute("data-target") || "0");
-          gsap.to(counter, {
-            textContent: target,
-            duration: 2,
-            snap: { textContent: 1 },
-            ease: "power2.out",
-            onUpdate: function () {
-              counter.textContent = Math.ceil(
-                parseFloat(counter.textContent || "0"),
-              ).toString();
-            },
-          });
-        });
-      },
-    });
-  }
-
-  /**
    * Clean up animations and tweens
    */
   private killAnimations(): void {
@@ -330,7 +271,6 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.aboutLeft?.nativeElement,
       this.aboutRight?.nativeElement,
       this.sectionDivider?.nativeElement,
-      this.aboutStats?.nativeElement,
       this.certificationsList?.nativeElement,
     ]);
   }

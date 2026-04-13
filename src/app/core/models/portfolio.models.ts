@@ -77,7 +77,7 @@ export const PORTFOLIO_DATA: Portfolio = {
         "Gained valuable experience in enterprise application development",
         "Collaborated in the full software development lifecycle",
       ],
-      logoUrl: "assets/prosolution.png",
+      logoUrl: "assets/prosolution.svg",
       isCurrent: false,
     },
     {
