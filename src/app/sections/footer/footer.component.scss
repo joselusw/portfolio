@@ -35,8 +35,8 @@
   }
 
   &:hover {
-    border-color: rgba(201, 169, 110, 0.2);
-    background-color: rgba(201, 169, 110, 0.05);
+    border-color: var(--color-accent-2-20);
+    background-color: var(--color-accent-2-08);
 
     &::after {
       clip-path: inset(0 0 0 0);

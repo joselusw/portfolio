@@ -17,7 +17,7 @@
   inset: 0;
   background: radial-gradient(
     circle at calc(var(--gradient-x, 50) * 1%) calc(var(--gradient-y, 50) * 1%),
-    rgba(201, 169, 110, 0.08) 0%,
+    var(--color-accent-2-08) 0%,
     transparent 50%
   );
   pointer-events: none;

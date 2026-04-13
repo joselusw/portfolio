@@ -1,5 +1,9 @@
-import { Injectable } from '@angular/core';
-import { signal } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { signal } from "@angular/core";
+import {
+  ANIMATION_EASES,
+  ANIMATION_DURATIONS,
+} from "../constants/animation.constants";
 
 /**
  * Utility service for managing animation preferences and reduced-motion support
@@ -7,15 +11,15 @@ import { signal } from '@angular/core';
  * for GSAP animations that gracefully degrade when motion is reduced
  */
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AnimationService {
-  private mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  private mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   prefersReducedMotion = signal<boolean>(this.mediaQuery.matches);
 
   constructor() {
     // Listen for changes to prefers-reduced-motion preference
-    this.mediaQuery.addEventListener('change', (e) => {
+    this.mediaQuery.addEventListener("change", (e) => {
       this.prefersReducedMotion.set(e.matches);
     });
   }
@@ -31,7 +35,9 @@ export class AnimationService {
       ...reducedConfig,
     };
 
-    return this.prefersReducedMotion() ? { ...defaults, duration: 0 } : fullConfig;
+    return this.prefersReducedMotion()
+      ? { ...defaults, duration: 0 }
+      : fullConfig;
   }
 
   /**
@@ -42,8 +48,8 @@ export class AnimationService {
     const full = {
       opacity: 1,
       y: 0,
-      duration: 0.8,
-      ease: 'power3.out',
+      duration: ANIMATION_DURATIONS.medium,
+      ease: ANIMATION_EASES.entrance,
       ...fullConfig,
     };
 
@@ -64,8 +70,8 @@ export class AnimationService {
     const full = {
       opacity: 1,
       scale: 1,
-      duration: 0.8,
-      ease: 'back.out(1.4)',
+      duration: ANIMATION_DURATIONS.medium,
+      ease: ANIMATION_EASES.cardEntrance,
       ...fullConfig,
     };
 

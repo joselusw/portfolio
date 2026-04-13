@@ -8,6 +8,20 @@
   --color-text-primary: #f0ede8;
   --color-text-muted: #6b6b6b;
 
+  /* Accent color with transparency variants */
+  --color-accent-2-12: rgba(201, 169, 110, 0.12);
+  --color-accent-2-08: rgba(201, 169, 110, 0.08);
+  --color-accent-2-15: rgba(201, 169, 110, 0.15);
+  --color-accent-2-20: rgba(201, 169, 110, 0.2);
+  --color-accent-2-25: rgba(201, 169, 110, 0.25);
+  --color-accent-2-30: rgba(201, 169, 110, 0.3);
+  --color-accent-2-10: rgba(160, 115, 42, 0.1);
+  --color-accent-light-12: rgba(160, 115, 42, 0.12);
+  --color-accent-light-18: rgba(160, 115, 42, 0.18);
+  --color-accent-08: rgba(232, 224, 212, 0.08);
+  --color-accent-10: rgba(232, 224, 212, 0.1);
+  --color-accent-20: rgba(232, 224, 212, 0.2);
+
   --font-display: "Playfair Display", serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
@@ -209,6 +223,20 @@ img {
   --color-text-primary: #1a1a1a;
   --color-text-muted: #555555;
 
+  /* Accent color with transparency variants for light theme */
+  --color-accent-2-12: rgba(160, 115, 42, 0.12);
+  --color-accent-2-08: rgba(160, 115, 42, 0.08);
+  --color-accent-2-15: rgba(160, 115, 42, 0.15);
+  --color-accent-2-20: rgba(160, 115, 42, 0.2);
+  --color-accent-2-25: rgba(160, 115, 42, 0.25);
+  --color-accent-2-30: rgba(160, 115, 42, 0.3);
+  --color-accent-2-10: rgba(160, 115, 42, 0.1);
+  --color-accent-light-12: rgba(160, 115, 42, 0.12);
+  --color-accent-light-18: rgba(160, 115, 42, 0.18);
+  --color-accent-08: rgba(160, 115, 42, 0.08);
+  --color-accent-10: rgba(160, 115, 42, 0.1);
+  --color-accent-20: rgba(160, 115, 42, 0.2);
+
   color-scheme: light;
 
   /* ========================================================================
@@ -234,7 +262,7 @@ img {
     &:hover {
       background-color: var(--color-accent);
       border-color: var(--color-accent);
-      color: #ffffff;
+      color: var(--color-bg);
     }
   }
 
@@ -266,13 +294,13 @@ img {
   /* Certification badges */
   .cert-badge {
     &.completed {
-      background-color: rgba(160, 115, 42, 0.12);
+      background-color: var(--color-accent-2-12);
       color: var(--color-accent-2);
       border-color: var(--color-accent-2);
     }
 
     &.in-progress {
-      background-color: rgba(160, 115, 42, 0.08);
+      background-color: var(--color-accent-2-08);
       color: var(--color-accent);
       border-color: var(--color-accent);
     }
@@ -283,44 +311,44 @@ img {
      ======================================================================== */
 
   .tech-masonry .tech-tile {
-    background: #ffffff;
+    background: var(--color-bg);
     backdrop-filter: none;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--color-surface-2);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
 
     &::before {
       background: radial-gradient(
         circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(160, 115, 42, 0.1),
+        var(--color-accent-2-10),
         transparent 50%
       );
     }
 
     &:hover {
-      background: #ffffff !important;
-      border-color: #a0732a;
-      box-shadow: 0 6px 20px rgba(160, 115, 42, 0.18);
+      background: var(--color-bg) !important;
+      border-color: var(--color-accent);
+      box-shadow: 0 6px 20px var(--color-accent-light-18);
 
       &::before {
         opacity: 1;
       }
 
       .tech-logo {
-        filter: drop-shadow(0 0 8px rgba(160, 115, 42, 0.25));
+        filter: drop-shadow(0 0 8px var(--color-accent-2-25));
       }
 
       .tech-label {
-        color: #a0732a;
+        color: var(--color-accent);
       }
     }
   }
 
   .tech-tile .tech-logo {
-    filter: drop-shadow(0 0 4px rgba(160, 115, 42, 0.15));
+    filter: drop-shadow(0 0 4px var(--color-accent-2-15));
   }
 
   .tech-tile .tech-label {
-    color: #222222;
+    color: var(--color-text-primary);
   }
 
   /* ========================================================================
@@ -328,21 +356,21 @@ img {
      ======================================================================== */
 
   .jobs-section .job-card {
-    background: #ffffff;
+    background: var(--color-bg);
     backdrop-filter: none;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--color-surface-2);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
   }
 
   .jobs-section .job-card.current {
-    border-color: #a0732a;
+    border-color: var(--color-accent);
   }
 
   .jobs-section .job-card:hover {
-    border-color: #a0732a;
-    box-shadow: 0 4px 24px rgba(160, 115, 42, 0.2);
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 24px var(--color-accent-2-20);
     transform: translateY(-12px);
-    background: #ffffff;
+    background: var(--color-bg);
   }
 
   /* Logo container in job card */
@@ -352,23 +380,23 @@ img {
   }
 
   .company-name {
-    color: #111111;
+    color: var(--color-text-primary);
   }
 
   .job-title {
-    color: #a0732a;
+    color: var(--color-accent);
   }
 
   .date-section {
-    border-left-color: rgba(160, 115, 42, 0.2);
+    border-left-color: var(--color-accent-2-20);
   }
 
   .date-range {
-    color: #555555;
+    color: var(--color-text-muted);
   }
 
   .achievements-list li {
-    color: #333333;
+    color: var(--color-text-primary);
 
     &:before {
       color: #a0732a;

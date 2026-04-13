@@ -236,15 +236,15 @@
 }
 
 .cert-badge.completed {
-  background-color: rgba(201, 169, 110, 0.15);
+  background-color: var(--color-accent-2-15);
   color: var(--color-accent-2);
-  border: 1px solid rgba(201, 169, 110, 0.3);
+  border: 1px solid var(--color-accent-2-30);
 }
 
 .cert-badge.in-progress {
-  background-color: rgba(232, 224, 212, 0.1);
+  background-color: var(--color-accent-10);
   color: var(--color-accent);
-  border: 1px solid rgba(232, 224, 212, 0.2);
+  border: 1px solid var(--color-accent-20);
 }
 
 /* Responsive design */

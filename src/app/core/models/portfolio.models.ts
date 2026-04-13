@@ -99,8 +99,7 @@ export const PORTFOLIO_DATA: Portfolio = {
         "Architecting cloud-native microservices on Azure",
         "Leading a team of developers to deliver high-quality software solutions",
       ],
-      logoUrl:
-        "https://www.verisk.com/49600d/contentassets/87d1b64b5c9a48f09ef33019baa650d3/verisk-analytics-logo-right.png",
+      logoUrl: "https://www.verisksequel.com/media/4yygxqsr/verisk_logo.svg",
       isCurrent: true,
     },
   ],
