@@ -92,7 +92,6 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("gridContainer") gridContainer!: ElementRef;
 
   private scrollTriggers: ScrollTrigger[] = [];
-  private floatingAnimationTweens: gsap.core.Tween[] = [];
 
   techs: TechItem[] = [
     { name: ".NET", icon: "dotnet", size: "lg", cluster: 1 },
@@ -133,14 +132,6 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.scrollTriggers = [];
 
-    // Kill floating animation tweens
-    this.floatingAnimationTweens.forEach((tween) => {
-      if (tween) {
-        tween.kill();
-      }
-    });
-    this.floatingAnimationTweens = [];
-
     // Clear all properties on tiles
     gsap.set(".tech-tile", { clearProps: "all" });
   }
@@ -149,7 +140,6 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.section?.nativeElement) return;
     this.animateTiles();
     this.setupParallax();
-    this.setupFloatingAnimation();
   }
 
   private animateTiles(): void {
@@ -211,30 +201,6 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
       if (trigger.scrollTrigger) {
         this.scrollTriggers.push(trigger.scrollTrigger);
       }
-    });
-  }
-
-  private setupFloatingAnimation(): void {
-    const tiles =
-      this.gridContainer?.nativeElement?.querySelectorAll(".tech-tile");
-    if (!tiles || this.animationService.prefersReducedMotion()) return;
-
-    tiles.forEach((tile: HTMLElement, index: number) => {
-      const randomDuration = 3 + Math.random() * 2;
-      const randomDelay = Math.random() * 2;
-      const randomDistance = 8 + Math.random() * 4;
-
-      const tween = gsap.to(tile, {
-        y: randomDistance,
-        duration: randomDuration,
-        delay: randomDelay,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
-
-      // Track tween for cleanup
-      this.floatingAnimationTweens.push(tween);
     });
   }
 }

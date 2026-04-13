@@ -169,8 +169,6 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
     { label: "Málaga, Spain", value: 0, suffix: "" },
   ];
 
-  private leftParallaxTween: gsap.core.Tween | null = null;
-  private rightParallaxTween: gsap.core.Tween | null = null;
   private scrollTriggers: ScrollTrigger[] = [];
 
   constructor(private animationService: AnimationService) {}
@@ -183,7 +181,6 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initDividerAnimation();
     this.initContentAnimation();
     this.initStatCounters();
-    this.initParallax();
   }
 
   ngOnDestroy(): void {
@@ -317,65 +314,9 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
-   * Initialize parallax effects for left and right panels
-   */
-  private initParallax(): void {
-    if (
-      !this.aboutLeft ||
-      !this.aboutRight ||
-      !this.animationService.shouldApplyParallax()
-    )
-      return;
-
-    // Left panel: 0.85x scroll speed
-    const leftScroll = gsap.to(this.aboutLeft.nativeElement, {
-      y: () => window.innerHeight * 0.85 * -1,
-      scrollTrigger: {
-        trigger: this.aboutSection.nativeElement,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-        markers: false,
-      },
-    });
-
-    // Right panel: 1.15x scroll speed
-    const rightScroll = gsap.to(this.aboutRight.nativeElement, {
-      y: () => window.innerHeight * 1.15 * -1,
-      scrollTrigger: {
-        trigger: this.aboutSection.nativeElement,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-        markers: false,
-      },
-    });
-
-    // Track tweens for cleanup
-    this.leftParallaxTween = leftScroll;
-    this.rightParallaxTween = rightScroll;
-
-    // Track ScrollTriggers for cleanup
-    if (leftScroll.scrollTrigger) {
-      this.scrollTriggers.push(leftScroll.scrollTrigger);
-    }
-    if (rightScroll.scrollTrigger) {
-      this.scrollTriggers.push(rightScroll.scrollTrigger);
-    }
-  }
-
-  /**
    * Clean up animations and tweens
    */
   private killAnimations(): void {
-    // Kill tweens
-    if (this.leftParallaxTween) {
-      this.leftParallaxTween.kill();
-    }
-    if (this.rightParallaxTween) {
-      this.rightParallaxTween.kill();
-    }
-
     // Kill ScrollTriggers
     this.scrollTriggers.forEach((trigger) => {
       if (trigger) {
