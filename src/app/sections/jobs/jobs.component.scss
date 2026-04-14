@@ -75,6 +75,7 @@
   cursor: pointer;
   opacity: 1;
   overflow: hidden;
+  will-change: opacity, transform;
 }
 
 .job-card.left {

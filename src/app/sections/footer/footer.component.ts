@@ -157,6 +157,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
         );
       },
       once: true,
+      invalidateOnRefresh: true,
     });
     this.scrollTriggers.push(trigger);
   }
@@ -182,6 +183,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       },
       once: true,
+      invalidateOnRefresh: true,
     });
 
     gsap.set(text.words, { opacity: 0, y: 40 });
@@ -212,6 +214,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
           );
         },
         once: true,
+        invalidateOnRefresh: true,
       });
       this.scrollTriggers.push(trigger);
     });

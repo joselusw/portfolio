@@ -170,6 +170,7 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
         trigger: this.aboutSection.nativeElement,
         start: "top 80%",
         toggleActions: "play none none none",
+        invalidateOnRefresh: true,
       },
       width: "100%",
       duration: 1,
@@ -188,6 +189,7 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
         trigger: this.aboutSection.nativeElement,
         start: "top 80%",
         toggleActions: "play none none none",
+        invalidateOnRefresh: true,
       },
     });
 

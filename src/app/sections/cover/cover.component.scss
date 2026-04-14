@@ -101,6 +101,7 @@
   justify-content: center;
   opacity: 0;
   transform: translateX(-40px);
+  will-change: transform;
 }
 
 .photo-border {
@@ -139,6 +140,7 @@
   margin: 0;
   word-break: break-word;
   letter-spacing: -0.02em;
+  will-change: transform;
 }
 
 .hero-name br {

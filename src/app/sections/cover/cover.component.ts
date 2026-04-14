@@ -283,6 +283,7 @@ export class CoverComponent implements OnInit, OnDestroy {
         end: "bottom top",
         scrub: 1,
         markers: false,
+        invalidateOnRefresh: true,
       },
     });
 
@@ -295,6 +296,7 @@ export class CoverComponent implements OnInit, OnDestroy {
         end: "bottom top",
         scrub: 1,
         markers: false,
+        invalidateOnRefresh: true,
       },
     });
 

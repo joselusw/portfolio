@@ -17,6 +17,7 @@
   padding: 0.75rem 1.25rem;
   border: 1px solid transparent;
   border-radius: 0.5rem;
+  will-change: opacity, transform;
 
   &::after {
     content: "";
@@ -64,6 +65,7 @@
   line-height: 1;
   transition: all 0.3s ease;
   color: var(--color-accent);
+  will-change: transform;
 }
 
 .contact-text {

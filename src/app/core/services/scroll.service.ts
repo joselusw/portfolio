@@ -10,17 +10,17 @@ gsap.registerPlugin(ScrollTrigger);
 export class ScrollService {
   private scrollProgress = signal(0);
   
-  constructor() {
-    this.initScrollProgress();
-  }
+  constructor() {}
 
   /**
-   * Initialize scroll progress tracking
+   * Initialize scroll progress tracking using Lenis scroll callback
+   * Must be called from AppComponent with Lenis instance to avoid conflicts
    */
-  private initScrollProgress(): void {
-    if (typeof window === 'undefined') return;
+  initScrollProgressWithLenis(lenis: any): void {
+    if (typeof window === 'undefined' || !lenis) return;
 
-    window.addEventListener('scroll', () => {
+    // Use Lenis onScroll callback instead of native scroll listener
+    lenis.on('scroll', () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrolled = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
       this.scrollProgress.set(scrolled);
@@ -45,6 +45,7 @@ export class ScrollService {
     return ScrollTrigger.create({
       trigger,
       onEnter,
+      invalidateOnRefresh: true,
       ...options,
     });
   }
@@ -62,6 +63,7 @@ export class ScrollService {
         trigger: element,
         start: 'top 80%',
         toggleActions: 'play none none reverse',
+        invalidateOnRefresh: true,
         ...scrollTriggerOptions,
       },
       ...animation,
@@ -80,6 +82,7 @@ export class ScrollService {
         end: 'bottom top',
         scrub: 1,
         markers: false,
+        invalidateOnRefresh: true,
       },
     });
   }

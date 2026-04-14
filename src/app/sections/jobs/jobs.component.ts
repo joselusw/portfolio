@@ -171,6 +171,7 @@ export class JobsComponent implements OnInit, AfterViewInit, OnDestroy {
         trigger: this.jobsSection.nativeElement,
         start: "top 80%",
         toggleActions: "play none none none",
+        invalidateOnRefresh: true,
       },
       duration: 0,
       onStart: () => {
@@ -209,6 +210,7 @@ export class JobsComponent implements OnInit, AfterViewInit, OnDestroy {
         trigger: this.jobsSection.nativeElement,
         start: "top 80%",
         toggleActions: "play none none none",
+        invalidateOnRefresh: true,
       },
       duration: 0,
       onStart: () => {

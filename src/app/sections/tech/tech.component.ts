@@ -166,6 +166,7 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
           });
         },
         once: true,
+        invalidateOnRefresh: true,
       });
 
       this.scrollTriggers.push(trigger);
@@ -194,6 +195,7 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
           onUpdate: (self) => {
             gsap.set(tile, { y: self.getVelocity() * speed * 0.02 });
           },
+          invalidateOnRefresh: true,
         },
         duration: 1,
       });

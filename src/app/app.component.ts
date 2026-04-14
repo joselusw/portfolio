@@ -133,6 +133,9 @@ export class AppComponent implements OnInit, OnDestroy {
       this.lenis?.raf(time * 1000);
     });
 
+    // Prevent GSAP ticker lag to ensure smooth integration with Lenis
+    gsap.ticker.lagSmoothing(0);
+
     // Ensure Lenis updates on scroll
     gsap.ticker.wake();
   }
@@ -141,12 +144,15 @@ export class AppComponent implements OnInit, OnDestroy {
    * Set up additional scroll behavior
    */
   private setupScrollBehavior(): void {
-    if (typeof window === "undefined") {
+    if (typeof window === "undefined" || !this.lenis) {
       return;
     }
 
+    // Initialize scroll progress tracking with Lenis callback (prevents conflicts)
+    this.scrollService.initScrollProgressWithLenis(this.lenis);
+
     // Refresh ScrollTriggers when Lenis is ready
-    this.lenis?.on("scroll", () => {
+    this.lenis.on("scroll", () => {
       gsap.ticker.wake();
     });
   }

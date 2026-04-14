@@ -47,6 +47,7 @@ export class SectionTransitionComponent implements AfterViewInit {
         end: "bottom top",
         scrub: 1,
         markers: false,
+        invalidateOnRefresh: true,
       },
     });
   }

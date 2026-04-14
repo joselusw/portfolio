@@ -17,6 +17,7 @@
   height: 1px;
   background-color: var(--color-surface-2);
   transform: translateX(-50%);
+  will-change: width;
 }
 
 .about-container {
@@ -46,6 +47,7 @@
   margin: 0 0 1rem 0;
   opacity: 0;
   transform: translateY(20px);
+  will-change: opacity, transform;
 }
 
 .about-heading {

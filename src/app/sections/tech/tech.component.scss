@@ -32,6 +32,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
+  will-change: opacity, transform;
 
   &::before {
     content: "";
