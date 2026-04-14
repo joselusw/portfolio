@@ -8,7 +8,7 @@ import {
   HostListener,
   signal,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { RouterModule } from "@angular/router";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
@@ -27,7 +27,7 @@ interface Section {
 @Component({
   selector: "app-cover",
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   styleUrl: "./cover.component.scss",
   template: `
     <section
@@ -41,16 +41,17 @@ interface Section {
 
       <!-- Navigation dots (top-right) -->
       <nav class="nav-dots" #navDots>
-        <button
-          *ngFor="let section of sections"
-          class="nav-dot"
-          [class.active]="currentSection() === section.id"
-          [title]="section.label"
-          (click)="scrollToSection(section.id)"
-          [attr.aria-label]="'Navigate to ' + section.label"
-        >
-          <span class="dot"></span>
-        </button>
+        @for (section of sections; track section) {
+          <button
+            class="nav-dot"
+            [class.active]="currentSection() === section.id"
+            [title]="section.label"
+            (click)="scrollToSection(section.id)"
+            [attr.aria-label]="'Navigate to ' + section.label"
+          >
+            <span class="dot"></span>
+          </button>
+        }
       </nav>
 
       <!-- Main container -->

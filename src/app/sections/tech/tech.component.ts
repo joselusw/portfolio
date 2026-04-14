@@ -6,7 +6,7 @@ import {
   ViewChild,
   ElementRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollService } from "../../core/services/scroll.service";
@@ -24,7 +24,7 @@ interface TechItem {
 @Component({
   selector: "app-tech",
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   styleUrl: "./tech.component.scss",
   template: `
     <section
@@ -60,27 +60,28 @@ interface TechItem {
         </div>
 
         <div class="tech-masonry" #gridContainer>
-          <div
-            *ngFor="let tech of techs; let i = index"
-            class="tech-tile"
-            [class.size-sm]="tech.size === 'sm'"
-            [class.size-md]="tech.size === 'md'"
-            [class.size-lg]="tech.size === 'lg'"
-            [attr.data-index]="i"
-            [attr.data-cluster]="tech.cluster"
-          >
-            <div class="tech-tile-inner">
-              <img
-                class="tech-logo"
-                [src]="'https://cdn.simpleicons.org/' + tech.icon + '/c9a96e'"
-                [alt]="tech.name"
-                loading="lazy"
-              />
-              <p class="tech-label font-mono text-xs tracking-widest">
-                {{ tech.name }}
-              </p>
+          @for (tech of techs; track tech; let i = $index) {
+            <div
+              class="tech-tile"
+              [class.size-sm]="tech.size === 'sm'"
+              [class.size-md]="tech.size === 'md'"
+              [class.size-lg]="tech.size === 'lg'"
+              [attr.data-index]="i"
+              [attr.data-cluster]="tech.cluster"
+            >
+              <div class="tech-tile-inner">
+                <img
+                  class="tech-logo"
+                  [src]="'https://cdn.simpleicons.org/' + tech.icon + '/c9a96e'"
+                  [alt]="tech.name"
+                  loading="lazy"
+                />
+                <p class="tech-label font-mono text-xs tracking-widest">
+                  {{ tech.name }}
+                </p>
+              </div>
             </div>
-          </div>
+          }
         </div>
       </div>
     </section>

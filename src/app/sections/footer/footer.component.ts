@@ -6,7 +6,7 @@ import {
   ViewChild,
   ElementRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
@@ -19,7 +19,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
 @Component({
   selector: "app-footer",
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   styleUrl: "./footer.component.scss",
   template: `
     <footer
@@ -60,20 +60,21 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
           class="flex flex-wrap justify-center gap-8 md:gap-12 mb-20"
           #contactContainer
         >
-          <a
-            *ngFor="let social of portfolio.social"
-            [href]="getLinkUrl(social)"
-            [target]="getLinkTarget(social)"
-            rel="noopener noreferrer"
-            class="contact-link group relative"
-            [title]="social.name"
-            [attr.aria-label]="'Visit my ' + social.name + ' profile'"
-          >
-            <span class="contact-icon">{{ getIcon(social.icon) }}</span>
-            <span class="contact-text font-mono text-xs tracking-widest">{{
-              social.name
-            }}</span>
-          </a>
+          @for (social of portfolio.social; track social) {
+            <a
+              [href]="getLinkUrl(social)"
+              [target]="getLinkTarget(social)"
+              rel="noopener noreferrer"
+              class="contact-link group relative"
+              [title]="social.name"
+              [attr.aria-label]="'Visit my ' + social.name + ' profile'"
+            >
+              <span class="contact-icon">{{ getIcon(social.icon) }}</span>
+              <span class="contact-text font-mono text-xs tracking-widest">{{
+                social.name
+              }}</span>
+            </a>
+          }
         </div>
       </div>
 

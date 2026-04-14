@@ -7,7 +7,7 @@ import {
   signal,
   effect,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { RouterModule } from "@angular/router";
 import Lenis from "lenis";
 import gsap from "gsap";
@@ -27,7 +27,6 @@ gsap.registerPlugin(ScrollToPlugin);
   selector: "app-root",
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     NoiseOverlayComponent,
     CoverComponent,
@@ -68,8 +67,12 @@ gsap.registerPlugin(ScrollToPlugin);
         "
         aria-label="Toggle theme"
       >
-        <span *ngIf="currentTheme() === 'dark'">☀️</span>
-        <span *ngIf="currentTheme() === 'light'">🌙</span>
+        @if (currentTheme() === "dark") {
+          <span>☀️</span>
+        }
+        @if (currentTheme() === "light") {
+          <span>🌙</span>
+        }
       </button>
     </div>
   `,

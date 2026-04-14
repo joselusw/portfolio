@@ -11,7 +11,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -23,7 +23,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 @Component({
   selector: "app-jobs",
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: "./jobs.component.scss",
   template: `
@@ -44,72 +44,75 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
         <!-- Jobs grid -->
         <div class="jobs-grid" #jobsGrid>
-          <div
-            class="job-card"
-            *ngFor="let job of portfolio.jobs; let i = index"
-            [class.right]="i % 2 === 1"
-            [class.current]="job.isCurrent"
-            #jobCard
-          >
-            <!-- Timeline line -->
-            <div class="timeline-line" #timelineLine></div>
-
-            <!-- Current badge -->
-            <div class="current-badge" *ngIf="job.isCurrent">Current</div>
-
-            <!-- Card content -->
-            <div class="card-content">
-              <!-- Logo section -->
-              <div class="logo-container" *ngIf="job.logoUrl">
-                <img
-                  [src]="job.logoUrl"
-                  [alt]="job.company + ' logo'"
-                  class="company-logo"
-                  loading="lazy"
-                />
-              </div>
-
-              <!-- Header -->
-              <div class="card-header">
-                <h3 class="company-name">{{ job.company }}</h3>
-                <p class="job-title">{{ job.title }}</p>
-              </div>
-
-              <!-- Date range with animated line -->
-              <div class="date-section">
-                <p class="date-range">{{ job.period }}</p>
-              </div>
-
-              <!-- Body: achievements -->
-              <div class="card-body">
-                <ul class="achievements-list">
-                  <li *ngFor="let achievement of job.achievements">
-                    {{ achievement }}
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Footer: tech stack -->
-              <div class="card-footer">
-                <div class="tech-tags">
-                  <span class="tech-tag" *ngFor="let tech of job.technologies">
-                    {{ tech }}
-                  </span>
+          @for (job of portfolio.jobs; track job; let i = $index) {
+            <div
+              class="job-card"
+              [class.right]="i % 2 === 1"
+              [class.current]="job.isCurrent"
+              #jobCard
+            >
+              <!-- Timeline line -->
+              <div class="timeline-line" #timelineLine></div>
+              <!-- Current badge -->
+              @if (job.isCurrent) {
+                <div class="current-badge">Current</div>
+              }
+              <!-- Card content -->
+              <div class="card-content">
+                <!-- Logo section -->
+                @if (job.logoUrl) {
+                  <div class="logo-container">
+                    <img
+                      [src]="job.logoUrl"
+                      [alt]="job.company + ' logo'"
+                      class="company-logo"
+                      loading="lazy"
+                    />
+                  </div>
+                }
+                <!-- Header -->
+                <div class="card-header">
+                  <h3 class="company-name">{{ job.company }}</h3>
+                  <p class="job-title">{{ job.title }}</p>
                 </div>
-
-                <!-- View project link -->
-                <a
-                  *ngIf="job.link"
-                  [href]="job.link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="view-link"
-                >
-                  View Project →
-                </a>
+                <!-- Date range with animated line -->
+                <div class="date-section">
+                  <p class="date-range">{{ job.period }}</p>
+                </div>
+                <!-- Body: achievements -->
+                <div class="card-body">
+                  <ul class="achievements-list">
+                    @for (achievement of job.achievements; track achievement) {
+                      <li>
+                        {{ achievement }}
+                      </li>
+                    }
+                  </ul>
+                </div>
+                <!-- Footer: tech stack -->
+                <div class="card-footer">
+                  <div class="tech-tags">
+                    @for (tech of job.technologies; track tech) {
+                      <span class="tech-tag">
+                        {{ tech }}
+                      </span>
+                    }
+                  </div>
+                  <!-- View project link -->
+                  @if (job.link) {
+                    <a
+                      [href]="job.link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="view-link"
+                    >
+                      View Project →
+                    </a>
+                  }
+                </div>
               </div>
             </div>
-          </div>
+          }
         </div>
       </div>
     </section>

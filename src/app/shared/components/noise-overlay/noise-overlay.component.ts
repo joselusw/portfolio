@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import gsap from "gsap";
 
 @Component({
   selector: "app-noise-overlay",
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   styleUrl: "./noise-overlay.component.scss",
   template: `
     <svg

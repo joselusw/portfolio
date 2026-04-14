@@ -7,7 +7,7 @@ import {
   OnDestroy,
   signal,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PORTFOLIO_DATA } from "@core/models/portfolio.models";
@@ -18,7 +18,7 @@ gsap.registerPlugin(ScrollTrigger);
 @Component({
   selector: "app-about-me",
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   styleUrl: "./about-me.component.scss",
   template: `
     <section class="about-section" #aboutSection>
@@ -36,9 +36,11 @@ gsap.registerPlugin(ScrollTrigger);
 
           <!-- Bio paragraphs -->
           <div class="about-bio">
-            <p *ngFor="let para of bioParagraphs" class="bio-paragraph">
-              {{ para }}
-            </p>
+            @for (para of bioParagraphs; track para) {
+              <p class="bio-paragraph">
+                {{ para }}
+              </p>
+            }
           </div>
 
           <!-- Divider -->
@@ -52,51 +54,46 @@ gsap.registerPlugin(ScrollTrigger);
 
           <!-- Certifications list -->
           <div class="certifications-list" #certificationsList>
-            <div
-              class="cert-card"
-              *ngFor="let cert of portfolio.certifications"
-              #certCard
-            >
-              <!-- Logo placeholder -->
-              <div class="cert-logo">
-                <svg
-                  width="40"
-                  height="40"
-                  viewBox="0 0 40 40"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="20"
-                    cy="20"
-                    r="18"
-                    fill="var(--color-surface)"
-                    stroke="var(--color-accent-2)"
-                    stroke-width="2"
-                  />
-                  <path d="M20 10L24 15H16Z" fill="var(--color-accent-2)" />
-                  <path
-                    d="M16 20H24M18 24H22"
-                    stroke="var(--color-accent-2)"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                </svg>
+            @for (cert of portfolio.certifications; track cert) {
+              <div class="cert-card" #certCard>
+                <!-- Logo placeholder -->
+                <div class="cert-logo">
+                  <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="20"
+                      cy="20"
+                      r="18"
+                      fill="var(--color-surface)"
+                      stroke="var(--color-accent-2)"
+                      stroke-width="2"
+                    />
+                    <path d="M20 10L24 15H16Z" fill="var(--color-accent-2)" />
+                    <path
+                      d="M16 20H24M18 24H22"
+                      stroke="var(--color-accent-2)"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </div>
+                <!-- Content -->
+                <div class="cert-content">
+                  <h3 class="cert-name">{{ cert.name }}</h3>
+                  <p class="cert-issuer">{{ cert.issuer }}</p>
+                  <p class="cert-year">{{ cert.issued }}</p>
+                </div>
+                <!-- Badge -->
+                <div class="cert-badge completed">Completed</div>
+                <!-- Left accent border -->
+                <div class="cert-accent-border"></div>
               </div>
-
-              <!-- Content -->
-              <div class="cert-content">
-                <h3 class="cert-name">{{ cert.name }}</h3>
-                <p class="cert-issuer">{{ cert.issuer }}</p>
-                <p class="cert-year">{{ cert.issued }}</p>
-              </div>
-
-              <!-- Badge -->
-              <div class="cert-badge completed">Completed</div>
-
-              <!-- Left accent border -->
-              <div class="cert-accent-border"></div>
-            </div>
+            }
           </div>
         </div>
       </div>
