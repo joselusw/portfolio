@@ -99,7 +99,7 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
     { name: "Angular", icon: "angular", size: "lg", cluster: 1 },
     { name: "Semantic Kernel", icon: "probot", size: "md", cluster: 1 },
     { name: "C#", icon: "sharp", size: "md", cluster: 1 },
-    { name: ".NET", icon: "dotnet", size: "md", cluster: 1 },
+    { name: "React", icon: "react", size: "md", cluster: 1 },
     { name: "LLM Integration", icon: "openaigym", size: "md", cluster: 1 },
     { name: "RAG", icon: "googlegemini", size: "sm", cluster: 1 },
 
