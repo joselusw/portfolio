@@ -38,9 +38,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
       <div class="jobs-content">
         <!-- Section heading -->
-        <h2 class="section-heading" #sectionHeading>
-          Cool stuff I've participated
-        </h2>
+        <h2 class="section-heading" #sectionHeading>Systems I've delivered</h2>
 
         <!-- Jobs grid -->
         <div class="jobs-grid" #jobsGrid>
@@ -74,6 +72,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
                 <div class="card-header">
                   <h3 class="company-name">{{ job.company }}</h3>
                   <p class="job-title">{{ job.title }}</p>
+                  <p class="job-summary">{{ job.description }}</p>
                 </div>
                 <!-- Date range with animated line -->
                 <div class="date-section">
@@ -200,76 +199,44 @@ export class JobsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const cardElements = this.jobCards
       .toArray()
-      .map((ref) => ref.nativeElement);
+      .map((ref) => ref.nativeElement as HTMLElement);
     const timelineLineElements = this.timelineLines
       .toArray()
-      .map((ref) => ref.nativeElement);
+      .map((ref) => ref.nativeElement as HTMLElement);
 
-    gsap.to(this.jobsGrid.nativeElement, {
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: this.jobsSection.nativeElement,
         start: "top 80%",
-        toggleActions: "play none none none",
+        once: true,
         invalidateOnRefresh: true,
       },
-      duration: 0,
-      onStart: () => {
-        // Animate cards in from opposite sides
-        cardElements.forEach((card: HTMLElement, index: number) => {
-          const isRight = index % 2 === 1;
-          const direction = isRight ? 100 : -100;
-
-          const tween = gsap.fromTo(
-            card,
-            { opacity: 0, x: direction },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.8,
-              ease: "cubic.inOut",
-              delay: index * 0.15,
-            },
-          );
-
-          this.jobsTweens.push(tween);
-
-          // Animate timeline line after card enters
-          if (timelineLineElements[index]) {
-            gsap.to(timelineLineElements[index], {
-              opacity: 1,
-              scaleY: 1,
-              duration: 0.6,
-              ease: "power2.out",
-              delay: index * 0.15 + 0.4,
-            });
-          }
-
-          // Stagger reveal of internal elements on hover
-          card.addEventListener("mouseenter", () => {
-            const header = card.querySelector(".card-header");
-            const title = card.querySelector(".job-title");
-            const dateSection = card.querySelector(".date-section");
-            const listItems = card.querySelectorAll(".achievements-list li");
-            const footer = card.querySelector(".card-footer");
-
-            const elements = [
-              header,
-              title,
-              dateSection,
-              ...Array.from(listItems),
-              footer,
-            ].filter(Boolean);
-
-            gsap.to(elements, {
-              opacity: 1,
-              y: 0,
-              stagger: 0.05,
-              duration: 0.4,
-              ease: "power2.out",
-            });
-          });
-        });
+      defaults: {
+        duration: 0.85,
+        ease: "power3.out",
       },
+    });
+
+    cardElements.forEach((card, index) => {
+      const isRight = index % 2 === 1;
+      const direction = isRight ? 60 : -60;
+
+      tl.fromTo(
+        card,
+        { opacity: 0, x: direction, y: 24 },
+        { opacity: 1, x: 0, y: 0 },
+        index * 0.12,
+      );
+
+      const line = timelineLineElements[index];
+      if (line) {
+        tl.fromTo(
+          line,
+          { opacity: 0, scaleY: 0, transformOrigin: "top" },
+          { opacity: 1, scaleY: 1, duration: 0.55, ease: "power2.out" },
+          index * 0.12 + 0.15,
+        );
+      }
     });
   }
 

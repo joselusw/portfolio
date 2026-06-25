@@ -150,22 +150,22 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
       this.gridContainer.nativeElement.querySelectorAll(".tech-tile");
 
     tiles.forEach((tile: HTMLElement, index: number) => {
-      gsap.set(tile, { opacity: 0, scale: 0.6 });
+      gsap.set(tile, { opacity: 0, y: 24, scale: 0.88 });
 
       const trigger = ScrollTrigger.create({
         trigger: tile,
-        start: "top 90%",
-        end: "top 50%",
+        start: "top 92%",
+        once: true,
         onEnter: () => {
           gsap.to(tile, {
             opacity: 1,
+            y: 0,
             scale: 1,
             duration: 0.8,
-            delay: index * 0.05,
-            ease: "back.out(1.4)",
+            delay: index * 0.04,
+            ease: "back.out(1.3)",
           });
         },
-        once: true,
         invalidateOnRefresh: true,
       });
 
@@ -185,24 +185,25 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
     ) as HTMLElement[];
 
     tiles.forEach((tile, index) => {
-      const row = Math.floor(index / 5);
-      const speed = row % 2 === 0 ? 0.95 : 1.05;
+      const speed = index % 2 === 0 ? 0.02 : -0.02;
 
-      const trigger = gsap.to(tile, {
-        scrollTrigger: {
-          trigger: this.section?.nativeElement,
-          start: "top center",
-          onUpdate: (self) => {
-            gsap.set(tile, { y: self.getVelocity() * speed * 0.02 });
-          },
-          invalidateOnRefresh: true,
+      const trigger = ScrollTrigger.create({
+        trigger: this.section?.nativeElement,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 0.65,
+        onUpdate: (self) => {
+          gsap.to(tile, {
+            y: self.getVelocity() * speed,
+            duration: 0.2,
+            ease: "power1.out",
+          });
         },
-        duration: 1,
+        invalidateOnRefresh: true,
       });
 
-      // Track ScrollTrigger for cleanup
-      if (trigger.scrollTrigger) {
-        this.scrollTriggers.push(trigger.scrollTrigger);
+      if (trigger) {
+        this.scrollTriggers.push(trigger);
       }
     });
   }

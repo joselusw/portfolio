@@ -41,6 +41,13 @@
   --duration-normal: 300ms;
   --duration-slow: 500ms;
 
+  /* Shadow System (2026 Standards) - Dark theme uses warm blacks */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.16);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.25);
+
   color-scheme: dark;
 }
 
@@ -61,9 +68,32 @@ html {
 body {
   font-family: var(--font-body);
   background-color: var(--color-bg);
+  background-image:
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(201, 169, 110, 0.12),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 85% 22%,
+      rgba(126, 231, 215, 0.08),
+      transparent 16%
+    );
   color: var(--color-text-primary);
   line-height: 1.6;
+  min-height: 100vh;
   overflow-x: hidden;
+}
+
+/* Light theme background gradient */
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(153, 125, 107, 0.08),
+      transparent 18%
+    ),
+    radial-gradient(circle at 85% 22%, rgba(107, 83, 68, 0.05), transparent 16%);
 }
 
 /* Typography */
@@ -206,6 +236,38 @@ img {
   display: block;
 }
 
+html[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #faf9f4;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0ebe3;
+  --color-accent: #6b5344;
+  --color-accent-2: #997d6b;
+  --color-text-primary: #1f1a16;
+  --color-text-muted: #7a6f68;
+
+  --color-accent-2-12: rgba(153, 125, 107, 0.12);
+  --color-accent-2-08: rgba(153, 125, 107, 0.08);
+  --color-accent-2-15: rgba(153, 125, 107, 0.15);
+  --color-accent-2-20: rgba(153, 125, 107, 0.2);
+  --color-accent-2-25: rgba(153, 125, 107, 0.25);
+  --color-accent-2-30: rgba(153, 125, 107, 0.3);
+  --color-accent-2-10: rgba(107, 83, 68, 0.1);
+  --color-accent-light-12: rgba(107, 83, 68, 0.12);
+  --color-accent-light-18: rgba(107, 83, 68, 0.18);
+  --color-accent-08: rgba(107, 83, 68, 0.08);
+  --color-accent-10: rgba(107, 83, 68, 0.1);
+  --color-accent-20: rgba(107, 83, 68, 0.2);
+
+  /* Light theme shadows with warm tint */
+  --shadow-xs: 0 1px 2px rgba(107, 83, 68, 0.05);
+  --shadow-sm: 0 2px 4px rgba(107, 83, 68, 0.08);
+  --shadow-md: 0 4px 8px rgba(107, 83, 68, 0.1);
+  --shadow-lg: 0 8px 16px rgba(107, 83, 68, 0.12);
+  --shadow-xl: 0 12px 32px rgba(107, 83, 68, 0.15);
+}
+
 /* ============================================================================
    LIGHT THEME OVERRIDES (data-theme="light")
    ============================================================================
@@ -214,28 +276,35 @@ img {
    ============================================================================ */
 
 [data-theme="light"] {
-  /* Global color scheme for light theme */
-  --color-bg: #ffffff;
-  --color-surface: #f5f5f5;
-  --color-surface-2: #e8e8e8;
-  --color-accent: #a0732a;
-  --color-accent-2: #7a5620;
-  --color-text-primary: #1a1a1a;
-  --color-text-muted: #555555;
+  /* Global color scheme for light theme - 2026 warm standards */
+  --color-bg: #faf9f4;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0ebe3;
+  --color-accent: #6b5344;
+  --color-accent-2: #997d6b;
+  --color-text-primary: #1f1a16;
+  --color-text-muted: #7a6f68;
 
   /* Accent color with transparency variants for light theme */
-  --color-accent-2-12: rgba(160, 115, 42, 0.12);
-  --color-accent-2-08: rgba(160, 115, 42, 0.08);
-  --color-accent-2-15: rgba(160, 115, 42, 0.15);
-  --color-accent-2-20: rgba(160, 115, 42, 0.2);
-  --color-accent-2-25: rgba(160, 115, 42, 0.25);
-  --color-accent-2-30: rgba(160, 115, 42, 0.3);
-  --color-accent-2-10: rgba(160, 115, 42, 0.1);
-  --color-accent-light-12: rgba(160, 115, 42, 0.12);
-  --color-accent-light-18: rgba(160, 115, 42, 0.18);
-  --color-accent-08: rgba(160, 115, 42, 0.08);
-  --color-accent-10: rgba(160, 115, 42, 0.1);
-  --color-accent-20: rgba(160, 115, 42, 0.2);
+  --color-accent-2-12: rgba(153, 125, 107, 0.12);
+  --color-accent-2-08: rgba(153, 125, 107, 0.08);
+  --color-accent-2-15: rgba(153, 125, 107, 0.15);
+  --color-accent-2-20: rgba(153, 125, 107, 0.2);
+  --color-accent-2-25: rgba(153, 125, 107, 0.25);
+  --color-accent-2-30: rgba(153, 125, 107, 0.3);
+  --color-accent-2-10: rgba(107, 83, 68, 0.1);
+  --color-accent-light-12: rgba(107, 83, 68, 0.12);
+  --color-accent-light-18: rgba(107, 83, 68, 0.18);
+  --color-accent-08: rgba(107, 83, 68, 0.08);
+  --color-accent-10: rgba(107, 83, 68, 0.1);
+  --color-accent-20: rgba(107, 83, 68, 0.2);
+
+  /* Light theme shadows with warm tint for elevation */
+  --shadow-xs: 0 1px 2px rgba(107, 83, 68, 0.05);
+  --shadow-sm: 0 2px 4px rgba(107, 83, 68, 0.08);
+  --shadow-md: 0 4px 8px rgba(107, 83, 68, 0.1);
+  --shadow-lg: 0 8px 16px rgba(107, 83, 68, 0.12);
+  --shadow-xl: 0 12px 32px rgba(107, 83, 68, 0.15);
 
   color-scheme: light;
 
@@ -247,9 +316,13 @@ img {
   .btn-primary {
     background-color: var(--color-accent);
     color: #ffffff;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) ease;
 
     &:hover {
       background-color: var(--color-accent-2);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
     }
   }
 
@@ -258,11 +331,14 @@ img {
     background-color: transparent;
     color: var(--color-accent-2);
     border-color: var(--color-accent-2);
+    transition: all var(--duration-normal) ease;
 
     &:hover {
       background-color: var(--color-accent);
       border-color: var(--color-accent);
-      color: var(--color-bg);
+      color: #ffffff;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
     }
   }
 
@@ -273,9 +349,12 @@ img {
   .cert-card {
     background-color: var(--color-surface);
     border-left-color: var(--color-accent-2);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) ease;
 
     &:hover {
       background-color: var(--color-surface-2);
+      box-shadow: var(--shadow-md);
     }
   }
 
@@ -314,7 +393,8 @@ img {
     background: var(--color-bg);
     backdrop-filter: none;
     border: 1px solid var(--color-surface-2);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) ease;
 
     &::before {
       background: radial-gradient(
@@ -325,9 +405,9 @@ img {
     }
 
     &:hover {
-      background: var(--color-bg) !important;
+      background: var(--color-surface) !important;
       border-color: var(--color-accent);
-      box-shadow: 0 6px 20px var(--color-accent-light-18);
+      box-shadow: var(--shadow-lg);
 
       &::before {
         opacity: 1;
@@ -345,10 +425,12 @@ img {
 
   .tech-tile .tech-logo {
     filter: drop-shadow(0 0 4px var(--color-accent-2-15));
+    transition: filter var(--duration-normal) ease;
   }
 
   .tech-tile .tech-label {
     color: var(--color-text-primary);
+    transition: color var(--duration-normal) ease;
   }
 
   /* ========================================================================
@@ -356,10 +438,15 @@ img {
      ======================================================================== */
 
   .jobs-section .job-card {
-    background: var(--color-bg);
+    background: var(--color-surface);
     backdrop-filter: none;
     border: 1px solid var(--color-surface-2);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-normal) ease;
+
+    &:hover {
+      box-shadow: var(--shadow-lg);
+    }
   }
 
   .jobs-section .job-card.current {
@@ -566,6 +653,26 @@ img {
     .about-right {
       border-left: none;
       border-top-color: var(--color-surface-2);
+    }
+  }
+
+  /* Theme toggle button for light theme */
+  .theme-toggle {
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-normal) ease;
+
+    &:hover {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent-2);
+      color: var(--color-surface);
+      box-shadow: var(--shadow-lg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
     }
   }
 }

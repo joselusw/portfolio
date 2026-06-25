@@ -87,6 +87,25 @@ interface Section {
             <em>{{ portfolio.bio }}</em>
           </p>
 
+          <!-- Status panel -->
+          <div class="hero-status-grid" #heroStatusGrid>
+            <div class="hero-statement">
+              <span class="hero-eyebrow">Current focus</span>
+              <p>
+                Cloud-native systems, AI-augmented experiences, and resilient
+                product delivery.
+              </p>
+            </div>
+
+            <div class="hero-panel">
+              <span class="status-chip">Now</span>
+              <p class="panel-label">Open to senior engineering roles</p>
+              <p class="panel-note">
+                {{ portfolio.location }} · remote / hybrid
+              </p>
+            </div>
+          </div>
+
           <!-- CTA Buttons -->
           <div class="cta-buttons" #ctaButtons>
             <button
@@ -135,6 +154,7 @@ export class CoverComponent implements OnInit, OnDestroy {
   @ViewChild("scrollIndicator") scrollIndicator!: ElementRef;
   @ViewChild("gradientBg") gradientBg!: ElementRef;
   @ViewChild("navDots") navDots!: ElementRef;
+  @ViewChild("heroStatusGrid") heroStatusGrid!: ElementRef;
 
   portfolio = PORTFOLIO_DATA;
   currentSection = signal<string>("cover");
@@ -245,23 +265,36 @@ export class CoverComponent implements OnInit, OnDestroy {
       0.8,
     );
 
-    // 5. CTA buttons fade up
+    // 5. Status panel appears with a gentle lift
+    tl.fromTo(
+      this.heroStatusGrid.nativeElement,
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      0.85,
+    );
+
+    // 6. CTA buttons fade up together
     tl.fromTo(
       this.ctaButtons.nativeElement,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, ...fadeConfig },
-      0.9,
+      0.95,
     );
 
-    // 6. Scroll indicator bounces in last
+    // 7. Scroll indicator bounces in last
     tl.fromTo(
       this.scrollIndicator.nativeElement,
       { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
-        duration: (fadeConfig.duration as number) * 0.75,
-        ease: "back.out",
+        duration: 0.7,
+        ease: "back.out(1.2)",
       },
       1.1,
     );
@@ -274,9 +307,9 @@ export class CoverComponent implements OnInit, OnDestroy {
     if (!this.coverSection || !this.animationService.shouldApplyParallax())
       return;
 
-    // Photo parallax (0.4x scroll speed)
+    // Photo parallax (subtle float)
     const photoScrollTrigger = gsap.to(this.photoWrapper.nativeElement, {
-      y: () => window.innerHeight * 0.4 * -1,
+      y: () => window.innerHeight * -0.12,
       scrollTrigger: {
         trigger: this.coverSection.nativeElement,
         start: "top top",
@@ -287,9 +320,9 @@ export class CoverComponent implements OnInit, OnDestroy {
       },
     });
 
-    // Name parallax (0.7x scroll speed)
+    // Name parallax (gentle upward drift)
     const nameScrollTrigger = gsap.to(this.heroName.nativeElement, {
-      y: () => window.innerHeight * 0.7 * -1,
+      y: () => window.innerHeight * -0.08,
       scrollTrigger: {
         trigger: this.coverSection.nativeElement,
         start: "top top",

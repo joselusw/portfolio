@@ -199,6 +199,15 @@
   transform: translateY(0);
 }
 
+.job-summary {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin: 0.75rem 0 0 0;
+  line-height: 1.7;
+  max-width: 38rem;
+}
+
 /* Date section */
 .date-section {
   padding-left: 1.5rem;

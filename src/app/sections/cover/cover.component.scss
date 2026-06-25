@@ -1,14 +1,25 @@
 .cover-section {
   position: relative;
   width: 100%;
-  height: 100dvh;
+  min-height: 100dvh;
   overflow: hidden;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-bg);
+  background:
+    radial-gradient(
+      circle at 14% 12%,
+      rgba(201, 169, 110, 0.14),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 84% 18%,
+      rgba(126, 231, 215, 0.08),
+      transparent 14%
+    ),
+    var(--color-bg);
 }
 
 /* Radial gradient background */
@@ -17,8 +28,8 @@
   inset: 0;
   background: radial-gradient(
     circle at calc(var(--gradient-x, 50) * 1%) calc(var(--gradient-y, 50) * 1%),
-    var(--color-accent-2-08) 0%,
-    transparent 50%
+    rgba(201, 169, 110, 0.12) 0%,
+    transparent 46%
   );
   pointer-events: none;
   z-index: 0;
@@ -29,11 +40,10 @@
 .nav-dots {
   position: fixed;
   right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 10rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   z-index: 50;
   opacity: 0;
   animation: fadeIn 0.8s ease-out 0.6s forwards;
@@ -82,10 +92,10 @@
   height: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 3rem;
+  padding: 2rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: minmax(320px, 1.05fr) minmax(280px, 0.9fr);
+  gap: 3rem;
   align-items: center;
   justify-items: center;
 }
@@ -94,7 +104,7 @@
 .photo-wrapper {
   position: relative;
   width: 100%;
-  max-width: 380px;
+  max-width: 340px;
   aspect-ratio: 1;
   display: flex;
   align-items: center;
@@ -108,10 +118,11 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  border-radius: 50%;
-  border: 3px solid var(--color-accent-2);
+  border-radius: 30px;
+  border: 1px solid rgba(201, 169, 110, 0.18);
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.28);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent);
 }
 
 .hero-photo {
@@ -119,6 +130,11 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
+}
+
+.photo-border:hover .hero-photo {
+  transform: scale(1.02);
 }
 
 /* Content section */
@@ -129,17 +145,20 @@
   flex-direction: column;
   gap: 1.5rem;
   justify-self: start;
+  max-width: 680px;
 }
 
 .hero-name {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-size: clamp(3rem, 8vw, 5.5rem);
   font-weight: 800;
-  line-height: 1;
+  line-height: 0.95;
   color: var(--color-text-primary);
   margin: 0;
   word-break: break-word;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
+  text-transform: none;
+  max-width: 13ch;
   will-change: transform;
 }
 
@@ -149,9 +168,9 @@
 
 .hero-title {
   font-family: var(--font-mono);
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-accent-2);
   margin: 0;
@@ -162,14 +181,84 @@
 
 .hero-tagline {
   font-family: var(--font-body);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: var(--color-text-muted);
   margin: 0;
-  max-width: 28rem;
+  max-width: 34rem;
   opacity: 0;
   transform: translateY(20px);
-  font-style: italic;
-  font-weight: 400;
+  font-style: normal;
+  line-height: 1.8;
+}
+
+.hero-status-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(220px, 1fr);
+  gap: 1rem;
+  align-items: start;
+  max-width: 44rem;
+}
+
+.hero-statement,
+.hero-panel {
+  padding: 1.5rem;
+  border-radius: 22px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  margin-bottom: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent-2);
+}
+
+.hero-statement p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--color-text-primary);
+}
+
+.hero-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.status-chip {
+  align-self: flex-start;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background-color: rgba(126, 231, 215, 0.14);
+  color: var(--color-accent-2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.panel-label {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  line-height: 1.75;
+}
+
+.panel-note {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .cta-buttons {
@@ -182,10 +271,10 @@
 }
 
 .btn {
-  padding: 12px 32px;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  padding: 14px 34px;
+  border-radius: 14px;
+  font-weight: 600;
+  transition: all 0.28s ease;
   border: none;
   cursor: pointer;
   font-size: 0.95rem;
@@ -196,33 +285,25 @@
   white-space: nowrap;
 }
 
-.btn:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
 .btn-primary {
   background-color: var(--color-accent);
   color: var(--color-bg);
 }
 
-.btn-primary:hover {
-  background-color: var(--color-accent-2);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(232, 224, 212, 0.2);
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-accent);
+  border: 1px solid rgba(201, 169, 110, 0.22);
 }
 
-.btn-secondary {
-  background-color: transparent;
-  color: var(--color-accent);
-  border: 2px solid var(--color-accent);
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-1px);
 }
 
 .btn-secondary:hover {
-  background-color: var(--color-surface);
-  border-color: var(--color-accent-2);
+  background-color: rgba(126, 231, 215, 0.08);
   color: var(--color-accent-2);
-  transform: translateY(-2px);
 }
 
 /* Scroll indicator */

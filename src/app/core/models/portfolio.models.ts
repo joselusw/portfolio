@@ -50,7 +50,7 @@ export const PORTFOLIO_DATA: Portfolio = {
   title: "Senior Full-Stack Developer",
   bio: "Crafting digital experiences with passion and precision",
   birthDate: "1994-07-27",
-  location: "Málaga, Spain",
+  location: "Málaga",
   email: "jose.gallardo994@gmail.com",
   photoUrl: "assets/joselu.png",
   social: [

@@ -32,7 +32,7 @@ gsap.registerPlugin(ScrollTrigger);
           <p class="section-label">About</p>
 
           <!-- Main heading -->
-          <h2 class="about-heading">Who I Am</h2>
+          <h2 class="about-heading">What I build</h2>
 
           <!-- Bio paragraphs -->
           <div class="about-bio">
@@ -135,10 +135,10 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
   // Split bio into paragraphs with dynamic age
   get bioParagraphs(): string[] {
     return [
-      `Heya! I am a ${this.age}-year-old Full-Stack .NET Developer with over ${this.experience} years of experience in designing, developing, and maintaining robust web applications.`,
-      "Based in Málaga, Spain, I enjoy both frontend and backend technologies, including C#, ASP.NET, Angular, React, and SQL.",
-      "Passionate about clean code, open-source contributions, and delivering end-to-end solutions that drive business success. I am currently seeking my next career step to leverage my expertise in a dynamic and innovative environment.",
-      "Beyond traditional development, I'm fascinated by the intersection of AI and full-stack development. I love finding ways to make applications more adaptive and user-centric.",
+      `I help teams ship resilient, user-first products with Angular, .NET, and cloud-native architectures.`,
+      `Based in Málaga, Spain, I bridge frontend motion, backend reliability, and emerging AI patterns.`,
+      "I enjoy turning complex challenges into clear, maintainable systems that support product teams and business outcomes.",
+      "Beyond core engineering, I focus on fast, thoughtful delivery that keeps performance, accessibility, and user trust at the center.",
     ];
   }
 
@@ -165,17 +165,22 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
   private initDividerAnimation(): void {
     if (!this.sectionDivider) return;
 
-    gsap.to(this.sectionDivider.nativeElement, {
-      scrollTrigger: {
-        trigger: this.aboutSection.nativeElement,
-        start: "top 80%",
-        toggleActions: "play none none none",
-        invalidateOnRefresh: true,
+    gsap.fromTo(
+      this.sectionDivider.nativeElement,
+      { width: "0%", opacity: 0, transformOrigin: "center" },
+      {
+        width: "100%",
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: this.aboutSection.nativeElement,
+          start: "top 80%",
+          once: true,
+          invalidateOnRefresh: true,
+        },
       },
-      width: "100%",
-      duration: 1,
-      ease: "power2.out",
-    });
+    );
   }
 
   /**
@@ -188,12 +193,15 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
       scrollTrigger: {
         trigger: this.aboutSection.nativeElement,
         start: "top 80%",
-        toggleActions: "play none none none",
+        once: true,
         invalidateOnRefresh: true,
+      },
+      defaults: {
+        duration: 0.75,
+        ease: "power3.out",
       },
     });
 
-    // Left panel animations
     const leftLabels =
       this.aboutLeft.nativeElement.querySelectorAll(".section-label");
     const leftHeading =
@@ -201,54 +209,38 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
     const leftBio = this.aboutLeft.nativeElement.querySelector(".about-bio");
     const leftDivider =
       this.aboutLeft.nativeElement.querySelector(".about-divider");
-
-    tl.fromTo(
-      leftLabels,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-      0,
-    );
-
-    tl.fromTo(
-      leftHeading,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-      0.1,
-    );
-
-    tl.fromTo(
-      leftBio,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-      0.2,
-    );
-
-    tl.fromTo(
-      leftDivider,
-      { opacity: 0, scaleX: 0, transformOrigin: "left" },
-      { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.out" },
-      0.4,
-    );
-
-    // Right panel animations (certifications)
     const rightLabels =
       this.aboutRight.nativeElement.querySelectorAll(".section-label");
     const certCards =
       this.certificationsList?.nativeElement.querySelectorAll(".cert-card");
 
     tl.fromTo(
-      rightLabels,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+      leftLabels,
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, stagger: 0.08 },
       0,
-    );
+    )
+      .fromTo(leftHeading, { opacity: 0, y: 36 }, { opacity: 1, y: 0 }, 0.15)
+      .fromTo(leftBio, { opacity: 0, y: 30 }, { opacity: 1, y: 0 }, 0.3)
+      .fromTo(
+        leftDivider,
+        { opacity: 0, scaleX: 0, transformOrigin: "left" },
+        { opacity: 1, scaleX: 1 },
+        0.45,
+      )
+      .fromTo(
+        rightLabels,
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, stagger: 0.08 },
+        0.05,
+      );
 
     if (certCards) {
       tl.fromTo(
         certCards,
-        { opacity: 0, x: 40 },
-        { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: "back.out" },
-        0.3,
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, stagger: 0.08, ease: "back.out(1.2)" },
+        0.35,
       );
     }
   }

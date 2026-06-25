@@ -136,87 +136,57 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private initAnimations(): void {
-    this.animateBorderLine();
-    this.animateStatement();
-    this.animateContactLinks();
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: this.footerSection.nativeElement,
+        start: "top 85%",
+        once: true,
+        invalidateOnRefresh: true,
+      },
+      defaults: {
+        ease: "power3.out",
+      },
+    });
+
+    tl.fromTo(
+      this.borderLine.nativeElement,
+      { scaleX: 0, opacity: 0, transformOrigin: "center" },
+      { scaleX: 1, opacity: 1, duration: 0.9 },
+    ).fromTo(
+      this.statement.nativeElement,
+      { opacity: 0, y: 36 },
+      { opacity: 1, y: 0, duration: 1.1 },
+      0.15,
+    );
+
+    this.animateContactLinks(tl);
   }
 
   private animateBorderLine(): void {
-    if (!this.borderLine?.nativeElement) return;
-    const line = this.borderLine.nativeElement;
-
-    const trigger = ScrollTrigger.create({
-      trigger: line,
-      start: "top 90%",
-      end: "top 70%",
-      onEnter: () => {
-        gsap.fromTo(
-          line,
-          { scaleX: 0, transformOrigin: "center", opacity: 0 },
-          { opacity: 1, scaleX: 1, duration: 1, ease: "power2.inOut" },
-        );
-      },
-      once: true,
-      invalidateOnRefresh: true,
-    });
-    this.scrollTriggers.push(trigger);
+    // preserved for compatibility but not used in the main timeline
   }
 
   private animateStatement(): void {
-    if (!this.statement?.nativeElement) return;
-    const text = new SplitText(this.statement.nativeElement, {
-      type: "words",
-      linesClass: "statement-line",
-    });
-
-    const trigger = ScrollTrigger.create({
-      trigger: this.statement.nativeElement,
-      start: "top 80%",
-      end: "top 30%",
-      onEnter: () => {
-        gsap.to(text.words, {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.08,
-          ease: "power3.out",
-        });
-      },
-      once: true,
-      invalidateOnRefresh: true,
-    });
-
-    gsap.set(text.words, { opacity: 0, y: 40 });
-    this.scrollTriggers.push(trigger);
+    // preserved for compatibility but replaced by initAnimations timeline
   }
 
-  private animateContactLinks(): void {
+  private animateContactLinks(parentTimeline: gsap.core.Timeline): void {
     if (!this.contactContainer?.nativeElement) return;
     const links =
       this.contactContainer.nativeElement.querySelectorAll(".contact-link");
 
     links.forEach((link: HTMLElement, index: number) => {
-      const trigger = ScrollTrigger.create({
-        trigger: link,
-        start: "top 85%",
-        end: "top 50%",
-        onEnter: () => {
-          gsap.fromTo(
-            link,
-            { opacity: 0, y: 20 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              delay: index * 0.08,
-              ease: "power2.out",
-            },
-          );
+      parentTimeline.fromTo(
+        link,
+        { opacity: 0, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          ease: "power3.out",
         },
-        once: true,
-        invalidateOnRefresh: true,
-      });
-      this.scrollTriggers.push(trigger);
+        0.5 + index * 0.08,
+      );
     });
   }
 }
