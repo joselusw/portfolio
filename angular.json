@@ -38,7 +38,8 @@
               }
             ],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "viteConfigFile": "vite.config.ts"
           },
           "configurations": {
             "production": {
@@ -126,7 +127,7 @@
     "@schematics/angular:pipe": {
       "typeSeparator": "."
     },
-    "@schemaths/angular:resolver": {
+    "@schematics/angular:resolver": {
       "typeSeparator": "."
     }
   }
