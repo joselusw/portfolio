@@ -1,52 +1,694 @@
-{
-  "name": "portfolio",
-  "version": "1.0.0",
-  "description": "SEO-optimized Angular 22 portfolio with GSAP animations and TailwindCSS",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "build:prod": "ng build --configuration production",
-    "build:ssr": "ng build --configuration=production",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint"
-  },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": "^22.0.3",
-    "@angular/common": "^22.0.3",
-    "@angular/compiler": "^22.0.3",
-    "@angular/core": "^22.0.3",
-    "@angular/forms": "^22.0.3",
-    "@angular/platform-browser": "^22.0.3",
-    "@angular/platform-browser-dynamic": "^22.0.3",
-    "@angular/router": "^22.0.3",
-    "@angular/ssr": "^22.0.4",
-    "gsap": "^3.15.0",
-    "lenis": "^1.3.24",
-    "rxjs": "^7.8.2",
-    "tslib": "^2.8.1",
-    "zone.js": "^0.16.2"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "^22.0.4",
-    "@angular-eslint/builder": "^22.0.0",
-    "@angular-eslint/eslint-plugin": "^22.0.0",
-    "@angular-eslint/eslint-plugin-template": "^22.0.0",
-    "@angular-eslint/schematics": "^22.0.0",
-    "@angular-eslint/template-parser": "^22.0.0",
-    "@angular/cli": "^22.0.4",
-    "@angular/compiler-cli": "^22.0.3",
-    "@tailwindcss/postcss": "^4.3.1",
-    "@tailwindcss/vite": "^4.3.1",
-    "@types/node": "^22.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.24.0",
-    "@typescript-eslint/parser": "^8.24.0",
-    "eslint": "^9.21.0",
-    "postcss": "^8.5.15",
-    "prettier": "^3.8.4",
-    "sass": "^1.101.0",
-    "typescript": "~6.0.3"
+@import "tailwindcss";
+
+/* Design System - Tailwind v4 Theme Configuration */
+@theme {
+  --color-bg: #0a0a0a;
+  --color-surface: #111111;
+  --color-surface-2: #1a1a1a;
+  --color-accent: #e8e0d4;
+  --color-accent-2: #c9a96e;
+  --color-text-primary: #f0ede8;
+  --color-text-muted: #6b6b6b;
+
+  /* Accent color with transparency variants */
+  --color-accent-2-12: rgba(201, 169, 110, 0.12);
+  --color-accent-2-08: rgba(201, 169, 110, 0.08);
+  --color-accent-2-15: rgba(201, 169, 110, 0.15);
+  --color-accent-2-20: rgba(201, 169, 110, 0.2);
+  --color-accent-2-25: rgba(201, 169, 110, 0.25);
+  --color-accent-2-30: rgba(201, 169, 110, 0.3);
+  --color-accent-2-10: rgba(160, 115, 42, 0.1);
+  --color-accent-light-12: rgba(160, 115, 42, 0.12);
+  --color-accent-light-18: rgba(160, 115, 42, 0.18);
+  --color-accent-08: rgba(232, 224, 212, 0.08);
+  --color-accent-10: rgba(232, 224, 212, 0.1);
+  --color-accent-20: rgba(232, 224, 212, 0.2);
+
+  --font-display: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  --spacing-4xl: 6rem;
+
+  /* Transitions */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+
+  /* Shadow System */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.16);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* Set dark scheme on root */
+:root {
+  color-scheme: dark;
+}
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(201, 169, 110, 0.12),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 85% 22%,
+      rgba(126, 231, 215, 0.08),
+      transparent 16%
+    );
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Light theme background gradient */
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(153, 125, 107, 0.08),
+      transparent 18%
+    ),
+    radial-gradient(circle at 85% 22%, rgba(107, 83, 68, 0.05), transparent 16%);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.875rem, 5vw, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+p {
+  color: var(--color-text-primary);
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--duration-normal) ease;
+}
+
+a:hover {
+  color: var(--color-accent-2);
+}
+
+code {
+  font-family: var(--font-mono);
+  background-color: var(--color-surface);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Scroll Snap */
+html {
+  scroll-snap-type: y mandatory;
+}
+
+/* Utility Classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Custom Component Styles */
+.btn {
+  @apply inline-flex items-center justify-center px-6 py-2 rounded-lg transition-all duration-300;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
+}
+
+.btn-primary {
+  @apply bg-accent text-bg font-medium hover:bg-accent-2;
+}
+
+.btn-secondary {
+  @apply bg-surface-2 text-accent border border-accent hover:bg-surface;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+/* Focus States */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Image Optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #faf9f4;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0ebe3;
+  --color-accent: #6b5344;
+  --color-accent-2: #997d6b;
+  --color-text-primary: #1f1a16;
+  --color-text-muted: #7a6f68;
+
+  --color-accent-2-12: rgba(153, 125, 107, 0.12);
+  --color-accent-2-08: rgba(153, 125, 107, 0.08);
+  --color-accent-2-15: rgba(153, 125, 107, 0.15);
+  --color-accent-2-20: rgba(153, 125, 107, 0.2);
+  --color-accent-2-25: rgba(153, 125, 107, 0.25);
+  --color-accent-2-30: rgba(153, 125, 107, 0.3);
+  --color-accent-2-10: rgba(107, 83, 68, 0.1);
+  --color-accent-light-12: rgba(107, 83, 68, 0.12);
+  --color-accent-light-18: rgba(107, 83, 68, 0.18);
+  --color-accent-08: rgba(107, 83, 68, 0.08);
+  --color-accent-10: rgba(107, 83, 68, 0.1);
+  --color-accent-20: rgba(107, 83, 68, 0.2);
+
+  /* Light theme shadows with warm tint */
+  --shadow-xs: 0 1px 2px rgba(107, 83, 68, 0.05);
+  --shadow-sm: 0 2px 4px rgba(107, 83, 68, 0.08);
+  --shadow-md: 0 4px 8px rgba(107, 83, 68, 0.1);
+  --shadow-lg: 0 8px 16px rgba(107, 83, 68, 0.12);
+  --shadow-xl: 0 12px 32px rgba(107, 83, 68, 0.15);
+}
+
+/* ============================================================================
+   LIGHT THEME OVERRIDES (data-theme="light")
+   ============================================================================
+   All light theme color and contrast improvements for accessibility.
+   IMPORTANT: Do not modify dark theme, animations, layout, or spacing.
+   ============================================================================ */
+
+[data-theme="light"] {
+  /* Global color scheme for light theme - 2026 warm standards */
+  --color-bg: #faf9f4;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0ebe3;
+  --color-accent: #6b5344;
+  --color-accent-2: #997d6b;
+  --color-text-primary: #1f1a16;
+  --color-text-muted: #7a6f68;
+
+  /* Accent color with transparency variants for light theme */
+  --color-accent-2-12: rgba(153, 125, 107, 0.12);
+  --color-accent-2-08: rgba(153, 125, 107, 0.08);
+  --color-accent-2-15: rgba(153, 125, 107, 0.15);
+  --color-accent-2-20: rgba(153, 125, 107, 0.2);
+  --color-accent-2-25: rgba(153, 125, 107, 0.25);
+  --color-accent-2-30: rgba(153, 125, 107, 0.3);
+  --color-accent-2-10: rgba(107, 83, 68, 0.1);
+  --color-accent-light-12: rgba(107, 83, 68, 0.12);
+  --color-accent-light-18: rgba(107, 83, 68, 0.18);
+  --color-accent-08: rgba(107, 83, 68, 0.08);
+  --color-accent-10: rgba(107, 83, 68, 0.1);
+  --color-accent-20: rgba(107, 83, 68, 0.2);
+
+  /* Light theme shadows with warm tint for elevation */
+  --shadow-xs: 0 1px 2px rgba(107, 83, 68, 0.05);
+  --shadow-sm: 0 2px 4px rgba(107, 83, 68, 0.08);
+  --shadow-md: 0 4px 8px rgba(107, 83, 68, 0.1);
+  --shadow-lg: 0 8px 16px rgba(107, 83, 68, 0.12);
+  --shadow-xl: 0 12px 32px rgba(107, 83, 68, 0.15);
+
+  color-scheme: light;
+
+  /* ========================================================================
+     BUTTONS - "View my work" & "Get in touch"
+     ======================================================================== */
+
+  /* Primary button - "View My Work" */
+  .btn-primary {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) ease;
+
+    &:hover {
+      background-color: var(--color-accent-2);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+  }
+
+  /* Secondary button - "Get in touch" (outlined) */
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-accent-2);
+    border-color: var(--color-accent-2);
+    transition: all var(--duration-normal) ease;
+
+    &:hover {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent);
+      color: #ffffff;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+  }
+
+  /* ========================================================================
+     ABOUT-ME SECTION - Certifications Panel (Right side)
+     ======================================================================== */
+
+  .cert-card {
+    background-color: var(--color-surface);
+    border-left-color: var(--color-accent-2);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) ease;
+
+    &:hover {
+      background-color: var(--color-surface-2);
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  .cert-name {
+    color: var(--color-text-primary);
+  }
+
+  .cert-issuer {
+    color: var(--color-text-muted);
+  }
+
+  .cert-year {
+    color: var(--color-accent-2);
+  }
+
+  /* Certification badges */
+  .cert-badge {
+    &.completed {
+      background-color: var(--color-accent-2-12);
+      color: var(--color-accent-2);
+      border-color: var(--color-accent-2);
+    }
+
+    &.in-progress {
+      background-color: var(--color-accent-2-08);
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+  }
+
+  /* ========================================================================
+     TECHNOLOGIES SECTION - Tech Tiles
+     ======================================================================== */
+
+  .tech-masonry .tech-tile {
+    background: var(--color-bg);
+    backdrop-filter: none;
+    border: 1px solid var(--color-surface-2);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) ease;
+
+    &::before {
+      background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        var(--color-accent-2-10),
+        transparent 50%
+      );
+    }
+
+    &:hover {
+      background: var(--color-surface) !important;
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-lg);
+
+      &::before {
+        opacity: 1;
+      }
+
+      .tech-logo {
+        filter: drop-shadow(0 0 8px var(--color-accent-2-25));
+      }
+
+      .tech-label {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  .tech-tile .tech-logo {
+    filter: drop-shadow(0 0 4px var(--color-accent-2-15));
+    transition: filter var(--duration-normal) ease;
+  }
+
+  .tech-tile .tech-label {
+    color: var(--color-text-primary);
+    transition: color var(--duration-normal) ease;
+  }
+
+  /* ========================================================================
+     JOBS SECTION - Info Cards
+     ======================================================================== */
+
+  .jobs-section .job-card {
+    background: var(--color-surface);
+    backdrop-filter: none;
+    border: 1px solid var(--color-surface-2);
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-normal) ease;
+
+    &:hover {
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+  .jobs-section .job-card.current {
+    border-color: var(--color-accent);
+  }
+
+  .jobs-section .job-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 24px var(--color-accent-2-20);
+    transform: translateY(-12px);
+    background: var(--color-bg);
+  }
+
+  /* Logo container in job card */
+  .jobs-section .logo-container {
+    background-color: #f5f0e8;
+    border: 1px solid #e8dcc8;
+  }
+
+  .company-name {
+    color: var(--color-text-primary);
+  }
+
+  .job-title {
+    color: var(--color-accent);
+  }
+
+  .date-section {
+    border-left-color: var(--color-accent-2-20);
+  }
+
+  .date-range {
+    color: var(--color-text-muted);
+  }
+
+  .achievements-list li {
+    color: var(--color-text-primary);
+
+    &:before {
+      color: #a0732a;
+    }
+  }
+
+  /* Tech tags in job cards */
+  .tech-tag {
+    background-color: #f5f0e8;
+    color: #7a5520;
+    border-color: #c4973a;
+
+    &:hover {
+      border-color: #a0732a;
+      background-color: #a0732a;
+      color: #ffffff;
+    }
+  }
+
+  /* Current badge on job cards */
+  .current-badge {
+    background-color: #a0732a;
+    color: #ffffff;
+  }
+
+  /* Timeline line on card */
+  .timeline-line {
+    background: linear-gradient(to bottom, #a0732a, transparent);
+  }
+
+  /* ========================================================================
+     FOOTER SECTION
+     ======================================================================== */
+
+  /* Footer headline: "Let's build something remarkable." */
+  .footer-statement {
+    color: #a0732a !important;
+  }
+
+  footer h2 {
+    color: #a0732a !important;
+  }
+
+  /* Contact links */
+  .contact-link {
+    color: var(--color-text-primary);
+    border-color: transparent;
+
+    &:hover {
+      border-color: rgba(160, 115, 42, 0.2);
+      background-color: rgba(160, 115, 42, 0.05);
+
+      .contact-icon {
+        color: var(--color-accent-2);
+      }
+
+      .contact-text {
+        color: var(--color-accent-2);
+      }
+
+      &::after {
+        background: linear-gradient(
+          90deg,
+          var(--color-accent-2),
+          var(--color-accent)
+        );
+        clip-path: inset(0 0 0 0);
+      }
+    }
+  }
+
+  .contact-icon {
+    color: var(--color-accent);
+  }
+
+  .contact-text {
+    color: var(--color-text-muted);
+  }
+
+  /* ========================================================================
+     ADDITIONAL LIGHT THEME ADJUSTMENTS
+     ======================================================================== */
+
+  /* Global text colors */
+  body {
+    color: var(--color-text-primary);
+  }
+
+  a {
+    color: var(--color-accent);
+
+    &:hover {
+      color: var(--color-accent-2);
+    }
+  }
+
+  /* Section labels and headings */
+  .section-label {
+    color: var(--color-accent-2);
+  }
+
+  .about-heading,
+  .section-heading {
+    color: var(--color-text-primary);
+  }
+
+  .bio-paragraph {
+    color: var(--color-text-muted);
+  }
+
+  /* Navigation dots */
+  .nav-dot .dot {
+    background-color: var(--color-text-muted);
+  }
+
+  .nav-dot:hover .dot,
+  .nav-dot.active .dot {
+    background-color: var(--color-accent);
+  }
+
+  /* Stat items in about section */
+  .stat-number {
+    color: var(--color-accent-2);
+  }
+
+  .stat-label {
+    color: var(--color-text-muted);
+  }
+
+  /* Dividers and borders */
+  .section-divider,
+  .about-divider {
+    background-color: var(--color-surface-2);
+  }
+
+  /* Code blocks */
+  code {
+    background-color: var(--color-surface-2);
+    color: var(--color-text-primary);
+  }
+
+  /* Jobs section background */
+  .jobs-section {
+    background-color: var(--color-bg);
+  }
+
+  .jobs-gradient-bg {
+    background: linear-gradient(
+      135deg,
+      var(--color-bg) 0%,
+      rgba(232, 232, 232, 0.3) calc(var(--gradient-x, 50) * 0.5%),
+      var(--color-bg) 100%
+    );
+  }
+
+  /* About-right panel (credentials panel) */
+  .about-right {
+    background: linear-gradient(
+      135deg,
+      var(--color-surface) 0%,
+      var(--color-bg) 100%
+    );
+    border-left-color: var(--color-surface-2);
+  }
+
+  @media (max-width: 1024px) {
+    .about-right {
+      border-left: none;
+      border-top-color: var(--color-surface-2);
+    }
+  }
+
+  /* Theme toggle button for light theme */
+  .theme-toggle {
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-normal) ease;
+
+    &:hover {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent-2);
+      color: var(--color-surface);
+      box-shadow: var(--shadow-lg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+  }
+}
+
+/* ============================================================================
+   DARK THEME - Tech Tile Hover (explicit dark theme or when data-theme not set)
+   ============================================================================ */
+
+[data-theme="dark"] .tech-masonry .tech-tile:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 22, 0.6),
+    rgba(30, 30, 35, 0.7)
+  ) !important;
+}
+
+/* Light theme overrides the above */
+[data-theme="light"] .tech-masonry .tech-tile:hover {
+  background: #ffffff !important;
 }
