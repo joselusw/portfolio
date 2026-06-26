@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss",
+          "style": "css",
           "standalone": true
         },
         "@schematics/angular:application": {
@@ -37,7 +37,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -92,7 +92,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         }
@@ -105,7 +105,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "type": "component",
-      "style": "scss",
+      "style": "css",
       "standalone": true
     },
     "@schematics/angular:directive": {
