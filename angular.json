@@ -38,8 +38,7 @@
               }
             ],
             "styles": ["src/styles.scss"],
-            "scripts": [],
-            "viteConfigFile": "vite.config.ts"
+            "scripts": []
           },
           "configurations": {
             "production": {
