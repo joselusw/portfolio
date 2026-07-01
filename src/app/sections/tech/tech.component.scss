@@ -1,57 +1,55 @@
-// Tech Component - Masonry Grid Layout
+// Tech Component - Masonry Grid Layout - Tailwind v3
 
 .tech-masonry {
-  display: grid;
+  @apply grid gap-8;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 2rem;
-  place-items: center;
 
-  @media (min-width: 640px) {
+  @screen sm {
+    @apply gap-10;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 2.5rem;
   }
 
-  @media (min-width: 1024px) {
+  @screen lg {
+    @apply gap-12;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 3rem;
   }
 }
 
 .tech-tile {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 1rem;
+  @apply relative w-full rounded-2xl border overflow-hidden transition-all duration-300;
+
+  // Bulletproof square box: height:0 + padding-bottom:100% is an explicit
+  // (definite) size, so CSS Grid's default item stretch can NOT override it.
+  // This avoids the aspect-ratio + grid-stretch conflict that was collapsing
+  // tiles into pill shapes.
+  height: 0;
+  padding-bottom: 100%;
+  box-sizing: border-box;
+
   background: linear-gradient(
     135deg,
     rgba(20, 20, 22, 0.4),
     rgba(30, 30, 35, 0.5)
   );
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(201, 169, 110, 0.1);
-  transition: all 0.3s ease;
-  overflow: hidden;
+  border-color: rgba(201, 169, 110, 0.1);
   will-change: opacity, transform;
 
   &::before {
     content: "";
-    position: absolute;
-    inset: 0;
+    @apply absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-300;
     background: radial-gradient(
       circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
       rgba(201, 169, 110, 0.15),
       transparent 50%
     );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
   }
 
   &:hover {
     border-color: rgba(201, 169, 110, 0.3);
 
     &::before {
-      opacity: 1;
+      @apply opacity-100;
     }
 
     .tech-logo {
@@ -95,39 +93,30 @@
 }
 
 .tech-tile-inner {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
+  // Absolutely positioned to fill the padding-box square from edge to edge
+  @apply absolute inset-0 flex flex-col items-center justify-center gap-4 p-4;
 }
 
 .tech-logo {
+  @apply object-contain transition-all duration-300;
   width: 48px;
   height: 48px;
-  object-fit: contain;
-  transition: all 0.3s ease;
   filter: drop-shadow(0 0 4px rgba(201, 169, 110, 0.2));
 
-  @media (min-width: 1024px) {
+  @screen lg {
     width: 56px;
     height: 56px;
   }
 }
 
 .tech-label {
+  @apply text-center uppercase transition-colors duration-300;
   color: var(--color-text-muted);
   font-size: 0.65rem;
-  text-align: center;
   line-height: 1.2;
-  transition: color 0.3s ease;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
 
-  @media (min-width: 640px) {
+  @screen sm {
     font-size: 0.7rem;
   }
 }
@@ -136,12 +125,11 @@
 @media (max-width: 640px) {
   .tech-masonry {
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    @apply gap-6;
   }
 
   .tech-tile-inner {
-    gap: 0.5rem;
-    padding: 0.75rem;
+    @apply gap-2 p-3;
   }
 
   .tech-logo {

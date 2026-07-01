@@ -52,7 +52,7 @@ export const PORTFOLIO_DATA: Portfolio = {
   birthDate: "1994-07-27",
   location: "Málaga",
   email: "jose.gallardo994@gmail.com",
-  photoUrl: "assets/joselu.png",
+  photoUrl: "./assets/joselu.png",
   social: [
     { name: "GitHub", url: "https://github.com/joselusw", icon: "github" },
     {
@@ -72,11 +72,7 @@ export const PORTFOLIO_DATA: Portfolio = {
         "Started my career working with C#, ASP.NET, and SQL Server, gaining valuable experience in enterprise application development.",
       period: "2017 — 2020",
       technologies: ["C#", "ASP.NET", "SQL Server", ".NET Framework"],
-      achievements: [
-        "Started my career working with C#, ASP.NET, and SQL Server",
-        "Gained valuable experience in enterprise application development",
-        "Collaborated in the full software development lifecycle",
-      ],
+      achievements: [],
       logoUrl: "assets/prosolution.svg",
       isCurrent: false,
     },

@@ -1,7 +1,13 @@
-@import "tailwindcss";
+/* Tailwind v3 Global Styles */
+/* Design System - Tailwind v3 Compatible Theme Configuration */
 
-/* Design System - Tailwind v4 Theme Configuration */
-@theme {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Custom Properties - Design System */
+:root {
+  /* Colors */
   --color-bg: #0a0a0a;
   --color-surface: #111111;
   --color-surface-2: #1a1a1a;
@@ -24,6 +30,7 @@
   --color-accent-10: rgba(232, 224, 212, 0.1);
   --color-accent-20: rgba(232, 224, 212, 0.2);
 
+  /* Fonts */
   --font-display: "Playfair Display", serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
@@ -49,12 +56,10 @@
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.16);
   --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
   --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.25);
-}
 
-/* Set dark scheme on root */
-:root {
   color-scheme: dark;
 }
+
 /* Global Styles */
 * {
   margin: 0;
@@ -233,38 +238,6 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
-}
-
-html[data-theme="light"] {
-  color-scheme: light;
-
-  --color-bg: #faf9f4;
-  --color-surface: #ffffff;
-  --color-surface-2: #f0ebe3;
-  --color-accent: #6b5344;
-  --color-accent-2: #997d6b;
-  --color-text-primary: #1f1a16;
-  --color-text-muted: #7a6f68;
-
-  --color-accent-2-12: rgba(153, 125, 107, 0.12);
-  --color-accent-2-08: rgba(153, 125, 107, 0.08);
-  --color-accent-2-15: rgba(153, 125, 107, 0.15);
-  --color-accent-2-20: rgba(153, 125, 107, 0.2);
-  --color-accent-2-25: rgba(153, 125, 107, 0.25);
-  --color-accent-2-30: rgba(153, 125, 107, 0.3);
-  --color-accent-2-10: rgba(107, 83, 68, 0.1);
-  --color-accent-light-12: rgba(107, 83, 68, 0.12);
-  --color-accent-light-18: rgba(107, 83, 68, 0.18);
-  --color-accent-08: rgba(107, 83, 68, 0.08);
-  --color-accent-10: rgba(107, 83, 68, 0.1);
-  --color-accent-20: rgba(107, 83, 68, 0.2);
-
-  /* Light theme shadows with warm tint */
-  --shadow-xs: 0 1px 2px rgba(107, 83, 68, 0.05);
-  --shadow-sm: 0 2px 4px rgba(107, 83, 68, 0.08);
-  --shadow-md: 0 4px 8px rgba(107, 83, 68, 0.1);
-  --shadow-lg: 0 8px 16px rgba(107, 83, 68, 0.12);
-  --shadow-xl: 0 12px 32px rgba(107, 83, 68, 0.15);
 }
 
 /* ============================================================================
