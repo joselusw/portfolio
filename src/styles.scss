@@ -248,35 +248,47 @@ img {
    ============================================================================ */
 
 [data-theme="light"] {
-  /* Global color scheme for light theme - 2026 warm standards */
-  --color-bg: #faf9f4;
-  --color-surface: #ffffff;
-  --color-surface-2: #f0ebe3;
-  --color-accent: #6b5344;
-  --color-accent-2: #997d6b;
-  --color-text-primary: #1f1a16;
-  --color-text-muted: #7a6f68;
+  /* ========================================================================
+     REDESIGNED LIGHT THEME - Refined, Sophisticated, Accessible
+     ========================================================================
+     Color Philosophy:
+     - Background: Clean, neutral cool-toned off-white (#f8f7f5)
+     - Surface: Minimal warmth for optimal readability (#fefdfb)
+     - Accents: Saturated, energetic warm browns that command presence
+     - Text: High-contrast dark charcoal for accessibility (WCAG AA+)
+     ======================================================================== */
 
-  /* Accent color with transparency variants for light theme */
-  --color-accent-2-12: rgba(153, 125, 107, 0.12);
-  --color-accent-2-08: rgba(153, 125, 107, 0.08);
-  --color-accent-2-15: rgba(153, 125, 107, 0.15);
-  --color-accent-2-20: rgba(153, 125, 107, 0.2);
-  --color-accent-2-25: rgba(153, 125, 107, 0.25);
-  --color-accent-2-30: rgba(153, 125, 107, 0.3);
-  --color-accent-2-10: rgba(107, 83, 68, 0.1);
-  --color-accent-light-12: rgba(107, 83, 68, 0.12);
-  --color-accent-light-18: rgba(107, 83, 68, 0.18);
-  --color-accent-08: rgba(107, 83, 68, 0.08);
-  --color-accent-10: rgba(107, 83, 68, 0.1);
-  --color-accent-20: rgba(107, 83, 68, 0.2);
+  /* Base Colors */
+  --color-bg: #f8f7f5;
+  --color-surface: #fefdfb;
+  --color-surface-2: #ede9e0;
+  --color-accent: #7d5e48;
+  --color-accent-2: #b8956a;
+  --color-text-primary: #2b2420;
+  --color-text-muted: #6b6559;
 
-  /* Light theme shadows with warm tint for elevation */
-  --shadow-xs: 0 1px 2px rgba(107, 83, 68, 0.05);
-  --shadow-sm: 0 2px 4px rgba(107, 83, 68, 0.08);
-  --shadow-md: 0 4px 8px rgba(107, 83, 68, 0.1);
-  --shadow-lg: 0 8px 16px rgba(107, 83, 68, 0.12);
-  --shadow-xl: 0 12px 32px rgba(107, 83, 68, 0.15);
+  /* Transparency Variants - Primary Accent (#7d5e48, rgb(125, 94, 72)) */
+  --color-accent-light-12: rgba(125, 94, 72, 0.12);
+  --color-accent-light-18: rgba(125, 94, 72, 0.18);
+  --color-accent-08: rgba(125, 94, 72, 0.08);
+  --color-accent-10: rgba(125, 94, 72, 0.1);
+  --color-accent-20: rgba(125, 94, 72, 0.2);
+
+  /* Transparency Variants - Secondary Accent (#b8956a, rgb(184, 149, 106)) */
+  --color-accent-2-12: rgba(184, 149, 106, 0.12);
+  --color-accent-2-08: rgba(184, 149, 106, 0.08);
+  --color-accent-2-15: rgba(184, 149, 106, 0.15);
+  --color-accent-2-20: rgba(184, 149, 106, 0.2);
+  --color-accent-2-25: rgba(184, 149, 106, 0.25);
+  --color-accent-2-30: rgba(184, 149, 106, 0.3);
+  --color-accent-2-10: rgba(184, 149, 106, 0.1);
+
+  /* Light Theme Shadows - Subtle, warm-tinted elevation */
+  --shadow-xs: 0 1px 2px rgba(125, 94, 72, 0.05);
+  --shadow-sm: 0 2px 4px rgba(125, 94, 72, 0.08);
+  --shadow-md: 0 4px 8px rgba(125, 94, 72, 0.1);
+  --shadow-lg: 0 8px 16px rgba(125, 94, 72, 0.12);
+  --shadow-xl: 0 12px 32px rgba(125, 94, 72, 0.15);
 
   color-scheme: light;
 
@@ -286,15 +298,17 @@ img {
 
   /* Primary button - "View My Work" */
   .btn-primary {
-    background-color: var(--color-accent);
+    background-color: var(--color-accent-2);
     color: #ffffff;
     box-shadow: var(--shadow-sm);
     transition: all var(--duration-normal) ease;
 
-    &:hover {
-      background-color: var(--color-accent-2);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var(--color-accent);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+      }
     }
   }
 
@@ -305,12 +319,14 @@ img {
     border-color: var(--color-accent-2);
     transition: all var(--duration-normal) ease;
 
-    &:hover {
-      background-color: var(--color-accent);
-      border-color: var(--color-accent);
-      color: #ffffff;
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var(--color-accent-2);
+        border-color: var(--color-accent-2);
+        color: #ffffff;
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+      }
     }
   }
 
@@ -324,9 +340,12 @@ img {
     box-shadow: var(--shadow-sm);
     transition: all var(--duration-normal) ease;
 
-    &:hover {
-      background-color: var(--color-surface-2);
-      box-shadow: var(--shadow-md);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var(--color-surface-2);
+        box-shadow: var(--shadow-md);
+        border-left-color: var(--color-accent);
+      }
     }
   }
 
@@ -351,7 +370,7 @@ img {
     }
 
     &.in-progress {
-      background-color: var(--color-accent-2-08);
+      background-color: var(--color-accent-08);
       color: var(--color-accent);
       border-color: var(--color-accent);
     }
@@ -362,7 +381,7 @@ img {
      ======================================================================== */
 
   .tech-masonry .tech-tile {
-    background: var(--color-bg);
+    background: var(--color-surface);
     backdrop-filter: none;
     border: 1px solid var(--color-surface-2);
     box-shadow: var(--shadow-sm);
@@ -371,32 +390,34 @@ img {
     &::before {
       background: radial-gradient(
         circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        var(--color-accent-2-10),
+        var(--color-accent-2-08),
         transparent 50%
       );
     }
 
-    &:hover {
-      background: var(--color-surface) !important;
-      border-color: var(--color-accent);
-      box-shadow: var(--shadow-lg);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: var(--color-surface);
+        border-color: var(--color-accent-2);
+        box-shadow: var(--shadow-lg);
 
-      &::before {
-        opacity: 1;
-      }
+        &::before {
+          opacity: 1;
+        }
 
-      .tech-logo {
-        filter: drop-shadow(0 0 8px var(--color-accent-2-25));
-      }
+        .tech-logo {
+          filter: drop-shadow(0 0 8px var(--color-accent-2-25));
+        }
 
-      .tech-label {
-        color: var(--color-accent);
+        .tech-label {
+          color: var(--color-accent-2);
+        }
       }
     }
   }
 
   .tech-tile .tech-logo {
-    filter: drop-shadow(0 0 4px var(--color-accent-2-15));
+    filter: drop-shadow(0 0 4px var(--color-accent-2-12));
     transition: filter var(--duration-normal) ease;
   }
 
@@ -415,27 +436,30 @@ img {
     border: 1px solid var(--color-surface-2);
     box-shadow: var(--shadow-md);
     transition: all var(--duration-normal) ease;
+    align-self: stretch;
 
-    &:hover {
-      box-shadow: var(--shadow-lg);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--color-accent-2);
+        box-shadow: 0 4px 24px var(--color-accent-2-20);
+        transform: translateY(-12px);
+        background: var(--color-bg);
+      }
     }
   }
 
   .jobs-section .job-card.current {
-    border-color: var(--color-accent);
+    border-color: var(--color-accent-2);
   }
 
-  .jobs-section .job-card:hover {
-    border-color: var(--color-accent);
-    box-shadow: 0 4px 24px var(--color-accent-2-20);
-    transform: translateY(-12px);
-    background: var(--color-bg);
+  .jobs-section .job-card:not(.current) {
+    border-color: var(--color-accent-2-20);
   }
 
   /* Logo container in job card */
   .jobs-section .logo-container {
-    background-color: #f5f0e8;
-    border: 1px solid #e8dcc8;
+    background-color: var(--color-surface-2);
+    border: 1px solid var(--color-accent-2-15);
   }
 
   .company-name {
@@ -443,7 +467,11 @@ img {
   }
 
   .job-title {
-    color: var(--color-accent);
+    color: var(--color-accent-2);
+  }
+
+  .job-summary {
+    color: var(--color-text-muted);
   }
 
   .date-section {
@@ -451,39 +479,41 @@ img {
   }
 
   .date-range {
-    color: var(--color-text-muted);
+    color: var(--color-accent-2);
   }
 
   .achievements-list li {
     color: var(--color-text-primary);
 
     &:before {
-      color: #a0732a;
+      color: var(--color-accent-2);
     }
   }
 
   /* Tech tags in job cards */
   .tech-tag {
-    background-color: #f5f0e8;
-    color: #7a5520;
-    border-color: #c4973a;
+    background-color: var(--color-surface-2);
+    color: var(--color-accent-2);
+    border: 1px solid var(--color-accent-2-20);
+    transition: all var(--duration-normal) ease;
 
-    &:hover {
-      border-color: #a0732a;
-      background-color: #a0732a;
-      color: #ffffff;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--color-accent-2);
+        background-color: transparent;
+      }
     }
   }
 
   /* Current badge on job cards */
   .current-badge {
-    background-color: #a0732a;
+    background-color: var(--color-accent-2);
     color: #ffffff;
   }
 
   /* Timeline line on card */
   .timeline-line {
-    background: linear-gradient(to bottom, #a0732a, transparent);
+    background: linear-gradient(to bottom, var(--color-accent-2), transparent);
   }
 
   /* ========================================================================
@@ -492,51 +522,58 @@ img {
 
   /* Footer headline: "Let's build something remarkable." */
   .footer-statement {
-    color: #a0732a !important;
+    color: var(--color-accent-2) !important;
   }
 
   footer h2 {
-    color: #a0732a !important;
+    color: var(--color-text-primary) !important;
   }
 
   /* Contact links */
   .contact-link {
     color: var(--color-text-primary);
     border-color: transparent;
+    transition: all var(--duration-normal) ease;
 
-    &:hover {
-      border-color: rgba(160, 115, 42, 0.2);
-      background-color: rgba(160, 115, 42, 0.05);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--color-accent-2-15);
+        background-color: var(--color-accent-2-08);
 
-      .contact-icon {
-        color: var(--color-accent-2);
-      }
+        .contact-icon {
+          color: var(--color-accent-2);
+          transform: scale(1.15);
+        }
 
-      .contact-text {
-        color: var(--color-accent-2);
-      }
+        .contact-text {
+          color: var(--color-accent-2);
+          letter-spacing: 1px;
+        }
 
-      &::after {
-        background: linear-gradient(
-          90deg,
-          var(--color-accent-2),
-          var(--color-accent)
-        );
-        clip-path: inset(0 0 0 0);
+        &::after {
+          background: linear-gradient(
+            90deg,
+            var(--color-accent-2),
+            var(--color-accent)
+          );
+          clip-path: inset(0 0 0 0);
+        }
       }
     }
   }
 
   .contact-icon {
-    color: var(--color-accent);
+    color: var(--color-accent-2);
+    transition: all var(--duration-normal) ease;
   }
 
   .contact-text {
     color: var(--color-text-muted);
+    transition: all var(--duration-normal) ease;
   }
 
   /* ========================================================================
-     ADDITIONAL LIGHT THEME ADJUSTMENTS
+     GLOBAL TEXT AND LINK STYLES
      ======================================================================== */
 
   /* Global text colors */
@@ -545,10 +582,12 @@ img {
   }
 
   a {
-    color: var(--color-accent);
+    color: var(--color-accent-2);
 
-    &:hover {
-      color: var(--color-accent-2);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--color-accent);
+      }
     }
   }
 
@@ -571,81 +610,164 @@ img {
     background-color: var(--color-text-muted);
   }
 
-  .nav-dot:hover .dot,
   .nav-dot.active .dot {
-    background-color: var(--color-accent);
+    background-color: var(--color-accent-2);
   }
 
-  /* Stat items in about section */
-  .stat-number {
-    color: var(--color-accent-2);
+  @media (hover: hover) and (pointer: fine) {
+    .nav-dot:hover .dot {
+      background-color: var(--color-accent-2);
+    }
   }
 
-  .stat-label {
-    color: var(--color-text-muted);
-  }
-
-  /* Dividers and borders */
-  .section-divider,
-  .about-divider {
-    background-color: var(--color-surface-2);
-  }
-
-  /* Code blocks */
-  code {
-    background-color: var(--color-surface-2);
+  /* Hero sections */
+  .hero-name {
     color: var(--color-text-primary);
   }
 
-  /* Jobs section background */
-  .jobs-section {
-    background-color: var(--color-bg);
+  .hero-title {
+    color: var(--color-accent-2);
   }
 
-  .jobs-gradient-bg {
-    background: linear-gradient(
-      135deg,
-      var(--color-bg) 0%,
-      rgba(232, 232, 232, 0.3) calc(var(--gradient-x, 50) * 0.5%),
-      var(--color-bg) 100%
-    );
+  .hero-tagline {
+    color: var(--color-text-muted);
   }
 
-  /* About-right panel (credentials panel) */
-  .about-right {
-    background: linear-gradient(
-      135deg,
-      var(--color-surface) 0%,
-      var(--color-bg) 100%
-    );
-    border-left-color: var(--color-surface-2);
+  /* Status panel */
+  .hero-statement,
+  .hero-panel {
+    background-color: var(--color-surface-2);
+    border-color: var(--color-accent-2-15);
+    border: 2px solid var(--color-accent-2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
   }
 
-  @media (max-width: 1024px) {
-    .about-right {
-      border-left: none;
-      border-top-color: var(--color-surface-2);
-    }
+  .status-chip {
+    background-color: var(--color-accent-2-12);
+    color: var(--color-accent-2);
   }
 
-  /* Theme toggle button for light theme */
+  .panel-label {
+    color: var(--color-text-primary);
+  }
+
+  .panel-note {
+    color: var(--color-text-muted);
+  }
+
+  /* Photo border */
+  .photo-border {
+    border-color: var(--color-accent-2-20);
+    background: linear-gradient(180deg, var(--color-accent-2-08), transparent);
+  }
+
+  /* Theme toggle button */
   .theme-toggle {
     background-color: var(--color-surface);
-    border: 2px solid var(--color-accent);
-    box-shadow: var(--shadow-md);
-    transition: all var(--duration-normal) ease;
+    border-color: var(--color-accent-2);
 
-    &:hover {
-      background-color: var(--color-accent);
-      border-color: var(--color-accent-2);
-      color: var(--color-surface);
-      box-shadow: var(--shadow-lg);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var(--color-accent-2);
+        color: #ffffff;
+      }
     }
+  }
 
-    &:focus-visible {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 2px;
-    }
+  /* Progress bar */
+  .progress-bar {
+    background: linear-gradient(
+      90deg,
+      var(--color-accent-2),
+      var(--color-accent)
+    );
+  }
+
+  /* Logo image filters for light theme */
+  .jobs-section .logo-container img {
+    filter: none !important;
+  }
+
+  /* ProSolution logo (1st card): make it black/very dark in light theme */
+  .jobs-grid .job-card:nth-of-type(1) .logo-container img {
+    filter: brightness(0.3) contrast(1.3) !important;
+  }
+
+  /* Verisk logo (2nd card): keep original blue in light theme */
+  .jobs-grid .job-card:nth-of-type(2) .logo-container img {
+    filter: none !important;
+  }
+
+  /* Hero statement: style as a proper card */
+  .hero-statement {
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-accent-2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+}
+.section-divider,
+.about-divider {
+  background-color: var(--color-surface-2);
+}
+
+/* Code blocks */
+code {
+  background-color: var(--color-surface-2);
+  color: var(--color-text-primary);
+}
+
+/* Jobs section background */
+.jobs-section {
+  background-color: var(--color-bg);
+}
+
+.jobs-gradient-bg {
+  background: linear-gradient(
+    135deg,
+    var(--color-bg) 0%,
+    rgba(232, 232, 232, 0.3) calc(var(--gradient-x, 50) * 0.5%),
+    var(--color-bg) 100%
+  );
+}
+
+/* About-right panel (credentials panel) */
+.about-right {
+  background: linear-gradient(
+    135deg,
+    var(--color-surface) 0%,
+    var(--color-bg) 100%
+  );
+  border-left-color: var(--color-surface-2);
+}
+
+@media (max-width: 1024px) {
+  .about-right {
+    border-left: none;
+    border-top-color: var(--color-surface-2);
+  }
+}
+
+/* Theme toggle button for light theme */
+.theme-toggle {
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-accent);
+  box-shadow: var(--shadow-md);
+  transition: all var(--duration-normal) ease;
+
+  &:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent-2);
+    color: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 }
 
@@ -659,6 +781,20 @@ img {
     rgba(20, 20, 22, 0.6),
     rgba(30, 30, 35, 0.7)
   ) !important;
+}
+
+/* ============================================================================
+   DARK THEME - Logo Filters for Visibility
+   ============================================================================ */
+
+/* Dark theme ProSolution (1st card): white */
+[data-theme="dark"] .jobs-grid .job-card:nth-of-type(1) .logo-container img {
+  filter: brightness(2.5) saturate(0) !important;
+}
+
+/* Dark theme Verisk (2nd card): white */
+[data-theme="dark"] .jobs-grid .job-card:nth-of-type(2) .logo-container img {
+  filter: brightness(2.2) saturate(0) !important;
 }
 
 /* Light theme overrides the above */
