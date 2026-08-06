@@ -31,7 +31,7 @@ interface Section {
   styleUrl: "./cover.component.scss",
   template: `
     <section
-      class="cover-section"
+      class="cover-section relative w-full min-h-screen overflow-hidden px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-0"
       #coverSection
       [style.--gradient-x]="gradientPos().x + '%'"
       [style.--gradient-y]="gradientPos().y + '%'"
@@ -55,9 +55,12 @@ interface Section {
       </nav>
 
       <!-- Main container -->
-      <div class="cover-container">
+      <div class="cover-container px-0 sm:px-2 lg:px-4">
         <!-- Left side: Fhoto -->
-        <div class="photo-wrapper" #photoWrapper>
+        <div
+          class="photo-wrapper w-full max-w-[240px] sm:max-w-[280px] lg:max-w-[340px]"
+          #photoWrapper
+        >
           <div class="photo-border" #photoBorder>
             <img
               #heroPhoto
@@ -71,7 +74,10 @@ interface Section {
         </div>
 
         <!-- Right side: Text content -->
-        <div class="content-wrapper" #contentWrapper>
+        <div
+          class="content-wrapper w-full max-w-[680px] items-center text-center lg:items-start lg:text-left"
+          #contentWrapper
+        >
           <!-- Name -->
           <h1 class="hero-name" #heroName>
             {{ nameFirstLine }}<br />{{ nameSecondLine }}
@@ -88,7 +94,10 @@ interface Section {
           </p>
 
           <!-- Status panel -->
-          <div class="hero-status-grid" #heroStatusGrid>
+          <div
+            class="hero-status-grid w-full grid-cols-1 md:grid-cols-2"
+            #heroStatusGrid
+          >
             <div class="hero-statement">
               <span class="hero-eyebrow">Current focus</span>
               <p>
@@ -107,7 +116,10 @@ interface Section {
           </div>
 
           <!-- CTA Buttons -->
-          <div class="cta-buttons" #ctaButtons>
+          <div
+            class="cta-buttons w-full max-w-[280px] sm:max-w-[360px] lg:max-w-none"
+            #ctaButtons
+          >
             <button
               class="btn btn-primary"
               (click)="scrollToSection('jobs')"

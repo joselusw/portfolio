@@ -1,16 +1,19 @@
-// Tech Component - Masonry Grid Layout - Tailwind v3
+// Tech Component - Responsive tile grid
 
 .tech-masonry {
-  @apply grid gap-8;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  @apply grid gap-6;
+  // Mobile: narrow tiles force 3-column natural wrap
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 
-  @screen sm {
-    @apply gap-10;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  @media (min-width: 640px) {
+    @apply gap-8;
+    // Tablet: medium tiles, natural 4-column wrap
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
 
-  @screen lg {
-    @apply gap-12;
+  @media (min-width: 1024px) {
+    @apply gap-10;
+    // Desktop: larger minmax allows 2x2 spans for lg tiles naturally
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 }
@@ -45,19 +48,21 @@
     );
   }
 
-  &:hover {
-    border-color: rgba(201, 169, 110, 0.3);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: rgba(201, 169, 110, 0.3);
 
-    &::before {
-      @apply opacity-100;
-    }
+      &::before {
+        @apply opacity-100;
+      }
 
-    .tech-logo {
-      filter: drop-shadow(0 0 8px rgba(201, 169, 110, 0.4));
-    }
+      .tech-logo {
+        filter: drop-shadow(0 0 8px rgba(201, 169, 110, 0.4));
+      }
 
-    .tech-label {
-      color: var(--color-accent-2);
+      .tech-label {
+        color: var(--color-accent-2);
+      }
     }
   }
 
@@ -70,24 +75,22 @@
   &.size-md {
     grid-column: span 1;
     grid-row: span 1;
-    transform: scale(1.15);
+
+    @media (min-width: 1024px) {
+      // On desktop, medium tiles take slightly more visual weight
+      grid-column: span 1;
+      grid-row: span 1;
+    }
   }
 
   &.size-lg {
-    grid-column: span 2;
-    grid-row: span 2;
-    transform: scale(1.3);
+    grid-column: span 1;
+    grid-row: span 1;
 
-    @media (max-width: 1024px) {
-      grid-column: span 1;
-      grid-row: span 1;
-      transform: scale(1.25);
-    }
-
-    @media (max-width: 640px) {
-      grid-column: span 1;
-      grid-row: span 1;
-      transform: scale(1.15);
+    @media (min-width: 1024px) {
+      // On desktop, large tiles span 2x2 for visual anchor
+      grid-column: span 2;
+      grid-row: span 2;
     }
   }
 }
@@ -95,17 +98,63 @@
 .tech-tile-inner {
   // Absolutely positioned to fill the padding-box square from edge to edge
   @apply absolute inset-0 flex flex-col items-center justify-center gap-4 p-4;
+
+  // Medium tiles get more breathing room
+  .tech-tile.size-md & {
+    @apply gap-5 p-5;
+  }
+
+  // Large tiles get extra space (especially noticeable on desktop)
+  .tech-tile.size-lg & {
+    @apply gap-6 p-6;
+
+    @media (min-width: 1024px) {
+      @apply gap-8 p-8;
+    }
+  }
 }
 
 .tech-logo {
   @apply object-contain transition-all duration-300;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   filter: drop-shadow(0 0 4px rgba(201, 169, 110, 0.2));
 
-  @screen lg {
+  // Medium tiles have slightly larger icons
+  .tech-tile.size-md & {
+    width: 48px;
+    height: 48px;
+  }
+
+  // Large tiles have prominent icons
+  .tech-tile.size-lg & {
     width: 56px;
     height: 56px;
+
+    @media (min-width: 1024px) {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    width: 48px;
+    height: 48px;
+
+    .tech-tile.size-md & {
+      width: 56px;
+      height: 56px;
+    }
+
+    .tech-tile.size-lg & {
+      width: 64px;
+      height: 64px;
+
+      @media (min-width: 1024px) {
+        width: 72px;
+        height: 72px;
+      }
+    }
   }
 }
 
@@ -121,13 +170,7 @@
   }
 }
 
-// Responsive masonry for mobile
 @media (max-width: 640px) {
-  .tech-masonry {
-    grid-template-columns: repeat(3, 1fr);
-    @apply gap-6;
-  }
-
   .tech-tile-inner {
     @apply gap-2 p-3;
   }

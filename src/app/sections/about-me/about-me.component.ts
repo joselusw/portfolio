@@ -25,9 +25,14 @@ gsap.registerPlugin(ScrollTrigger);
       <!-- Divider line (draws from center outward) -->
       <div class="section-divider" #sectionDivider></div>
 
-      <div class="about-container">
+      <div
+        class="about-container flex flex-col gap-8 lg:grid lg:grid-cols-[55%_45%]"
+      >
         <!-- Left Panel: Bio -->
-        <div class="about-left" #aboutLeft>
+        <div
+          class="about-left px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-16"
+          #aboutLeft
+        >
           <!-- Section label -->
           <p class="section-label">About</p>
 
@@ -48,12 +53,15 @@ gsap.registerPlugin(ScrollTrigger);
         </div>
 
         <!-- Right Panel: Certifications -->
-        <div class="about-right" #aboutRight>
+        <div
+          class="about-right px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-16"
+          #aboutRight
+        >
           <!-- Section label -->
           <p class="section-label">Credentials</p>
 
           <!-- Certifications list -->
-          <div class="certifications-list" #certificationsList>
+          <div class="certifications-list pt-2 sm:pt-4" #certificationsList>
             @for (cert of portfolio.certifications; track cert) {
               <div class="cert-card" #certCard>
                 <!-- Logo placeholder -->

@@ -24,7 +24,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
   template: `
     <footer
       id="footer"
-      class="relative min-h-screen flex flex-col items-center justify-center py-24"
+      class="relative min-h-screen flex flex-col items-center justify-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
       style="background-color: var(--color-surface);"
       #footerSection
     >
@@ -34,18 +34,20 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
       ></div>
 
       <div
-        class="relative z-10 w-full max-w-4xl mx-auto px-6 lg:px-12 flex flex-col items-center justify-center flex-1"
+        class="relative z-10 w-full max-w-4xl mx-auto px-0 sm:px-2 lg:px-12 flex flex-col items-center justify-center flex-1"
       >
-        <div class="mb-16 text-center">
+        <div class="mb-10 sm:mb-12 lg:mb-16 text-center">
           <h2
             #heading
-            class="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6"
+            class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-bold mb-4 sm:mb-6"
             style="color: var(--color-text-primary);"
           >
             Let's build something remarkable.
           </h2>
 
-          <div class="flex justify-center items-center gap-6 mb-12">
+          <div
+            class="flex justify-center items-center gap-4 sm:gap-6 mb-8 sm:mb-10 lg:mb-12"
+          >
             <div
               class="h-px flex-grow bg-gradient-to-r from-transparent to-accent/30"
             ></div>
@@ -57,7 +59,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
         </div>
 
         <div
-          class="flex flex-wrap justify-center gap-8 md:gap-12 mb-20"
+          class="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 mb-12 sm:mb-16 lg:mb-20"
           #contactContainer
         >
           @for (social of portfolio.social; track social) {
@@ -65,7 +67,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
               [href]="getLinkUrl(social)"
               [target]="getLinkTarget(social)"
               rel="noopener noreferrer"
-              class="contact-link group relative"
+              class="contact-link group relative min-h-[44px] min-w-[112px] px-4 py-3 sm:min-w-[120px] sm:px-5 sm:py-4"
               [title]="social.name"
               [attr.aria-label]="'Visit my ' + social.name + ' profile'"
             >

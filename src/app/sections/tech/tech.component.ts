@@ -29,7 +29,7 @@ interface TechItem {
   template: `
     <section
       id="tech"
-      class="relative w-full min-h-screen flex items-center justify-center py-12"
+      class="relative w-full min-h-screen flex items-center justify-center px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-16"
       style="background-color: var(--color-bg);"
       #section
     >
@@ -43,23 +43,26 @@ interface TechItem {
       </div>
 
       <div class="relative z-10 w-full max-w-6xl px-6 lg:px-12">
-        <div class="text-center mb-20">
+        <div class="text-center mb-10 sm:mb-14 lg:mb-20">
           <h2
             #heading
-            class="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6"
+            class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-4 sm:mb-6"
             style="color: var(--color-text-primary);"
           >
             Tech Stack
           </h2>
           <p
-            class="text-lg font-mono tracking-wide"
+            class="text-sm sm:text-base lg:text-lg font-mono tracking-wide"
             style="color: var(--color-text-muted);"
           >
             Technologies I work with
           </p>
         </div>
 
-        <div class="tech-masonry" #gridContainer>
+        <div
+          class="tech-masonry grid grid-cols-3 gap-4 sm:grid-cols-4 sm:gap-6 lg:grid-cols-5 lg:gap-8"
+          #gridContainer
+        >
           @for (tech of techs; track tech; let i = $index) {
             <div
               class="tech-tile"
@@ -107,7 +110,6 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
     { name: "Docker", icon: "docker", size: "lg", cluster: 2 },
     { name: "Kubernetes", icon: "kubernetes", size: "md", cluster: 2 },
     { name: "Terraform", icon: "terraform", size: "md", cluster: 2 },
-    { name: "Kafka", icon: "apachekafka", size: "md", cluster: 2 },
     { name: "OpenTelemetry", icon: "opentelemetry", size: "sm", cluster: 2 },
   ];
 

@@ -22,19 +22,32 @@
 
 .about-container {
   width: 100%;
-  display: grid;
-  grid-template-columns: 55% 45%;
+  display: flex;
+  flex-direction: column;
   align-items: stretch;
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 55% 45%;
+  }
 }
 
 /* Left Panel */
 .about-left {
-  padding: 6rem 4rem;
+  padding: 2.5rem 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   z-index: 2;
+
+  @media (min-width: 640px) {
+    padding: 3rem 1.75rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 6rem 4rem;
+  }
 }
 
 .section-label {
@@ -93,7 +106,7 @@
 
 /* Right Panel */
 .about-right {
-  padding: 6rem 4rem;
+  padding: 2.5rem 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -104,9 +117,19 @@
     var(--color-surface) 0%,
     var(--color-bg) 100%
   );
-  border-left: 1px solid var(--color-surface-2);
+  border-top: 1px solid var(--color-surface-2);
   overflow: hidden;
   min-width: 0;
+
+  @media (min-width: 640px) {
+    padding: 3rem 1.75rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 6rem 4rem;
+    border-left: 1px solid var(--color-surface-2);
+    border-top: 0;
+  }
 }
 
 .about-right .section-label {
@@ -117,9 +140,9 @@
 .certifications-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  max-height: 600px;
-  overflow-y: auto;
+  gap: 1rem;
+  max-height: none;
+  overflow-y: visible;
   overflow-x: hidden;
   padding: 0 1rem;
   min-width: 0;
@@ -138,10 +161,10 @@
 .cert-card {
   position: relative;
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr) auto;
-  gap: 1rem;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  gap: 0.75rem;
   align-items: center;
-  padding: 1.25rem;
+  padding: 1rem;
   background-color: var(--color-surface);
   border-radius: 8px;
   border-left: 3px solid var(--color-accent-2);
@@ -258,12 +281,9 @@
 }
 
 @media (max-width: 640px) {
-  .about-left {
-    padding: 2rem 1.5rem 0 1.5rem;
-  }
-
+  .about-left,
   .about-right {
-    padding: 2rem 1.5rem;
+    padding: 2rem 1rem;
   }
 
   .about-heading {
@@ -279,7 +299,7 @@
   .cert-card {
     grid-template-columns: 44px 1fr auto;
     gap: 0.5rem;
-    padding: 0.9rem;
+    padding: 0.85rem;
   }
 
   .cert-name {

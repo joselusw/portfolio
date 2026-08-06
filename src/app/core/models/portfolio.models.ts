@@ -90,11 +90,7 @@ export const PORTFOLIO_DATA: Portfolio = {
         "Microservices",
         "Microfrontends",
       ],
-      achievements: [
-        "Developing and maintaining enterprise-scale applications",
-        "Architecting cloud-native microservices on Azure",
-        "Leading a team of developers to deliver high-quality software solutions",
-      ],
+      achievements: [],
       logoUrl: "https://www.verisksequel.com/media/4yygxqsr/verisk_logo.svg",
       isCurrent: true,
     },

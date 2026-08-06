@@ -36,12 +36,15 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
       <!-- Background gradient -->
       <div class="jobs-gradient-bg" #gradientBg></div>
 
-      <div class="jobs-content">
+      <div class="jobs-content px-0 sm:px-2 lg:px-4">
         <!-- Section heading -->
         <h2 class="section-heading" #sectionHeading>Systems I've delivered</h2>
 
         <!-- Jobs grid -->
-        <div class="jobs-grid" #jobsGrid>
+        <div
+          class="jobs-grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-10"
+          #jobsGrid
+        >
           @for (job of portfolio.jobs; track job; let i = $index) {
             <div
               class="job-card"
