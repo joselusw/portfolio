@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "description": "SEO-optimized Angular 22 portfolio with GSAP animations and TailwindCSS v3",
+  "description": "SEO-optimized Angular 22 portfolio with GSAP animations and TailwindCSS v4",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
