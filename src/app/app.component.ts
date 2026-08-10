@@ -8,7 +8,6 @@ import {
   effect,
 } from "@angular/core";
 
-import { RouterModule } from "@angular/router";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
@@ -27,7 +26,6 @@ gsap.registerPlugin(ScrollToPlugin);
   selector: "app-root",
   standalone: true,
   imports: [
-    RouterModule,
     NoiseOverlayComponent,
     CoverComponent,
     AboutMeComponent,

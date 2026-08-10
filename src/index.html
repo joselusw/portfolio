@@ -13,10 +13,6 @@
       name="description"
       content="Full-stack developer specializing in Angular, React, and modern web technologies. Crafting high-performance, accessible digital experiences with cutting-edge animations and UX design."
     />
-    <meta
-      name="keywords"
-      content="José Luis Gallardo, full-stack developer, Angular, React, web development, TypeScript, GSAP animations, UX design"
-    />
     <meta name="author" content="José Luis Gallardo" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0a0a0a" />
@@ -64,6 +60,37 @@
     />
 
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://joselusw.dev/#website",
+            "url": "https://joselusw.dev/",
+            "name": "José Luis Gallardo - Full-Stack Developer",
+            "inLanguage": "en"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://joselusw.dev/#person",
+            "name": "José Luis Gallardo",
+            "url": "https://joselusw.dev/",
+            "jobTitle": "Full-Stack Developer & Creative Technologist",
+            "knowsAbout": [
+              "Angular",
+              "React",
+              "TypeScript",
+              "Web Development",
+              "UX Design"
+            ],
+            "sameAs": ["https://github.com/joselusw", "https://x.com/joselusw"]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <app-root></app-root>

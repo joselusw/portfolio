@@ -9,13 +9,12 @@ import {
   signal,
 } from "@angular/core";
 
-import { RouterModule } from "@angular/router";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { SplitText } from "gsap/SplitText";
 import { PORTFOLIO_DATA } from "@core/models/portfolio.models";
 import { AnimationService } from "@core/services/animation.service";
+import gsap from "gsap";
 
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, SplitText);
 
@@ -27,7 +26,7 @@ interface Section {
 @Component({
   selector: "app-cover",
   standalone: true,
-  imports: [RouterModule],
+  imports: [],
   styleUrl: "./cover.component.scss",
   template: `
     <section

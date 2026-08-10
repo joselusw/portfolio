@@ -96,7 +96,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
   `,
 })
 export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild("statement") statement!: ElementRef;
+  @ViewChild("heading") heading!: ElementRef;
   @ViewChild("contactContainer") contactContainer!: ElementRef;
   @ViewChild("borderLine") borderLine!: ElementRef;
   @ViewChild("footerSection") footerSection!: ElementRef;
@@ -155,7 +155,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
       { scaleX: 0, opacity: 0, transformOrigin: "center" },
       { scaleX: 1, opacity: 1, duration: 0.9 },
     ).fromTo(
-      this.statement.nativeElement,
+      this.heading.nativeElement,
       { opacity: 0, y: 36 },
       { opacity: 1, y: 0, duration: 1.1 },
       0.15,

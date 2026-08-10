@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import {
+  Component,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from "@angular/core";
 
 import gsap from "gsap";
 
@@ -39,12 +44,12 @@ import gsap from "gsap";
     </svg>
   `,
 })
-export class NoiseOverlayComponent implements OnInit {
+export class NoiseOverlayComponent implements AfterViewInit {
   @ViewChild("noiseOverlay") noiseOverlay!: ElementRef;
   width = 1920;
   height = 1080;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.initNoise();
   }
 

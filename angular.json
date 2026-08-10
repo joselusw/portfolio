@@ -32,7 +32,12 @@
                 "glob": "**/*",
                 "input": "public",
                 "output": "assets",
-                "ignore": ["**/.gitkeep"]
+                "ignore": ["**/.gitkeep", "seo/**"]
+              },
+              {
+                "glob": "**/*",
+                "input": "public/seo",
+                "output": "."
               }
             ],
             "styles": ["src/styles.scss"],
