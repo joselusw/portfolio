@@ -1,4 +1,5 @@
 // Tech Component - Responsive tile grid
+@reference "tailwindcss";
 
 .tech-masonry {
   @apply grid gap-6;
@@ -165,7 +166,7 @@
   line-height: 1.2;
   letter-spacing: 0.5px;
 
-  @screen sm {
+  @media (min-width: 640px) {
     font-size: 0.7rem;
   }
 }
