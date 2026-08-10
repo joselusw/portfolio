@@ -1,11 +1,10 @@
 import {
   Component,
-  OnInit,
   AfterViewInit,
   ViewChild,
   ElementRef,
   OnDestroy,
-  signal,
+  inject,
 } from "@angular/core";
 
 import gsap from "gsap";
@@ -108,7 +107,7 @@ gsap.registerPlugin(ScrollTrigger);
     </section>
   `,
 })
-export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AboutMeComponent implements AfterViewInit, OnDestroy {
   @ViewChild("aboutSection") aboutSection!: ElementRef;
   @ViewChild("aboutLeft") aboutLeft!: ElementRef;
   @ViewChild("aboutRight") aboutRight!: ElementRef;
@@ -152,13 +151,10 @@ export class AboutMeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private scrollTriggers: ScrollTrigger[] = [];
 
-  constructor(private animationService: AnimationService) {}
-
-  ngOnInit(): void {
-    // Initialization if needed
-  }
+  private readonly animationService = inject(AnimationService);
 
   ngAfterViewInit(): void {
+    if (typeof window === "undefined") return;
     this.initDividerAnimation();
     this.initContentAnimation();
   }

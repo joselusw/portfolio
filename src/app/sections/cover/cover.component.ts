@@ -1,11 +1,11 @@
 import {
   Component,
-  OnInit,
   AfterViewInit,
   ViewChild,
   ElementRef,
   OnDestroy,
   HostListener,
+  inject,
   signal,
 } from "@angular/core";
 
@@ -155,7 +155,7 @@ interface Section {
     </section>
   `,
 })
-export class CoverComponent implements OnInit, OnDestroy {
+export class CoverComponent implements AfterViewInit, OnDestroy {
   @ViewChild("coverSection") coverSection!: ElementRef;
   @ViewChild("photoWrapper") photoWrapper!: ElementRef;
   @ViewChild("heroName") heroName!: ElementRef;
@@ -196,13 +196,10 @@ export class CoverComponent implements OnInit, OnDestroy {
   private splitText: SplitText | null = null;
   private scrollTriggers: ScrollTrigger[] = [];
 
-  constructor(private animationService: AnimationService) {}
-
-  ngOnInit(): void {
-    // Initialize other things here if needed
-  }
+  private readonly animationService = inject(AnimationService);
 
   ngAfterViewInit(): void {
+    if (typeof window === "undefined") return;
     this.initAnimations();
     this.initParallax();
   }

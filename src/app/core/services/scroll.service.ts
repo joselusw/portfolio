@@ -1,4 +1,5 @@
-import { Injectable, effect, signal } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
+import type Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,7 +17,7 @@ export class ScrollService {
    * Initialize scroll progress tracking using Lenis scroll callback
    * Must be called from AppComponent with Lenis instance to avoid conflicts
    */
-  initScrollProgressWithLenis(lenis: any): void {
+  initScrollProgressWithLenis(lenis: Lenis | null): void {
     if (typeof window === "undefined" || !lenis) return;
 
     // Use Lenis onScroll callback instead of native scroll listener

@@ -1,6 +1,6 @@
 # Portfolio
 
-An SEO-optimized Angular 19 portfolio with GSAP animations, TailwindCSS styling, and smooth scroll interactions.
+An SEO-optimized Angular 22 portfolio with GSAP animations, TailwindCSS v4 styling, and smooth scroll interactions.
 
 ## Features
 
@@ -17,20 +17,20 @@ An SEO-optimized Angular 19 portfolio with GSAP animations, TailwindCSS styling,
 
 ## Tech Stack
 
-- **Framework**: Angular 19 (standalone components only)
+- **Framework**: Angular 22 (standalone components only, zoneless change detection)
 - **Styling**: TailwindCSS v4 + SCSS
 - **Animations**: GSAP v3 with ScrollTrigger and SplitText plugins
 - **Smooth Scroll**: Lenis
 - **State Management**: Angular Signals
 - **Rendering**: Static Site Generation with Prerendering
-- **Language**: TypeScript 5.6
+- **Language**: TypeScript 6.0
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ (LTS recommended)
-- npm 9+ or yarn 4+
+- Node.js 22+ (LTS recommended)
+- npm 10+
 
 ### Installation
 
@@ -43,9 +43,6 @@ npm start
 
 # Build for production (SSG with prerendering)
 npm run build:prod
-
-# Prerender static pages
-npm run prerender
 ```
 
 ### Development
@@ -67,28 +64,31 @@ npm run lint
 src/
 ├── app/
 │   ├── core/
+│   │   ├── constants/
+│   │   │   └── animation.constants.ts   # GSAP durations & easings
 │   │   ├── services/
-│   │   │   ├── scroll.service.ts      # GSAP ScrollTrigger wrapper
-│   │   │   └── theme.service.ts       # Dark/light mode management
+│   │   │   ├── animation.service.ts     # Reduced-motion aware animation configs
+│   │   │   ├── scroll.service.ts        # GSAP ScrollTrigger wrapper
+│   │   │   └── theme.service.ts         # Dark/light mode management
 │   │   └── models/
-│   │       └── portfolio.models.ts    # All data interfaces
+│   │       └── portfolio.models.ts      # All data interfaces
 │   ├── shared/
 │   │   └── components/
-│   │       ├── cursor/                # Animated cursor component
-│   │       ├── noise-overlay/         # SVG noise texture
-│   │       └── section-transition/    # Parallax section wrapper
+│   │       └── noise-overlay/           # SVG noise texture
 │   ├── sections/
-│   │   ├── cover/                     # Hero section
-│   │   ├── about-me/                  # About section
-│   │   ├── jobs/                      # Experience timeline
-│   │   ├── tech/                      # Technology showcase
-│   │   └── footer/                    # Footer with links
-│   ├── app.component.ts               # Root layout with Lenis
-│   ├── app.config.ts                  # App configuration
-│   └── app.routes.ts                  # Route configuration
-├── index.html                         # SEO meta tags and fonts
-├── main.ts                            # Application entry point
-└── styles.scss                        # Global styles & design tokens
+│   │   ├── cover/                       # Hero section
+│   │   ├── about-me/                    # About section
+│   │   ├── jobs/                        # Experience timeline
+│   │   ├── tech/                        # Technology showcase
+│   │   └── footer/                      # Footer with links
+│   ├── app.component.ts                 # Root layout with Lenis
+│   ├── app.config.ts                    # App configuration (zoneless + hydration)
+│   ├── app.config.server.ts             # Server rendering config
+│   └── app.routes.server.ts             # Server route render modes (prerender)
+├── index.html                           # SEO meta tags and fonts
+├── main.ts                              # Browser entry point
+├── main.server.ts                       # Server (prerender) entry point
+└── styles.scss                          # Global styles & design tokens
 ```
 
 ## Design System
@@ -116,7 +116,7 @@ src/
 - Hero image uses `NgOptimizedImage` with known aspect ratios
 
 ✓ **FID/INP** (Interaction to Next Paint) < 100ms
-- Lazy-loaded section components with `@defer`
+- Zoneless change detection (no zone.js overhead)
 - Minimal JavaScript after hydration
 - GSAP animations use GPU acceleration
 
@@ -127,7 +127,7 @@ src/
 
 ### Build Optimization
 - Tree-shaking removes unused code
-- Code splitting via lazy routes
+- Single-page static bundle (no routing)
 - Images optimized with `@angular/common` NgOptimizedImage
 - SCSS minified in production
 - No external tracking or analytics scripts
@@ -206,4 +206,4 @@ For issues or questions, please open an issue on the repository.
 
 ---
 
-Built with ❤️ using Angular 19, GSAP, TailwindCSS, and modern web technologies.
+Built with ❤️ using Angular 22, GSAP, TailwindCSS, and modern web technologies.

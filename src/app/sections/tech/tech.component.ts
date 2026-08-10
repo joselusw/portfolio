@@ -1,11 +1,11 @@
 import {
   Component,
-  OnInit,
   AfterViewInit,
   OnDestroy,
   ViewChild,
   ElementRef,
   computed,
+  inject,
 } from "@angular/core";
 
 import gsap from "gsap";
@@ -97,7 +97,7 @@ interface TechItem {
     </section>
   `,
 })
-export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TechComponent implements AfterViewInit, OnDestroy {
   @ViewChild("section") section!: ElementRef;
   @ViewChild("heading") heading!: ElementRef;
   @ViewChild("gridContainer") gridContainer!: ElementRef;
@@ -120,21 +120,16 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
     { name: "OpenTelemetry", icon: "opentelemetry", size: "sm", cluster: 2 },
   ];
 
-  constructor(
-    private scrollService: ScrollService,
-    private animationService: AnimationService,
-    private themeService: ThemeService,
-  ) {}
+  private readonly scrollService = inject(ScrollService);
+  private readonly animationService = inject(AnimationService);
+  private readonly themeService = inject(ThemeService);
 
   iconColor = computed(() =>
     this.themeService.getTheme()() === "light" ? "7d5e48" : "c9a96e",
   );
 
-  ngOnInit(): void {
-    // Initialization if needed
-  }
-
   ngAfterViewInit(): void {
+    if (typeof window === "undefined") return;
     requestAnimationFrame(() => this.initAnimations());
   }
 
@@ -147,8 +142,10 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.scrollTriggers = [];
 
-    // Clear all properties on tiles
-    gsap.set(".tech-tile", { clearProps: "all" });
+    // Clear all properties on tiles (only when a DOM is available)
+    if (typeof window !== "undefined") {
+      gsap.set(".tech-tile", { clearProps: "all" });
+    }
   }
 
   private initAnimations(): void {

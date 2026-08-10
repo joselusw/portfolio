@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   AfterViewInit,
   ViewChild,
   ElementRef,
@@ -9,13 +8,13 @@ import {
   QueryList,
   ViewChildren,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { PORTFOLIO_DATA, Job } from "@core/models/portfolio.models";
+import { PORTFOLIO_DATA } from "@core/models/portfolio.models";
 import { AnimationService } from "@core/services/animation.service";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -120,7 +119,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
     </section>
   `,
 })
-export class JobsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class JobsComponent implements AfterViewInit, OnDestroy {
   @ViewChild("jobsSection") jobsSection!: ElementRef;
   @ViewChild("sectionHeading") sectionHeading!: ElementRef;
   @ViewChild("jobsGrid") jobsGrid!: ElementRef;
@@ -133,17 +132,10 @@ export class JobsComponent implements OnInit, AfterViewInit, OnDestroy {
   private splitText: SplitText | null = null;
   private jobsTweens: gsap.core.Tween[] = [];
 
-  constructor(
-    private animationService: AnimationService,
-    private cdr: ChangeDetectorRef,
-  ) {}
-
-  ngOnInit(): void {
-    // Initialization if needed
-  }
+  private readonly animationService = inject(AnimationService);
 
   ngAfterViewInit(): void {
-    this.cdr.detectChanges();
+    if (typeof window === "undefined") return;
     this.initHeadingAnimation();
     this.initCardsAnimation();
     // Refresh ScrollTrigger to detect all animations after view initialization

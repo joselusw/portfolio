@@ -18,8 +18,12 @@
  * If real-time data or personalization becomes necessary, this can be migrated to SSR.
  */
 
-import { ApplicationConfig } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZonelessChangeDetection,
+} from "@angular/core";
+import { provideClientHydration } from "@angular/platform-browser";
 
 export const appConfig: ApplicationConfig = {
-  providers: [],
+  providers: [provideZonelessChangeDetection(), provideClientHydration()],
 };

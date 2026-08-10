@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { signal } from "@angular/core";
+import gsap from "gsap";
 import {
   ANIMATION_EASES,
   ANIMATION_DURATIONS,
@@ -14,12 +15,15 @@ import {
   providedIn: "root",
 })
 export class AnimationService {
-  private mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  prefersReducedMotion = signal<boolean>(this.mediaQuery.matches);
+  private readonly mediaQuery: MediaQueryList | null =
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)")
+      : null;
+  prefersReducedMotion = signal<boolean>(this.mediaQuery?.matches ?? false);
 
   constructor() {
     // Listen for changes to prefers-reduced-motion preference
-    this.mediaQuery.addEventListener("change", (e) => {
+    this.mediaQuery?.addEventListener("change", (e) => {
       this.prefersReducedMotion.set(e.matches);
     });
   }
@@ -29,7 +33,10 @@ export class AnimationService {
    * If motion is reduced, returns instant config (duration: 0)
    * Otherwise returns the full animation config
    */
-  getAnimationConfig(fullConfig: any, reducedConfig?: any): any {
+  getAnimationConfig(
+    fullConfig: gsap.TweenVars,
+    reducedConfig?: gsap.TweenVars,
+  ): gsap.TweenVars {
     const defaults = {
       opacity: 1,
       ...reducedConfig,
@@ -44,7 +51,10 @@ export class AnimationService {
    * Standard scroll-triggered fade-in + slide animation
    * Used for most scroll-based reveals
    */
-  getFadeInAnimation(fullConfig: any = {}, reducedConfig: any = {}): any {
+  getFadeInAnimation(
+    fullConfig: gsap.TweenVars = {},
+    reducedConfig: gsap.TweenVars = {},
+  ): gsap.TweenVars {
     const full = {
       opacity: 1,
       y: 0,
@@ -66,7 +76,10 @@ export class AnimationService {
   /**
    * Scale + fade animation (common for card reveals)
    */
-  getScaleFadeAnimation(fullConfig: any = {}, reducedConfig: any = {}): any {
+  getScaleFadeAnimation(
+    fullConfig: gsap.TweenVars = {},
+    reducedConfig: gsap.TweenVars = {},
+  ): gsap.TweenVars {
     const full = {
       opacity: 1,
       scale: 1,
@@ -96,7 +109,7 @@ export class AnimationService {
    * Float/hover animations should be disabled entirely when motion is reduced
    * Returns empty animation config
    */
-  getFloatingAnimation(fullConfig: any): any {
+  getFloatingAnimation(fullConfig: gsap.TweenVars): gsap.TweenVars {
     if (this.prefersReducedMotion()) {
       return { duration: 0, repeat: 0 };
     }

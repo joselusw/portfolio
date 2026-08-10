@@ -1,10 +1,10 @@
 import {
   Component,
-  OnInit,
   AfterViewInit,
   OnDestroy,
   ViewChild,
   ElementRef,
+  inject,
 } from "@angular/core";
 
 import gsap from "gsap";
@@ -95,7 +95,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
     </footer>
   `,
 })
-export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FooterComponent implements AfterViewInit, OnDestroy {
   @ViewChild("heading") heading!: ElementRef;
   @ViewChild("contactContainer") contactContainer!: ElementRef;
   @ViewChild("borderLine") borderLine!: ElementRef;
@@ -105,13 +105,10 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
   currentYear = new Date().getFullYear();
   private scrollTriggers: ScrollTrigger[] = [];
 
-  constructor(private animationService: AnimationService) {}
-
-  ngOnInit(): void {
-    // Initialization if needed
-  }
+  private readonly animationService = inject(AnimationService);
 
   ngAfterViewInit(): void {
+    if (typeof window === "undefined") return;
     requestAnimationFrame(() => this.initAnimations());
   }
 
@@ -162,14 +159,6 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     this.animateContactLinks(tl);
-  }
-
-  private animateBorderLine(): void {
-    // preserved for compatibility but not used in the main timeline
-  }
-
-  private animateStatement(): void {
-    // preserved for compatibility but replaced by initAnimations timeline
   }
 
   private animateContactLinks(parentTimeline: gsap.core.Timeline): void {

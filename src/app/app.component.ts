@@ -6,6 +6,7 @@ import {
   ElementRef,
   signal,
   effect,
+  inject,
 } from "@angular/core";
 
 import Lenis from "lenis";
@@ -83,10 +84,10 @@ export class AppComponent implements OnInit, OnDestroy {
   scrollProgress = signal(0);
   currentTheme = signal<"dark" | "light">("dark");
 
-  constructor(
-    private scrollService: ScrollService,
-    private themeService: ThemeService,
-  ) {
+  private readonly scrollService = inject(ScrollService);
+  private readonly themeService = inject(ThemeService);
+
+  constructor() {
     // Subscribe to theme changes
     effect(() => {
       this.currentTheme.set(this.themeService.getTheme()());
@@ -120,11 +121,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
+      smoothWheel: true,
+      syncTouch: false,
+      wheelMultiplier: 1,
       touchMultiplier: 2,
-    } as any);
+    });
 
     // Wire Lenis into GSAP ticker
     gsap.ticker.add((time: number) => {
