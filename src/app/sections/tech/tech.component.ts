@@ -5,12 +5,14 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
+  computed,
 } from "@angular/core";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollService } from "../../core/services/scroll.service";
 import { AnimationService } from "../../core/services/animation.service";
+import { ThemeService } from "@core/services/theme.service";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -55,7 +57,7 @@ interface TechItem {
             class="text-sm sm:text-base lg:text-lg font-mono tracking-wide"
             style="color: var(--color-text-muted);"
           >
-            Technologies I work with
+            Technologies I ♥️ working with
           </p>
         </div>
 
@@ -75,7 +77,12 @@ interface TechItem {
               <div class="tech-tile-inner">
                 <img
                   class="tech-logo"
-                  [src]="'https://cdn.simpleicons.org/' + tech.icon + '/c9a96e'"
+                  [src]="
+                    'https://cdn.simpleicons.org/' +
+                    tech.icon +
+                    '/' +
+                    iconColor()
+                  "
                   [alt]="tech.name"
                   loading="lazy"
                 />
@@ -116,7 +123,12 @@ export class TechComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private scrollService: ScrollService,
     private animationService: AnimationService,
+    private themeService: ThemeService,
   ) {}
+
+  iconColor = computed(() =>
+    this.themeService.getTheme()() === "light" ? "7d5e48" : "c9a96e",
+  );
 
   ngOnInit(): void {
     // Initialization if needed

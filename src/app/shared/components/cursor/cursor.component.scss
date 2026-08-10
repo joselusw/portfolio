@@ -27,3 +27,7 @@
   border-color: var(--color-accent-2);
   background-color: var(--color-accent-2-10);
 }
+
+:host-context([data-theme="light"]) .cursor {
+  mix-blend-mode: normal;
+}

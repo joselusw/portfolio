@@ -23,9 +23,9 @@
   --color-accent-2-20: rgba(201, 169, 110, 0.2);
   --color-accent-2-25: rgba(201, 169, 110, 0.25);
   --color-accent-2-30: rgba(201, 169, 110, 0.3);
-  --color-accent-2-10: rgba(160, 115, 42, 0.1);
-  --color-accent-light-12: rgba(160, 115, 42, 0.12);
-  --color-accent-light-18: rgba(160, 115, 42, 0.18);
+  --color-accent-2-10: rgba(201, 169, 110, 0.1);
+  --color-accent-light-12: rgba(232, 224, 212, 0.12);
+  --color-accent-light-18: rgba(232, 224, 212, 0.18);
   --color-accent-08: rgba(232, 224, 212, 0.08);
   --color-accent-10: rgba(232, 224, 212, 0.1);
   --color-accent-20: rgba(232, 224, 212, 0.2);
@@ -99,10 +99,10 @@ body {
   background-image:
     radial-gradient(
       circle at 12% 8%,
-      rgba(153, 125, 107, 0.08),
+      rgba(184, 149, 106, 0.08),
       transparent 18%
     ),
-    radial-gradient(circle at 85% 22%, rgba(107, 83, 68, 0.05), transparent 16%);
+    radial-gradient(circle at 85% 22%, rgba(125, 94, 72, 0.05), transparent 16%);
 }
 
 /* Typography */
@@ -297,7 +297,7 @@ img {
      ======================================================================== */
 
   /* Primary button - "View My Work" */
-  .btn-primary {
+  .cover-section .btn-primary {
     background-color: var(--color-accent-2);
     color: #ffffff;
     box-shadow: var(--shadow-sm);
@@ -313,7 +313,7 @@ img {
   }
 
   /* Secondary button - "Get in touch" (outlined) */
-  .btn-secondary {
+  .cover-section .btn-secondary {
     background-color: transparent;
     color: var(--color-accent-2);
     border-color: var(--color-accent-2);
@@ -436,7 +436,6 @@ img {
     border: 1px solid var(--color-surface-2);
     box-shadow: var(--shadow-md);
     transition: all var(--duration-normal) ease;
-    align-self: stretch;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
@@ -506,7 +505,7 @@ img {
   }
 
   /* Current badge on job cards */
-  .current-badge {
+  .jobs-section .current-badge {
     background-color: var(--color-accent-2);
     color: #ffffff;
   }
@@ -634,17 +633,21 @@ img {
   }
 
   /* Status panel */
-  .hero-statement,
-  .hero-panel {
-    background-color: var(--color-surface-2);
-    border-color: var(--color-accent-2-15);
+  .cover-section .hero-statement,
+  .cover-section .hero-panel {
+    background-color: var(--color-surface);
     border: 2px solid var(--color-accent-2);
-    border-radius: 8px;
-    padding: 1.25rem;
+    border-radius: 22px;
+    padding: 1.5rem;
     box-shadow: var(--shadow-sm);
   }
 
-  .status-chip {
+  .cover-section .hero-panel {
+    background-color: var(--color-surface-2);
+    padding: 1.25rem;
+  }
+
+  .cover-section .status-chip {
     background-color: var(--color-accent-2-12);
     color: var(--color-accent-2);
   }
@@ -658,8 +661,9 @@ img {
   }
 
   /* Photo border */
-  .photo-border {
+  .cover-section .photo-border {
     border-color: var(--color-accent-2-20);
+    box-shadow: 0 40px 120px var(--color-accent-2-20);
     background: linear-gradient(180deg, var(--color-accent-2-08), transparent);
   }
 
@@ -700,13 +704,47 @@ img {
     filter: none !important;
   }
 
-  /* Hero statement: style as a proper card */
-  .hero-statement {
-    background-color: var(--color-surface);
-    border: 2px solid var(--color-accent-2);
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: var(--shadow-sm);
+  /* Cover background gradients (warm, low-opacity for light theme) */
+  .cover-section {
+    background:
+      radial-gradient(
+        circle at 14% 12%,
+        var(--color-accent-2-12),
+        transparent 20%
+      ),
+      radial-gradient(
+        circle at 84% 18%,
+        var(--color-accent-08),
+        transparent 14%
+      ),
+      var(--color-bg) !important;
+  }
+
+  .cover-section .gradient-bg {
+    background: radial-gradient(
+      circle at calc(var(--gradient-x, 50) * 1%)
+        calc(var(--gradient-y, 50) * 1%),
+      var(--color-accent-2-08) 0%,
+      transparent 46%
+    );
+  }
+
+  /* Jobs background gradient & card details */
+  .jobs-section .jobs-gradient-bg {
+    background: linear-gradient(
+      135deg,
+      var(--color-surface) 0%,
+      var(--color-accent-2-08) calc(var(--gradient-x, 50) * 0.5%),
+      var(--color-surface) 100%
+    );
+  }
+
+  .jobs-section .date-section {
+    border-left-color: var(--color-accent-2-20);
+  }
+
+  .jobs-section .card-footer {
+    border-top-color: var(--color-accent-2-15);
   }
 }
 .section-divider,

@@ -61,7 +61,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
-  align-items: start;
+  align-items: stretch;
   justify-items: stretch;
   perspective: 1000px;
   max-width: 1200px;
