@@ -8,6 +8,7 @@
     "start:open": "ng serve --open",
     "build": "ng build && node scripts/post-build.mjs",
     "build:prod": "ng build --configuration production && node scripts/post-build.mjs",
+    "build:ghpages": "ng build --configuration production --base-href /portfolio/ && node scripts/post-build.mjs",
     "build:staging": "ng build --configuration staging && node scripts/post-build.mjs",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
