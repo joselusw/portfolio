@@ -58,8 +58,6 @@
   text-transform: uppercase;
   color: var(--color-accent-2);
   margin: 0 0 1rem 0;
-  opacity: 0;
-  transform: translateY(20px);
   will-change: opacity, transform;
 }
 
@@ -70,14 +68,10 @@
   line-height: 1.1;
   color: var(--color-text-primary);
   margin: 0 0 2rem 0;
-  opacity: 0;
-  transform: translateY(30px);
 }
 
 .about-bio {
   margin-bottom: 2rem;
-  opacity: 0;
-  transform: translateY(30px);
 }
 
 .bio-paragraph {
@@ -133,8 +127,7 @@
 }
 
 .about-right .section-label {
-  opacity: 0;
-  transform: translateY(20px);
+  will-change: opacity, transform;
 }
 
 .certifications-list {
@@ -169,7 +162,6 @@
   border-radius: 8px;
   border-left: 3px solid var(--color-accent-2);
   transition: all 0.3s ease;
-  opacity: 0;
   min-width: 0;
   width: 100%;
 }

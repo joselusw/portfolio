@@ -218,6 +218,15 @@ export class AboutMeComponent implements AfterViewInit, OnDestroy {
     const certCards =
       this.certificationsList?.nativeElement.querySelectorAll(".cert-card");
 
+    // Set start states in JS (not CSS) so content stays visible without scripts
+    gsap.set(leftLabels, { opacity: 0, y: 24 });
+    gsap.set(leftHeading, { opacity: 0, y: 36 });
+    gsap.set(leftBio, { opacity: 0, y: 30 });
+    gsap.set(rightLabels, { opacity: 0, y: 24 });
+    if (certCards) {
+      gsap.set(certCards, { opacity: 0, y: 24 });
+    }
+
     tl.fromTo(
       leftLabels,
       { opacity: 0, y: 24 },

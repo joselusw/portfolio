@@ -160,6 +160,8 @@ export class JobsComponent implements AfterViewInit, OnDestroy {
       wordsClass: "word",
     });
 
+    gsap.set(this.splitText.words, { opacity: 0, y: 30 });
+
     gsap.to(this.sectionHeading.nativeElement, {
       scrollTrigger: {
         trigger: this.jobsSection.nativeElement,
@@ -198,6 +200,9 @@ export class JobsComponent implements AfterViewInit, OnDestroy {
     const timelineLineElements = this.timelineLines
       .toArray()
       .map((ref) => ref.nativeElement as HTMLElement);
+
+    // Set start states in JS (not CSS) so content stays visible without scripts
+    gsap.set(cardElements, { opacity: 0 });
 
     const tl = gsap.timeline({
       scrollTrigger: {

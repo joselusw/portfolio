@@ -3,28 +3,64 @@
 @use "tailwindcss";
 
 @theme {
-  /* Colors */
-  --color-bg: #0a0a0a;
-  --color-surface: #111111;
-  --color-surface-2: #1a1a1a;
-  --color-accent: #e8e0d4;
-  --color-accent-2: #c9a96e;
-  --color-text-primary: #f0ede8;
-  --color-text-muted: #6b6b6b;
+  /* Colors (light first, dark second) per light-dark() spec */
+  --color-bg: light-dark(#f8f7f5, #0a0a0a);
+  --color-surface: light-dark(#fefdfb, #111111);
+  --color-surface-2: light-dark(#ede9e0, #1a1a1a);
+  --color-accent: light-dark(#7d5e48, #e8e0d4);
+  --color-accent-2: light-dark(#b8956a, #c9a96e);
+  --color-text-primary: light-dark(#2b2420, #f0ede8);
+  --color-text-muted: light-dark(#6b6559, #6b6b6b);
 
   /* Accent color with transparency variants */
-  --color-accent-2-12: rgba(201, 169, 110, 0.12);
-  --color-accent-2-08: rgba(201, 169, 110, 0.08);
-  --color-accent-2-15: rgba(201, 169, 110, 0.15);
-  --color-accent-2-20: rgba(201, 169, 110, 0.2);
-  --color-accent-2-25: rgba(201, 169, 110, 0.25);
-  --color-accent-2-30: rgba(201, 169, 110, 0.3);
-  --color-accent-2-10: rgba(201, 169, 110, 0.1);
-  --color-accent-light-12: rgba(232, 224, 212, 0.12);
-  --color-accent-light-18: rgba(232, 224, 212, 0.18);
-  --color-accent-08: rgba(232, 224, 212, 0.08);
-  --color-accent-10: rgba(232, 224, 212, 0.1);
-  --color-accent-20: rgba(232, 224, 212, 0.2);
+  --color-accent-2-12: light-dark(
+    rgba(184, 149, 106, 0.12),
+    rgba(201, 169, 110, 0.12)
+  );
+  --color-accent-2-08: light-dark(
+    rgba(184, 149, 106, 0.08),
+    rgba(201, 169, 110, 0.08)
+  );
+  --color-accent-2-15: light-dark(
+    rgba(184, 149, 106, 0.15),
+    rgba(201, 169, 110, 0.15)
+  );
+  --color-accent-2-20: light-dark(
+    rgba(184, 149, 106, 0.2),
+    rgba(201, 169, 110, 0.2)
+  );
+  --color-accent-2-25: light-dark(
+    rgba(184, 149, 106, 0.25),
+    rgba(201, 169, 110, 0.25)
+  );
+  --color-accent-2-30: light-dark(
+    rgba(184, 149, 106, 0.3),
+    rgba(201, 169, 110, 0.3)
+  );
+  --color-accent-2-10: light-dark(
+    rgba(184, 149, 106, 0.1),
+    rgba(201, 169, 110, 0.1)
+  );
+  --color-accent-light-12: light-dark(
+    rgba(125, 94, 72, 0.12),
+    rgba(232, 224, 212, 0.12)
+  );
+  --color-accent-light-18: light-dark(
+    rgba(125, 94, 72, 0.18),
+    rgba(232, 224, 212, 0.18)
+  );
+  --color-accent-08: light-dark(
+    rgba(125, 94, 72, 0.08),
+    rgba(232, 224, 212, 0.08)
+  );
+  --color-accent-10: light-dark(
+    rgba(125, 94, 72, 0.1),
+    rgba(232, 224, 212, 0.1)
+  );
+  --color-accent-20: light-dark(
+    rgba(125, 94, 72, 0.2),
+    rgba(232, 224, 212, 0.2)
+  );
 
   /* Fonts */
   --font-display: "Playfair Display", serif;
@@ -36,12 +72,27 @@
   --duration-normal: 300ms;
   --duration-slow: 500ms;
 
-  /* Shadow System */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.08);
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.12);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.16);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
-  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.25);
+  /* Shadows (light first, dark second) */
+  --shadow-xs: light-dark(
+    0 1px 2px rgba(125, 94, 72, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.08)
+  );
+  --shadow-sm: light-dark(
+    0 2px 4px rgba(125, 94, 72, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.12)
+  );
+  --shadow-md: light-dark(
+    0 4px 8px rgba(125, 94, 72, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.16)
+  );
+  --shadow-lg: light-dark(
+    0 8px 16px rgba(125, 94, 72, 0.12),
+    0 8px 16px rgba(0, 0, 0, 0.2)
+  );
+  --shadow-xl: light-dark(
+    0 12px 32px rgba(125, 94, 72, 0.15),
+    0 12px 32px rgba(0, 0, 0, 0.25)
+  );
 }
 
 :root {
@@ -186,6 +237,18 @@
   }
 }
 
+/* Respect reduced motion preferences (WCAG 2.2 / EU Accessibility Act) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ============================================================================
    LIGHT THEME OVERRIDES (data-theme="light")
    ============================================================================
@@ -195,46 +258,12 @@
 
 [data-theme="light"] {
   /* ========================================================================
-     REDESIGNED LIGHT THEME - Refined, Sophisticated, Accessible
+     LIGHT THEME - Component-level adjustments only
      ========================================================================
-     Color Philosophy:
-     - Background: Clean, neutral cool-toned off-white (#f8f7f5)
-     - Surface: Minimal warmth for optimal readability (#fefdfb)
-     - Accents: Saturated, energetic warm browns that command presence
-     - Text: High-contrast dark charcoal for accessibility (WCAG AA+)
+     Color tokens are theme-agnostic via light-dark() in @theme; this block
+     only adjusts component styles whose dark values are baked into the
+     component SCSS (surfaces, shadows, hover treatments).
      ======================================================================== */
-
-  /* Base Colors */
-  --color-bg: #f8f7f5;
-  --color-surface: #fefdfb;
-  --color-surface-2: #ede9e0;
-  --color-accent: #7d5e48;
-  --color-accent-2: #b8956a;
-  --color-text-primary: #2b2420;
-  --color-text-muted: #6b6559;
-
-  /* Transparency Variants - Primary Accent (#7d5e48, rgb(125, 94, 72)) */
-  --color-accent-light-12: rgba(125, 94, 72, 0.12);
-  --color-accent-light-18: rgba(125, 94, 72, 0.18);
-  --color-accent-08: rgba(125, 94, 72, 0.08);
-  --color-accent-10: rgba(125, 94, 72, 0.1);
-  --color-accent-20: rgba(125, 94, 72, 0.2);
-
-  /* Transparency Variants - Secondary Accent (#b8956a, rgb(184, 149, 106)) */
-  --color-accent-2-12: rgba(184, 149, 106, 0.12);
-  --color-accent-2-08: rgba(184, 149, 106, 0.08);
-  --color-accent-2-15: rgba(184, 149, 106, 0.15);
-  --color-accent-2-20: rgba(184, 149, 106, 0.2);
-  --color-accent-2-25: rgba(184, 149, 106, 0.25);
-  --color-accent-2-30: rgba(184, 149, 106, 0.3);
-  --color-accent-2-10: rgba(184, 149, 106, 0.1);
-
-  /* Light Theme Shadows - Subtle, warm-tinted elevation */
-  --shadow-xs: 0 1px 2px rgba(125, 94, 72, 0.05);
-  --shadow-sm: 0 2px 4px rgba(125, 94, 72, 0.08);
-  --shadow-md: 0 4px 8px rgba(125, 94, 72, 0.1);
-  --shadow-lg: 0 8px 16px rgba(125, 94, 72, 0.12);
-  --shadow-xl: 0 12px 32px rgba(125, 94, 72, 0.15);
 
   color-scheme: light;
 
@@ -280,7 +309,7 @@
      ABOUT-ME SECTION - Certifications Panel (Right side)
      ======================================================================== */
 
-  .cert-card {
+  .about-right .cert-card {
     background-color: var(--color-surface);
     border-left-color: var(--color-accent-2);
     box-shadow: var(--shadow-sm);
@@ -295,30 +324,36 @@
     }
   }
 
-  .cert-name {
-    color: var(--color-text-primary);
+  .about-right .cert-badge.completed {
+    background-color: var(--color-accent-2-12);
+    border-color: var(--color-accent-2);
   }
 
-  .cert-issuer {
-    color: var(--color-text-muted);
+  .about-right .cert-badge.in-progress {
+    background-color: var(--color-accent-08);
+    border-color: var(--color-accent);
   }
 
-  .cert-year {
-    color: var(--color-accent-2);
-  }
+  /* ========================================================================
+     PROJECTS SECTION - Project Cards
+     ======================================================================== */
 
-  /* Certification badges */
-  .cert-badge {
-    &.completed {
-      background-color: var(--color-accent-2-12);
-      color: var(--color-accent-2);
-      border-color: var(--color-accent-2);
+  .projects-section .project-card {
+    background: var(--color-surface);
+    backdrop-filter: none;
+    border-color: var(--color-accent-2-20);
+    box-shadow: var(--shadow-md);
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--color-accent-2);
+        background: var(--color-bg);
+        box-shadow: 0 4px 24px var(--color-accent-2-20);
+      }
     }
 
-    &.in-progress {
-      background-color: var(--color-accent-08);
-      color: var(--color-accent);
-      border-color: var(--color-accent);
+    &.featured {
+      border-color: var(--color-accent-2);
     }
   }
 
@@ -369,7 +404,6 @@
 
   .tech-tile .tech-label {
     color: var(--color-text-primary);
-    transition: color var(--duration-normal) ease;
   }
 
   /* ========================================================================
@@ -407,32 +441,14 @@
     border: 1px solid var(--color-accent-2-15);
   }
 
-  .company-name {
-    color: var(--color-text-primary);
-  }
-
-  .job-title {
-    color: var(--color-accent-2);
-  }
-
-  .job-summary {
-    color: var(--color-text-muted);
-  }
-
   .date-section {
     border-left-color: var(--color-accent-2-20);
   }
 
-  .date-range {
-    color: var(--color-accent-2);
-  }
-
-  .achievements-list li {
-    color: var(--color-text-primary);
-
-    &:before {
-      color: var(--color-accent-2);
-    }
+  /* Current badge on job cards */
+  .jobs-section .current-badge {
+    background-color: var(--color-accent-2);
+    color: #ffffff;
   }
 
   /* Tech tags in job cards */
@@ -450,124 +466,18 @@
     }
   }
 
-  /* Current badge on job cards */
-  .jobs-section .current-badge {
-    background-color: var(--color-accent-2);
-    color: #ffffff;
-  }
-
-  /* Timeline line on card */
-  .timeline-line {
-    background: linear-gradient(to bottom, var(--color-accent-2), transparent);
-  }
-
   /* ========================================================================
      FOOTER SECTION
      ======================================================================== */
 
   /* Contact links */
-  .contact-link {
-    color: var(--color-text-primary);
-    border-color: transparent;
-    transition: all var(--duration-normal) ease;
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        border-color: var(--color-accent-2-15);
-        background-color: var(--color-accent-2-08);
-
-        .contact-icon {
-          color: var(--color-accent-2);
-          transform: scale(1.15);
-        }
-
-        .contact-text {
-          color: var(--color-accent-2);
-          letter-spacing: 1px;
-        }
-
-        &::after {
-          background: linear-gradient(
-            90deg,
-            var(--color-accent-2),
-            var(--color-accent)
-          );
-          clip-path: inset(0 0 0 0);
-        }
-      }
-    }
-  }
-
-  .contact-icon {
+  .contact-link .contact-icon {
     color: var(--color-accent-2);
-    transition: all var(--duration-normal) ease;
-  }
-
-  .contact-text {
-    color: var(--color-text-muted);
-    transition: all var(--duration-normal) ease;
   }
 
   /* ========================================================================
      GLOBAL TEXT AND LINK STYLES
      ======================================================================== */
-
-  /* Global text colors */
-  body {
-    color: var(--color-text-primary);
-  }
-
-  a {
-    color: var(--color-accent-2);
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        color: var(--color-accent);
-      }
-    }
-  }
-
-  /* Section labels and headings */
-  .section-label {
-    color: var(--color-accent-2);
-  }
-
-  .about-heading,
-  .section-heading {
-    color: var(--color-text-primary);
-  }
-
-  .bio-paragraph {
-    color: var(--color-text-muted);
-  }
-
-  /* Navigation dots */
-  .nav-dot .dot {
-    background-color: var(--color-text-muted);
-  }
-
-  .nav-dot.active .dot {
-    background-color: var(--color-accent-2);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .nav-dot:hover .dot {
-      background-color: var(--color-accent-2);
-    }
-  }
-
-  /* Hero sections */
-  .hero-name {
-    color: var(--color-text-primary);
-  }
-
-  .hero-title {
-    color: var(--color-accent-2);
-  }
-
-  .hero-tagline {
-    color: var(--color-text-muted);
-  }
 
   /* Status panel */
   .cover-section .hero-statement,
@@ -589,14 +499,6 @@
     color: var(--color-accent-2);
   }
 
-  .panel-label {
-    color: var(--color-text-primary);
-  }
-
-  .panel-note {
-    color: var(--color-text-muted);
-  }
-
   /* Photo border */
   .cover-section .photo-border {
     border-color: var(--color-accent-2-20);
@@ -604,8 +506,17 @@
     background: linear-gradient(180deg, var(--color-accent-2-08), transparent);
   }
 
+  /* Progress bar */
+  .app-wrapper .progress-bar {
+    background: linear-gradient(
+      90deg,
+      var(--color-accent-2),
+      var(--color-accent)
+    );
+  }
+
   /* Theme toggle button */
-  .theme-toggle {
+  .app-wrapper .theme-toggle {
     background-color: var(--color-surface);
     border-color: var(--color-accent-2);
 
@@ -616,16 +527,6 @@
       }
     }
   }
-
-  /* Progress bar */
-  .progress-bar {
-    background: linear-gradient(
-      90deg,
-      var(--color-accent-2),
-      var(--color-accent)
-    );
-  }
-
   /* Logo image filters for light theme */
   .jobs-section .logo-container img {
     filter: none !important;

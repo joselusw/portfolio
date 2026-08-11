@@ -16,6 +16,7 @@ import { NoiseOverlayComponent } from "@shared/components/noise-overlay/noise-ov
 import { ScrollService } from "@core/services/scroll.service";
 import { ThemeService } from "@core/services/theme.service";
 import { CoverComponent } from "./sections/cover/cover.component";
+import { ProjectsComponent } from "./sections/projects/projects.component";
 import { AboutMeComponent } from "./sections/about-me/about-me.component";
 import { JobsComponent } from "./sections/jobs/jobs.component";
 import { TechComponent } from "./sections/tech/tech.component";
@@ -29,6 +30,7 @@ gsap.registerPlugin(ScrollToPlugin);
   imports: [
     NoiseOverlayComponent,
     CoverComponent,
+    ProjectsComponent,
     AboutMeComponent,
     JobsComponent,
     TechComponent,
@@ -49,6 +51,7 @@ gsap.registerPlugin(ScrollToPlugin);
       <!-- Main Content -->
       <main class="main-content" role="main">
         <app-cover></app-cover>
+        <app-projects></app-projects>
         <app-about-me></app-about-me>
         <app-jobs></app-jobs>
         <app-tech></app-tech>

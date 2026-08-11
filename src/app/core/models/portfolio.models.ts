@@ -30,6 +30,23 @@ export interface SocialLink {
   icon: string;
 }
 
+export interface ProjectMetric {
+  label: string;
+  value: string;
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  year: string;
+  role: string;
+  stack: string[];
+  metrics: ProjectMetric[];
+  link?: string;
+  featured?: boolean;
+}
+
 export interface Portfolio {
   name: string;
   title: string;
@@ -40,15 +57,16 @@ export interface Portfolio {
   photoUrl?: string;
   social: SocialLink[];
   jobs: Job[];
+  projects: Project[];
   certifications: Certification[];
   technologies: TechSkill[];
 }
 
-// Placeholder portfolio data
+// Placeholder portfolio data — replace with real content before shipping.
 export const PORTFOLIO_DATA: Portfolio = {
   name: "Joselu Gallardo",
   title: "Senior Full-Stack Developer",
-  bio: "Crafting digital experiences with passion and precision",
+  bio: "The best way to predict the future is to build it with .NET and AI",
   birthDate: "1994-07-27",
   location: "Málaga",
   email: "jose.gallardo994@gmail.com",
@@ -72,7 +90,11 @@ export const PORTFOLIO_DATA: Portfolio = {
         "Started my career working with C#, ASP.NET, and SQL Server, gaining valuable experience in enterprise application development.",
       period: "2017 — 2020",
       technologies: ["C#", "ASP.NET", "SQL Server", ".NET Framework"],
-      achievements: [],
+      achievements: [
+        "Built and maintained enterprise reporting and CRUD modules serving internal business workflows.",
+        "Reduced common request round-trips by introducing stored-procedure-based data access.",
+        "Collaborated with a cross-functional team on features from design through deployment.",
+      ],
       logoUrl: "assets/prosolution.svg",
       isCurrent: false,
     },
@@ -90,7 +112,11 @@ export const PORTFOLIO_DATA: Portfolio = {
         "Microservices",
         "Microfrontends",
       ],
-      achievements: [],
+      achievements: [
+        "Designed and shipped cloud-native microservices on AWS, containerized with Docker and orchestrated with Kubernetes.",
+        "Improved p95 response times by 40%+ by moving latency-sensitive paths to async, event-driven flows.",
+        "Adopted a microfrontend architecture that cut cross-team delivery conflicts and release coordination overhead.",
+      ],
       logoUrl: "https://www.verisksequel.com/media/4yygxqsr/verisk_logo.svg",
       isCurrent: true,
     },
@@ -119,6 +145,50 @@ export const PORTFOLIO_DATA: Portfolio = {
       name: "Técnico en Sistemas Microinformáticos y Redes",
       issuer: "I.E.S Pedro Espinosa",
       issued: "2014",
+    },
+  ],
+  projects: [
+    {
+      id: "project-1",
+      title: "AI-augmented support assistant",
+      description:
+        "An LLM-powered triage assistant that reads incoming tickets, drafts responses, and routes complex cases to the right team using semantic retrieval over the knowledge base.",
+      year: "2025",
+      role: "Full-stack lead",
+      stack: [".NET", "Semantic Kernel", "Angular", "RAG", "Azure"],
+      metrics: [
+        { label: "Resolution time", value: "-38%" },
+        { label: "Auto-resolved", value: "31%" },
+        { label: "CSAT", value: "+9pts" },
+      ],
+    },
+    {
+      id: "project-2",
+      title: "Real-time trading dashboard",
+      description:
+        "A low-latency microfrontend platform streaming market data over WebSockets, with order-of-magnitude faster load times and a charting layer rebuilt for sub-60ms interactions.",
+      year: "2024",
+      role: "Senior engineer",
+      stack: [".NET", "AWS", "Kubernetes", "Angular", "WebSockets"],
+      metrics: [
+        { label: "p95 latency", value: "-42%" },
+        { label: "Bundle size", value: "-55%" },
+        { label: "Uptime", value: "99.98%" },
+      ],
+    },
+    {
+      id: "project-3",
+      title: "Enterprise claims platform",
+      description:
+        "Migrated a monolith into domain-driven microservices, introduced blue/green deployments, and cut monthly incident count while enabling weekly release cadence.",
+      year: "2023",
+      role: "Platform engineer",
+      stack: ["C#", "Docker", "Terraform", "AWS", "OpenTelemetry"],
+      metrics: [
+        { label: "Release cadence", value: "2×/wk" },
+        { label: "Incidents", value: "-60%" },
+        { label: "Deploy time", value: "18m → 4m" },
+      ],
     },
   ],
   technologies: [

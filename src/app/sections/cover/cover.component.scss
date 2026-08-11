@@ -122,8 +122,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transform: translateX(-40px);
   will-change: transform;
 }
 
@@ -196,8 +194,6 @@
   text-transform: uppercase;
   color: var(--color-accent-2);
   margin: 0;
-  opacity: 0;
-  transform: scaleX(0);
   transform-origin: left;
 }
 
@@ -207,8 +203,6 @@
   color: var(--color-text-muted);
   margin: 0;
   max-width: 34rem;
-  opacity: 0;
-  transform: translateY(20px);
   font-style: normal;
   line-height: 1.8;
 }
@@ -295,8 +289,6 @@
   flex-wrap: wrap;
   margin-top: 1rem;
   width: 100%;
-  opacity: 0;
-  transform: translateY(20px);
 }
 
 .btn {
@@ -349,7 +341,6 @@
   align-items: center;
   gap: 0.5rem;
   color: var(--color-accent);
-  opacity: 0;
   z-index: 3;
 }
 

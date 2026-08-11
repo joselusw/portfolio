@@ -121,7 +121,7 @@ interface Section {
           >
             <button
               class="btn btn-primary"
-              (click)="scrollToSection('jobs')"
+              (click)="scrollToSection('projects')"
               aria-label="View my work"
             >
               View My Work
@@ -173,6 +173,7 @@ export class CoverComponent implements AfterViewInit, OnDestroy {
 
   sections: Section[] = [
     { id: "cover", label: "Home" },
+    { id: "projects", label: "Work" },
     { id: "about-me", label: "About" },
     { id: "jobs", label: "Experience" },
     { id: "tech", label: "Tech" },
@@ -214,6 +215,18 @@ export class CoverComponent implements AfterViewInit, OnDestroy {
   private initAnimations(): void {
     if (!this.coverSection) return;
 
+    // Set start states in JS (not CSS) so content stays visible without scripts
+    gsap.set(this.photoWrapper.nativeElement, { opacity: 0, x: -40 });
+    gsap.set(this.heroTitle.nativeElement, {
+      opacity: 0,
+      scaleX: 0,
+      transformOrigin: "left",
+    });
+    gsap.set(this.heroTagline.nativeElement, { opacity: 0, y: 20 });
+    gsap.set(this.heroStatusGrid.nativeElement, { opacity: 0, y: 24 });
+    gsap.set(this.ctaButtons.nativeElement, { opacity: 0, y: 20 });
+    gsap.set(this.scrollIndicator.nativeElement, { opacity: 0, y: 20 });
+
     // Get animation config from AnimationService
     const fadeConfig = this.animationService.getFadeInAnimation({
       duration: 1,
@@ -242,6 +255,8 @@ export class CoverComponent implements AfterViewInit, OnDestroy {
       this.splitText = new SplitText(this.heroName.nativeElement, {
         type: "chars",
       });
+
+      gsap.set(this.splitText.chars, { opacity: 0, y: 80 });
 
       tl.fromTo(
         this.splitText.chars,

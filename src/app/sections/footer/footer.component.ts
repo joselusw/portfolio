@@ -135,6 +135,9 @@ export class FooterComponent implements AfterViewInit, OnDestroy {
   }
 
   private initAnimations(): void {
+    // Set start states in JS (not CSS) so content stays visible without scripts
+    gsap.set(this.heading.nativeElement, { opacity: 0, y: 36 });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: this.footerSection.nativeElement,
@@ -165,6 +168,8 @@ export class FooterComponent implements AfterViewInit, OnDestroy {
     if (!this.contactContainer?.nativeElement) return;
     const links =
       this.contactContainer.nativeElement.querySelectorAll(".contact-link");
+
+    gsap.set(links, { opacity: 0, y: 18 });
 
     links.forEach((link: HTMLElement, index: number) => {
       parentTimeline.fromTo(
