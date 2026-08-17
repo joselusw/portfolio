@@ -37,7 +37,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
       <div class="jobs-content px-0 sm:px-2 lg:px-4">
         <!-- Section heading -->
-        <h2 class="section-heading" #sectionHeading>Systems I've delivered</h2>
+        <h2 class="section-heading anim-hidden" #sectionHeading>Systems I've delivered</h2>
 
         <!-- Jobs grid -->
         <div
@@ -46,7 +46,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
         >
           @for (job of portfolio.jobs; track job; let i = $index) {
             <div
-              class="job-card"
+              class="job-card anim-hidden"
               [class.right]="i % 2 === 1"
               [class.current]="job.isCurrent"
               #jobCard
@@ -136,10 +136,23 @@ export class JobsComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (typeof window === "undefined") return;
+    this.removeInitialHiddenClasses();
     this.initHeadingAnimation();
     this.initCardsAnimation();
     // Refresh ScrollTrigger to detect all animations after view initialization
     ScrollTrigger.refresh();
+  }
+
+  private removeInitialHiddenClasses(): void {
+    const heading = this.sectionHeading?.nativeElement;
+    const cards = Array.from<HTMLElement>(
+      this.jobsGrid?.nativeElement?.querySelectorAll(".job-card") ?? [],
+    );
+    [heading, ...cards].forEach((el) => {
+      if (el) {
+        el.classList.remove("anim-hidden");
+      }
+    });
   }
 
   ngOnDestroy(): void {

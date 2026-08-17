@@ -57,7 +57,7 @@ interface Section {
       <div class="cover-container px-0 sm:px-2 lg:px-4">
         <!-- Left side: Fhoto -->
         <div
-          class="photo-wrapper w-full max-w-[240px] sm:max-w-[280px] lg:max-w-[340px]"
+          class="photo-wrapper w-full max-w-[240px] sm:max-w-[280px] lg:max-w-[340px] anim-hidden-x-left"
           #photoWrapper
         >
           <div class="photo-border" #photoBorder>
@@ -78,23 +78,23 @@ interface Section {
           #contentWrapper
         >
           <!-- Name -->
-          <h1 class="hero-name" #heroName>
+          <h1 class="hero-name anim-hidden" #heroName>
             {{ nameFirstLine }}<br />{{ nameSecondLine }}
           </h1>
 
           <!-- Title (professional role) -->
-          <p class="hero-title" #heroTitle>
+          <p class="hero-title anim-hidden-scale-x" #heroTitle>
             {{ portfolio.title }}
           </p>
 
           <!-- Tagline -->
-          <p class="hero-tagline" #heroTagline>
+          <p class="hero-tagline anim-hidden-y-sm" #heroTagline>
             <em>{{ portfolio.bio }}</em>
           </p>
 
           <!-- Status panel -->
           <div
-            class="hero-status-grid w-full grid-cols-1 md:grid-cols-2"
+            class="hero-status-grid w-full grid-cols-1 md:grid-cols-2 anim-hidden-y-md"
             #heroStatusGrid
           >
             <div class="hero-statement">
@@ -116,7 +116,7 @@ interface Section {
 
           <!-- CTA Buttons -->
           <div
-            class="cta-buttons w-full max-w-[280px] sm:max-w-[360px] lg:max-w-none"
+            class="cta-buttons w-full max-w-[280px] sm:max-w-[360px] lg:max-w-none anim-hidden-y-sm"
             #ctaButtons
           >
             <button
@@ -138,7 +138,7 @@ interface Section {
       </div>
 
       <!-- Scroll indicator (bottom center) -->
-      <div class="scroll-indicator" #scrollIndicator>
+      <div class="scroll-indicator anim-hidden-y-sm" #scrollIndicator>
         <svg
           class="scroll-arrow"
           width="24"
@@ -201,8 +201,36 @@ export class CoverComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (typeof window === "undefined") return;
+    this.removeInitialHiddenClasses();
     this.initAnimations();
     this.initParallax();
+  }
+
+  /**
+   * Remove CSS initial-hidden classes before GSAP takes over.
+   * GSAP's inline styles will override any remaining CSS.
+   */
+  private removeInitialHiddenClasses(): void {
+    const elements = [
+      this.photoWrapper,
+      this.heroName,
+      this.heroTitle,
+      this.heroTagline,
+      this.heroStatusGrid,
+      this.ctaButtons,
+      this.scrollIndicator,
+    ];
+    elements.forEach((ref) => {
+      if (ref?.nativeElement) {
+        ref.nativeElement.classList.remove(
+          "anim-hidden",
+          "anim-hidden-x-left",
+          "anim-hidden-y-sm",
+          "anim-hidden-y-md",
+          "anim-hidden-scale-x",
+        );
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -256,6 +284,10 @@ export class CoverComponent implements AfterViewInit, OnDestroy {
         type: "chars",
       });
 
+      // Remove CSS hidden class from parent so child opacity isn't blocked
+      this.heroName.nativeElement.classList.remove("anim-hidden");
+
+      // Set start states on individual characters
       gsap.set(this.splitText.chars, { opacity: 0, y: 80 });
 
       tl.fromTo(

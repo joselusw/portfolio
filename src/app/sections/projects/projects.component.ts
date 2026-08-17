@@ -22,13 +22,13 @@ gsap.registerPlugin(ScrollTrigger);
   template: `
     <section id="projects" class="projects-section" #projectsSection>
       <div class="projects-content">
-        <p class="section-label">Work</p>
-        <h2 class="section-heading" #sectionHeading>Selected projects</h2>
+        <p class="section-label anim-hidden-y-md">Work</p>
+        <h2 class="section-heading anim-hidden-y-lg" #sectionHeading>Selected projects</h2>
 
         <div class="projects-grid" #projectsGrid>
           @for (project of portfolio.projects; track project; let i = $index) {
             <article
-              class="project-card"
+              class="project-card anim-hidden"
               [class.featured]="project.featured"
               #projectCard
             >
@@ -89,8 +89,28 @@ export class ProjectsComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (typeof window === "undefined") return;
+    this.removeInitialHiddenClasses();
     this.initHeadingAnimation();
     this.initCardsAnimation();
+  }
+
+  private removeInitialHiddenClasses(): void {
+    const elements = [
+      this.projectsSection?.nativeElement?.querySelector(".section-label"),
+      this.projectsSection?.nativeElement?.querySelector(".section-heading"),
+      ...Array.from<HTMLElement>(
+        this.projectsSection?.nativeElement?.querySelectorAll(".project-card") ?? [],
+      ),
+    ];
+    elements.forEach((el) => {
+      if (el) {
+        el.classList.remove(
+          "anim-hidden",
+          "anim-hidden-y-md",
+          "anim-hidden-y-lg",
+        );
+      }
+    });
   }
 
   ngOnDestroy(): void {

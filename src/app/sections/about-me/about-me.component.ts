@@ -33,13 +33,13 @@ gsap.registerPlugin(ScrollTrigger);
           #aboutLeft
         >
           <!-- Section label -->
-          <p class="section-label">About</p>
+          <p class="section-label anim-hidden-y-md">About</p>
 
           <!-- Main heading -->
-          <h2 class="about-heading">What I build</h2>
+          <h2 class="about-heading anim-hidden-y-lg">What I build</h2>
 
           <!-- Bio paragraphs -->
-          <div class="about-bio">
+          <div class="about-bio anim-hidden-y-md">
             @for (para of bioParagraphs; track para) {
               <p class="bio-paragraph">
                 {{ para }}
@@ -48,7 +48,7 @@ gsap.registerPlugin(ScrollTrigger);
           </div>
 
           <!-- Divider -->
-          <div class="about-divider"></div>
+          <div class="about-divider anim-hidden-scale-x"></div>
         </div>
 
         <!-- Right Panel: Certifications -->
@@ -57,12 +57,12 @@ gsap.registerPlugin(ScrollTrigger);
           #aboutRight
         >
           <!-- Section label -->
-          <p class="section-label">Credentials</p>
+          <p class="section-label anim-hidden-y-md">Credentials</p>
 
           <!-- Certifications list -->
           <div class="certifications-list pt-2 sm:pt-4" #certificationsList>
             @for (cert of portfolio.certifications; track cert) {
-              <div class="cert-card" #certCard>
+              <div class="cert-card anim-hidden-y-md" #certCard>
                 <!-- Logo placeholder -->
                 <div class="cert-logo">
                   <svg
@@ -155,8 +155,34 @@ export class AboutMeComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (typeof window === "undefined") return;
+    this.removeInitialHiddenClasses();
     this.initDividerAnimation();
     this.initContentAnimation();
+  }
+
+  private removeInitialHiddenClasses(): void {
+    const elements = [
+      ...Array.from<HTMLElement>(
+        this.aboutLeft?.nativeElement?.querySelectorAll(
+          ".section-label, .about-heading, .about-bio, .about-divider",
+        ) ?? [],
+      ),
+      ...Array.from<HTMLElement>(
+        this.aboutRight?.nativeElement?.querySelectorAll(
+          ".section-label, .cert-card",
+        ) ?? [],
+      ),
+    ];
+    elements.forEach((el) => {
+      if (el) {
+        el.classList.remove(
+          "anim-hidden",
+          "anim-hidden-y-md",
+          "anim-hidden-y-lg",
+          "anim-hidden-scale-x",
+        );
+      }
+    });
   }
 
   ngOnDestroy(): void {

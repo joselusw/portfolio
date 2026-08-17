@@ -39,7 +39,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
         <div class="mb-10 sm:mb-12 lg:mb-16 text-center">
           <h2
             #heading
-            class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-bold mb-4 sm:mb-6"
+            class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-bold mb-4 sm:mb-6 anim-hidden-y-lg"
             style="color: var(--color-text-primary);"
           >
             Let's build something remarkable.
@@ -67,7 +67,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
               [href]="getLinkUrl(social)"
               [target]="getLinkTarget(social)"
               rel="noopener noreferrer"
-              class="contact-link group relative min-h-[44px] min-w-[112px] px-4 py-3 sm:min-w-[120px] sm:px-5 sm:py-4"
+              class="contact-link group relative min-h-[44px] min-w-[112px] px-4 py-3 sm:min-w-[120px] sm:px-5 sm:py-4 anim-hidden-y-sm"
               [title]="social.name"
               [attr.aria-label]="'Visit my ' + social.name + ' profile'"
             >
@@ -109,7 +109,22 @@ export class FooterComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (typeof window === "undefined") return;
+    this.removeInitialHiddenClasses();
     requestAnimationFrame(() => this.initAnimations());
+  }
+
+  private removeInitialHiddenClasses(): void {
+    const elements = [
+      this.heading?.nativeElement,
+      ...Array.from<HTMLElement>(
+        this.contactContainer?.nativeElement?.querySelectorAll(".contact-link") ?? [],
+      ),
+    ];
+    elements.forEach((el) => {
+      if (el) {
+        el.classList.remove("anim-hidden", "anim-hidden-y-lg", "anim-hidden-y-sm");
+      }
+    });
   }
 
   ngOnDestroy(): void {

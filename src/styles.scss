@@ -237,6 +237,37 @@
   }
 }
 
+/* Initial hidden states for animated elements (prevents flash of static content on load) */
+.anim-hidden {
+  opacity: 0;
+}
+
+.anim-hidden-x-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.anim-hidden-y-sm {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.anim-hidden-y-md {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.anim-hidden-y-lg {
+  opacity: 0;
+  transform: translateY(36px);
+}
+
+.anim-hidden-scale-x {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
 /* Respect reduced motion preferences (WCAG 2.2 / EU Accessibility Act) */
 @media (prefers-reduced-motion: reduce) {
   *,

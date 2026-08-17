@@ -67,7 +67,7 @@ interface TechItem {
         >
           @for (tech of techs; track tech; let i = $index) {
             <div
-              class="tech-tile"
+              class="tech-tile anim-hidden"
               [class.size-sm]="tech.size === 'sm'"
               [class.size-md]="tech.size === 'md'"
               [class.size-lg]="tech.size === 'lg'"
@@ -130,7 +130,18 @@ export class TechComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (typeof window === "undefined") return;
+    this.removeInitialHiddenClasses();
     requestAnimationFrame(() => this.initAnimations());
+  }
+
+  private removeInitialHiddenClasses(): void {
+    const tiles =
+      this.gridContainer?.nativeElement?.querySelectorAll(".tech-tile") ?? [];
+    tiles.forEach((el: HTMLElement) => {
+      if (el) {
+        el.classList.remove("anim-hidden");
+      }
+    });
   }
 
   ngOnDestroy(): void {
